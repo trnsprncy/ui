@@ -4,7 +4,7 @@ import "./globals.css";
 import { Provider } from "@/components/provider";
 import { Toaster } from "sonner";
 import { SiteHeader } from "@/components/layouts/site-header";
-import { CSPostHogProvider } from "@/components/analytics";
+
 import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -56,13 +56,11 @@ export default function RootLayout({
         )}
       >
         <SkipNav />
-        <CSPostHogProvider>
-          <Provider>
-            <SiteHeader />
-            {children}
-            <Toaster richColors position="bottom-center" />
-          </Provider>
-        </CSPostHogProvider>
+        <Provider>
+          <SiteHeader />
+          {children}
+          <Toaster richColors position="bottom-center" />
+        </Provider>
       </body>
     </html>
   );
