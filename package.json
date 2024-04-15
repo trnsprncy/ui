@@ -2,6 +2,15 @@
   "name": "@trnsprncy/ui",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "pnpm": "please use npm",
+    "yarn": "please use npm",
+    "bun": "please use npm",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "packages/cli"
+  ],
   "scripts": {
     "dev": "next dev --turbo",
     "build": "contentlayer2 build && npm run build:registry && next build",
@@ -73,8 +82,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "workspaces": [
-    "packages/cli"
-  ]
+  }
 }
