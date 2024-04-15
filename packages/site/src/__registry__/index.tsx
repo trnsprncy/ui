@@ -5,12 +5,12 @@ import * as React from "react"
 
 export const Index: Record<string, any> = {
     "alpha": {
-    "boop": {
-      name: "boop",
+    "banner": {
+      name: "banner",
       type: "components:library",
-      registryDependencies: undefined,
-      component: React.lazy(() => import("@/registry/alpha/library/boop.tsx")),
-      files: ["src/registry/alpha/library/boop.tsx"],
+      registryDependencies: ["accordion","button","popover","switch"],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/banner-shell")),
+      files: ["src/registry/alpha/library/banner.tsx"],
     },
   },
 }

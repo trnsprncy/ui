@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/registry/alpha/library/banner";
+import Banner from "@/registry/alpha/library/banner/banner-shell";
 import CookieConsentProvider from "@trnsprncy/oss";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/react"
