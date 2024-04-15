@@ -3,6 +3,7 @@
 import Banner from "@/registry/alpha/library/banner";
 import CookieConsentProvider from "@trnsprncy/oss";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react"
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,6 +18,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
           ]}
         >
           <Banner />
+          <Analytics/> 
         </CookieConsentProvider>
       </ThemeProvider>
     </>
