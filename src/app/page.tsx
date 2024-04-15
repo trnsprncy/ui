@@ -11,18 +11,20 @@ export default async function Home() {
     <main id="main-content" className="max-w-4xl mx-auto flex-1 flex flex-col">
       <section className="flex-1 flex flex-col items-center justify-center gap-4 ">
         <h1
-          className="text-center animate-fade-up text-4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl"
+          className="px-4 text-center animate-fade-up text-4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl"
           style={{
             animationDelay: "0.25s",
             animationFillMode: "forwards",
           }}
         >
           <Balancer>
-            <span className="text-muted-foreground">Drop-in</span> Consent
-            Manager.
+            Cookie Consent Compliance{" "}
+            <span className="text-muted-foreground leading-relaxed">
+              Simplified.
+            </span>{" "}
           </Balancer>
         </h1>
-        <p className="max-w-2xl my-4">
+        <p className="max-w-4xl my-4 px-6">
           <span
             className="text-center animate-fade-up text-base text-muted-foreground sm:text-xl opacity-0"
             style={{
