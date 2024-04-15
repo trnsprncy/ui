@@ -32,6 +32,7 @@
     "execa": "^7.2.0",
     "figlet": "^1.7.0",
     "ora": "^6.3.1",
+    "prompts": "^2.4.2",
     "semver": "^7.6.0",
     "zod": "^3.22.4"
   },
@@ -42,6 +43,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/figlet": "^1.5.5",
     "@types/node": "^18.11.18",
+    "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",

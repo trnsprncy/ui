@@ -1,64 +1,44 @@
 #!/usr/bin/env node
-import { renderTitle } from "../utils/render-title.js";
-import chalk from "chalk";
-import { Command } from "commander";
-import fs from "fs";
-import ora from "ora";
 import path from "path";
-import readline from "readline";
+import fs from "fs";
+import { Command } from "commander";
 import * as semver from "semver";
+import chalk from "chalk"
+import ora from "ora"
+import prompt from "prompts"
+import { renderTitle } from "../utils/render-title.js";
 
-const highlightCyan = (text: string) => chalk.cyan.underline(text);
-const highlightGreen = (text: string) => chalk.greenBright(text);
-const highlightRed = (text: string) => chalk.redBright(text);
+const highlights = {
+  info: (text: string) => chalk.blueBright(text),
+  success: (text: string) => chalk.greenBright(text),
+  error: (text: string) => chalk.redBright(text),
+  warning: (text: string) => chalk.yellowBright(text),
+};
 
-const TRANSPARENCY_PATH = "@/components/ui/transparency";
+const TRNSPRNCY_PATH = "@/components/ui/trnsprncy";
 const ALIAS_EXAMPLE = `
-this alias will be added to your ${highlightGreen("components.json")} file
+  this alias will be added to your ${highlights.success("components.json")} file
 
-  ${chalk.blueBright(
-    `"aliases": {
-      "transparency": "@/components/ui/transparency"
-    }`
+    ${highlights.info(
+      `"aliases": {
+        "trnsprncy": "@/components/ui/trnsprncy"
+      }`
   )}
-
 `;
 
 const prompts = {
   greet: "Hello, There! Fellow frontend Fanatic!",
   missingPackages: "This project does not meet the minimum requirements:",
   outdatedPackages: "This project does not meet the minimum requirements:",
-  noDependencies: `No dependencies found in ${highlightGreen(
-    "package.json"
-  )} file.`,
+  noDependencies: `No dependencies found in ${highlights.success("package.json")} file.`,
   meetsRequirements: "This project meets the minimum requirements!",
-  writeConfiguration: `Adding configuration alias to ${highlightGreen(
-    "components.json"
-  )}.${ALIAS_EXAMPLE}Proceed? (${highlightCyan("no")} / yes): `,
-  configurationWritten: `Configuration written to ${highlightGreen(
-    "components.json"
-  )}.`,
-  operationAborted: `${highlightRed(
-    "Operation aborted. Configuration not saved."
-  )}`,
+  writeConfiguration: `Adding configuration alias to ${highlights.success("components.json")}.${ALIAS_EXAMPLE}  Proceed?`,
+  configurationWritten: `Configuration written to ${highlights.success("components.json")}.`,
+  operationAborted: `${highlights.error("Operation aborted. Configuration not saved.")}`,
   componentsFileNotChanged: "Components file will not be changed.",
-  shadcnRequired: `shadcn ${highlightGreen(
-    "components.json"
-  )} file in your project root is required before running this command`,
+  shadcnRequired:
+    `shadcn ${highlights.success("components.json")} file in your project root is required before running this command`,
 };
-/**
- * Checks if the user's answer is "y" or "Y" and returns a boolean.
- *
- * @param {string} answer
- * @return {*}  {boolean}
- */
-const isGranted = (answer: string): boolean =>
-  answer.toLowerCase() === "y" || answer.toLowerCase() === "yes";
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
 
 const COMPONENTS_JSON_PATH = path.join(process.cwd(), "components.json");
 function parseComponentsJson() {
@@ -75,7 +55,7 @@ const isInitialized = () => {
     ora(prompts.shadcnRequired).fail();
     process.exit(1);
   }
-  return !!componentsJson.aliases?.transparency;
+  return !!componentsJson.aliases?.trnsprncy;
 };
 
 export const init = new Command()
@@ -84,11 +64,7 @@ export const init = new Command()
   .action(() => {
     renderTitle("Initializing:");
     if (isInitialized()) {
-      ora(
-        `Transparency alias already exists in ${highlightGreen(
-          "components.json"
-        )}`
-      ).fail();
+      ora(`trnsprncy alias already exists in ${highlights.success("components.json")}`).fail();
       process.exit(1);
     }
     checkRequiredPackages()
@@ -98,7 +74,7 @@ export const init = new Command()
           !!result.outdatedPackages.length
         ) {
           // handle missing or outdated packages and exit after printing the error
-          ora(highlightRed(prompts.missingPackages)).fail();
+          ora(highlights.error(prompts.missingPackages)).fail();
           console.log("Minimum Requirements:");
           if (result.missingPackages.length > 0) {
             console.log("→ " + result.missingPackages.join("\n"));
@@ -114,28 +90,7 @@ export const init = new Command()
           process.exit(1);
         } else {
           ora(prompts.meetsRequirements).succeed();
-          rl.question(prompts.writeConfiguration, async (confirmation) => {
-            if (isGranted(confirmation)) {
-              if (!fs.existsSync(COMPONENTS_JSON_PATH)) {
-                // technically this may not be necc. as the isInitialized fn will check if the file exists.
-                ora(prompts.shadcnRequired).fail();
-                process.exit(1);
-              }
-              const componentsJson = parseComponentsJson();
-
-              // Create transparency alias
-              componentsJson.aliases.transparency = TRANSPARENCY_PATH;
-
-              fs.writeFileSync(
-                COMPONENTS_JSON_PATH,
-                JSON.stringify(componentsJson, null, 2)
-              );
-              ora(prompts.configurationWritten).succeed();
-            } else {
-              ora(prompts.operationAborted).fail();
-            }
-            rl.close();
-          });
+          config();
         }
       })
       .catch((error) => {
@@ -154,7 +109,7 @@ export const init = new Command()
 const normalizeVersion = (version: string) => {
   // Check if the version contains only major version (e.g., '^18')
   if (/^\^\d+$/.test(version)) {
-    version = version + ".0.0"; // Append '.0.0' to indicate minor and patch versions
+      version = version + '.0.0'; // Append '.0.0' to indicate minor and patch versions
   }
   return version.replace(/[^0-9.]/g, ""); // Replace all characters except digits and dot
 };
@@ -193,11 +148,40 @@ async function loadDependencies(): Promise<Record<string, string>> {
     // packageJson.dependencies[dependency] = normalizeVersion(
     //   packageJson.dependencies[dependency]
     // );
-    packageJson.dependencies[dependency] = normalizeVersion(
-      packageJson.dependencies[dependency]
-    );
+    packageJson.dependencies[dependency] = normalizeVersion(packageJson.dependencies[dependency]);
   }
   return packageJson.dependencies;
+}
+
+async function config() {
+    const { confirmation } = await prompt({
+      type: "toggle",
+      name: "confirmation",
+      message: prompts.writeConfiguration,
+      initial:true,
+      active: "yes",
+      inactive: "no",
+    })
+    if (confirmation) {
+      if (!fs.existsSync(COMPONENTS_JSON_PATH)) {
+        // technically this may not be necessary. as the isInitialized fn will check if the file exists.
+        ora(prompts.shadcnRequired).fail();
+        process.exit(1);
+      }
+      const componentsJson = parseComponentsJson();
+
+      // Create trnsprncy alias
+      componentsJson.aliases.trnsprncy = TRNSPRNCY_PATH;
+
+      fs.writeFileSync(
+        COMPONENTS_JSON_PATH,
+        JSON.stringify(componentsJson, null, 2)
+      );
+      ora(prompts.configurationWritten).succeed();
+    } else {
+      ora(prompts.operationAborted).fail();
+    }
+  
 }
 
 /**
