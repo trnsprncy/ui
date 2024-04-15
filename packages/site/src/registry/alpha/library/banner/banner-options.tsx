@@ -1,21 +1,25 @@
-"use-client"
+"use-client";
 
-import { useCallback, useState } from "react";
-import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
-import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
-import { AnalyticsTags, type BrowserCookies, type NecessaryAnalyticsTagsTupleArrays, NecessaryTags, type TagArray } from "@trnsprncy/oss/dist/types";
+import { CookieSwitch } from "./banner-switch";
+import { categoryDescriptions, tagDetails } from "./constants";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CookieSwitch } from "./banner-switch";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { categoryDescriptions, tagDetails } from "./constants";
-
-
+import { cn } from "@/lib/utils";
+import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
+import {
+  AnalyticsTags,
+  type BrowserCookies,
+  type EssentialAnalyticsTagsTupleArrays,
+  EssentialTags,
+  type TagArray,
+} from "@trnsprncy/oss/dist/types";
+import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
+import { useCallback, useState } from "react";
 
 /**
  * Responsible for building up and syncing the options object from cookies with the consent manager context
@@ -28,12 +32,12 @@ export function BannerOptions() {
   const { setHasConsent, handleConsentUpdate } = useConsentDispatch();
   const { tags, hasConsent } = useConsent(); // provide only the options that the user has selected
   const [cookies, setCookies] = useState<Partial<BrowserCookies>>(() =>
-    convertTagsToCookies(tags as NecessaryAnalyticsTagsTupleArrays)
+    convertTagsToCookies(tags as EssentialAnalyticsTagsTupleArrays)
   );
 
-  const [NECESSARY, ANALYTICS] = tags;
+  const [ESSENTIAL, ANALYTICS] = tags;
   const [isChecked, setIsChecked] = useState([
-    NECESSARY?.every((tag) => !!cookies[tag as keyof typeof cookies]),
+    ESSENTIAL?.every((tag) => !!cookies[tag as keyof typeof cookies]),
     ANALYTICS?.every((tag) => !!cookies[tag as keyof typeof cookies]),
   ]);
 
@@ -43,7 +47,7 @@ export function BannerOptions() {
         const updatedCookies = { ...prev, ...cookies };
 
         setIsChecked([
-          NECESSARY?.every(
+          ESSENTIAL?.every(
             (tag) => !!updatedCookies[tag as keyof typeof updatedCookies]
           ),
           ANALYTICS?.every(
@@ -55,16 +59,16 @@ export function BannerOptions() {
 
       handleConsentUpdate(cookies);
     },
-    [NECESSARY, ANALYTICS, handleConsentUpdate]
+    [ESSENTIAL, ANALYTICS, handleConsentUpdate]
   );
 
   const renderSwitch = (
-    tagGroup: TagArray<NecessaryTags> | TagArray<AnalyticsTags> | undefined,
+    tagGroup: TagArray<EssentialTags> | TagArray<AnalyticsTags> | undefined,
     index: number
   ) => {
-    const category = index ? "Analytics" : "Necessary";
+    const category = index ? "Analytics" : "Essential";
     if (!tagGroup?.length) return null;
-    const isDisabled = category === "Necessary";
+    const isDisabled = category === "Essential";
 
     return (
       <div key={category} className="p-2">
