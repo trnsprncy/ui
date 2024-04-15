@@ -1,12 +1,11 @@
 {
   "name": "site",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "npx next dev --turbo",
     "build": "contentlayer2 build && npm run build:registry && next build",
-    "start": "next start",
-    "lint": "next lint",
+    "start": "npx next start",
+    "lint": "npx next lint",
     "build:test": "npm run typecheck && npm run build:registry && next build && next start -p 3001",
     "build:registry": "npx tsx --tsconfig ./src/script/tsconfig.scripts.json ./src/script/registry-builder.ts",
     "typecheck": "contentlayer2 build && tsc --noEmit",
