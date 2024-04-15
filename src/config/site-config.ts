@@ -3,10 +3,10 @@ export const siteConfig = {
   url: "https://trnsprncy.vercel.app/",
   ogImage: "https://trnsprncy.vercel.app/og.png",
   description:
-    "The easiest way to handle cookie consent compliance in a nextjs application.",
+    "Optimized Google Tag Manager implementation for performance in next.js applications. Simply drop it in and go!",
   links: {
     twitter: "https://twitter.com/soham_asmi",
-    github: "https://github.com/trnsprncy/ui",
+    github: "https://github.com/trnsprncy",
     docs: "/docs/introduction",
     components: "/components",
   },

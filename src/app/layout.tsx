@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Provider } from "@/components/provider";
+import { Providers } from "@/components/providers";
 import { Toaster } from "sonner";
 import { SiteHeader } from "@/components/layouts/site-header";
 
@@ -56,11 +56,11 @@ export default function RootLayout({
         )}
       >
         <SkipNav />
-        <Provider>
+        <Providers>
           <SiteHeader />
           {children}
           <Toaster richColors position="bottom-center" />
-        </Provider>
+        </Providers>
       </body>
     </html>
   );
