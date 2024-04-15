@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "pnpm": "please use npm",
-    "yarn": "please use npm",
-    "bun": "please use npm",
-    "npm": ">=10"
+
   },
   "workspaces": [
     "packages/*"

@@ -1,24 +1,17 @@
 {
   "name": "site",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "dev": "npx next dev --turbo",
-    "build": "contentlayer2 build && npm run build:registry && next build",
-    "start": "npx next start",
-    "lint": "npx next lint",
-    "build:test": "npm run typecheck && npm run build:registry && next build && next start -p 3001",
+    "dev": "next dev --turbo",
+    "build": "contentlayer2 build && yarn build:registry && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:test": "yarn typecheck && yarn build:registry && next build && next start -p 3001",
     "build:registry": "npx tsx --tsconfig ./src/script/tsconfig.scripts.json ./src/script/registry-builder.ts",
     "typecheck": "contentlayer2 build && tsc --noEmit",
     "watch": "contentlayer2 dev && tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    },
-    "gitHooks": {
-      "pre-commit": "npm run lint"
-    }
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -48,7 +41,7 @@
     "lucide-react": "^0.365.0",
     "mdast-util-toc": "^7.0.0",
     "mini-svg-data-uri": "^1.4.4",
-    "next": "^14.1.2",
+    "next": "^14.2.1",
     "next-contentlayer2": "^0.4.4",
     "next-themes": "^0.2.1",
     "posthog-js": "^1.116.5",
