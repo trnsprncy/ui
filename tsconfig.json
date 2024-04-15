@@ -13,13 +13,14 @@
     "baseUrl": ".",
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*", "./packages/cli/src/*"],
       "contentlayer/generated": ["./.contentlayer/generated"],
       "@ui/*": ["./src/components/ui/*"]
     }

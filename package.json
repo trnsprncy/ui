@@ -16,11 +16,22 @@
     "build": "contentlayer2 build && npm run build:registry && next build",
     "start": "next start",
     "lint": "next lint",
+    "prepare": "husky",
     "build:test": "npm run typecheck && npm run build:registry && next build && next start -p 3001",
     "build:registry": "npx tsx --tsconfig ./src/script/tsconfig.scripts.json ./src/script/registry-builder.ts",
     "typecheck": "contentlayer2 build && tsc --noEmit",
     "watch": "contentlayer2 dev && tsc --noEmit",
-    "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache"
+    "format": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+    "cli": "npm run -w packages/cli cli",
+    "init": "npm run -w packages/cli init"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    },
+    "gitHooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -79,6 +90,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
+    "husky": "^9.0.11",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
