@@ -12,7 +12,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build",
     "cli": "npm run -w packages/cli cli",
     "init": "npm run -w packages/cli init"
   }
