@@ -16,7 +16,7 @@
     "build": "contentlayer2 build && npm run build:registry && next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky",
+    "prepare": "husky install",
     "build:test": "npm run typecheck && npm run build:registry && next build && next start -p 3001",
     "build:registry": "npx tsx --tsconfig ./src/script/tsconfig.scripts.json ./src/script/registry-builder.ts",
     "typecheck": "contentlayer2 build && tsc --noEmit",
