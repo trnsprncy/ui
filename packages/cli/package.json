@@ -32,11 +32,13 @@
     "execa": "^7.2.0",
     "figlet": "^1.7.0",
     "ora": "^6.3.1",
+    "prompts": "^2.4.2",
     "semver": "^7.6.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
+    "@types/prompts": "^2.4.9",
     "@commitlint/cli": "^17.4.1",
     "@commitlint/config-conventional": "^17.4.0",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
