@@ -1,5 +1,5 @@
 {
-  "name": "cli",
+  "name": "@trnsprncy-ui/cli",
   "version": "0.0.10",
   "description": "Drop-in Consent Manager for Next.js Applications",
   "type": "module",
@@ -22,7 +22,6 @@
     "dev": "tsup src/index.ts --format esm --watch --clean --onSuccess \"node dist/index.js\"",
     "test": "vitest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prepare": "husky install",
     "changeset": "changeset",
     "release": "changeset publish"
   },
