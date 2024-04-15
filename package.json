@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "contentlayer2 build && npm run build:registry && next build --ignore-scripts --workspaces=false",
+    "build": "contentlayer2 build && npm run build:registry && next build --workspaces=false",
     "start": "next start",
     "lint": "next lint",
     "build:test": "npm run typecheck && npm run build:registry && next build && next start -p 3001",
