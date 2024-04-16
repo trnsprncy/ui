@@ -1,6 +1,6 @@
 import "./globals.css";
+import { ClientProviders } from "@/components/client-providers";
 import { SiteHeader } from "@/components/layouts/site-header";
-import { Providers } from "@/components/providers";
 import { SkipNav } from "@/components/skip-nav";
 import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
@@ -52,12 +52,12 @@ export default function RootLayout({
           "flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth"
         )}
       >
-        <SkipNav />
-        <Providers>
+        <ClientProviders>
+          <SkipNav />
           <SiteHeader />
           {children}
           <Toaster richColors position="bottom-center" />
-        </Providers>
+        </ClientProviders>
       </body>
     </html>
   );

@@ -5,15 +5,25 @@ import TrnsprncyProvider from "@trnsprncy/oss";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 
-export const Providers = ({ children }: { children: React.ReactNode }) => {
+export const ClientProviders = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <ThemeProvider attribute="class">
         {children}
-        <TrnsprncyProvider essentialTags={["functionality_storage"]}>
-          <Banner />
-          <Analytics />
+        <TrnsprncyProvider
+          essentialTags={[
+            "functionality_storage",
+            "personalization_storage",
+            "security_storage",
+          ]}
+        >
+          <Banner lockBodyScroll placement="centered" />
         </TrnsprncyProvider>
+        <Analytics />
       </ThemeProvider>
     </>
   );

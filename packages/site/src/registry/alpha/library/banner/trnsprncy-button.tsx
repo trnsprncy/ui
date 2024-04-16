@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 /**
  * This button renders with a popup trigger wrapped around it.
  * It is used to allow the default popover behavior from shadcn-ui
- * This will open an options dialog allowing us to granularly control user preferences
+ * This will open an options dialog allowing users insight into their cookie preferences
  *
  * @type {React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants>, {asChild?: Boolean}}
  *
@@ -29,11 +29,9 @@ export function TrnsprncyButton({ ...rest }: ButtonProps) {
       <PopoverContent
         align="end"
         side="top"
+        sideOffset={24}
         className={cn("relative, w-[500px] ", background)}
       >
-        <div className="absolute rotate-[270deg] -left-[2.2rem] pt-3 top-[3.5rem] opacity-90 z-0 drop-shadow-md flex gap-2">
-          <p>trnsprncy</p>
-        </div>
         <BannerOptions />
       </PopoverContent>
     </Popover>

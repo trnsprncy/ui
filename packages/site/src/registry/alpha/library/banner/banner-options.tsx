@@ -1,6 +1,6 @@
 "use-client";
 
-import { CookieSwitch } from "./banner-switch";
+import { BannerSwitch } from "./banner-switch";
 import { categoryDescriptions, tagDetails } from "./utils/constants";
 import {
   Accordion,
@@ -23,7 +23,7 @@ import { useCallback, useState } from "react";
 
 /**
  * Responsible for building up and syncing the options object from cookies with the consent manager context
- * Delegates GroupedOptions to render out the options and assign functionality.
+ * Delegates renderSwitch to render out the options and assign functionality.
  *
  * @export
  * @return {*} {React.ReactNode}
@@ -72,7 +72,7 @@ export function BannerOptions() {
 
     return (
       <div key={category} className="p-2">
-        <CookieSwitch
+        <BannerSwitch
           type="category"
           label={category}
           description={
@@ -95,7 +95,7 @@ export function BannerOptions() {
         <Accordion type="single" collapsible>
           <AccordionItem value={category}>
             <AccordionTrigger className="text-xs">
-              <p className="ml-auto pr-2">
+              <p className="ml-auto pr-2 text-foreground/50">
                 Show all {category.toLowerCase()} cookies
               </p>
             </AccordionTrigger>
@@ -104,7 +104,7 @@ export function BannerOptions() {
                 {Array.isArray(tagGroup) &&
                   tagGroup.map((tag) => {
                     return (
-                      <CookieSwitch
+                      <BannerSwitch
                         type="tag"
                         key={tag}
                         className="ml-4"
@@ -127,7 +127,7 @@ export function BannerOptions() {
   };
 
   return (
-    <div className="grid gap-4 min-w-2xl">
+    <div className="grid gap-2 min-w-2xl w-full">
       <div
         className={cn(
           "w-full p-2 bg-background/40 backdrop-blur-md rounded-md z-10 [&:not(:first-child)]:border-t transition-opacity duration-150"

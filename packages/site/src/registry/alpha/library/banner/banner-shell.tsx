@@ -1,5 +1,7 @@
 import { BannerTriggerGroup } from "./banner-trigger";
 import { background } from "./utils/constants";
+import { useLockBodyScroll } from "./utils/use-lock-body-scroll";
+import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { Cookie } from "lucide-react";
@@ -24,7 +26,7 @@ export interface IBannerContentProps extends React.PropsWithChildren {
  */
 export function BannerContent(props: IBannerContentProps) {
   return (
-    <div className="flex flex-col justify-center gap-y-2 mr-2 flex-1 text-sm">
+    <div className="flex flex-col justify-center gap-y-2 mr-2 flex-1 text-sm text-foreground">
       <strong>{props.heading ?? "trnsprncy"}</strong>
       <p className="">
         {props.description ?? "We use cookies to improve your experience."} By
@@ -47,34 +49,59 @@ export interface IBannerProps
   asChild?: boolean;
   buttonGroup?: React.ReactNode;
   leftElement?: React.ReactNode;
+  lockBodyScroll?: boolean;
+  placement?: "bottom" | "centered";
+  className?: string;
 }
 
 /**
  *
  * Responsible for rendering the shell and defining the structure of the banner components
  * orchestrates where and how each of the elements are positioned, and is configurable.
- * uses radix-ui's Slot primitive to facilitate this behavior by default as a wrapper around the children
- *
- * Meant to be used in conjunction with the BannerContent component to render the content inside the banner shell
+ * uses radix-ui's `Slot` primitive to facilitate this behavior.
  *
  * @export
  * @param {BannerProps} props: React.PropsWithChildren<{
- *   bannerClass?: string; asChild?: boolean; buttonGroup?: React.ReactNode; leftElement?: React.ReactNode;
+ *    asChild?: boolean; buttonGroup?: React.ReactNode; leftElement?: React.ReactNode; placement: 'centered' | 'bottom';
+ *    bannerClass: string; className: string;
  * }>
  * @return {*} {React.ReactNode}
  */
 export default function Banner(props: IBannerProps) {
-  const { asChild, leftElement, buttonGroup, bannerClass, ...rest } = props;
-
+  const {
+    asChild,
+    buttonGroup,
+    leftElement,
+    placement,
+    bannerClass,
+    className,
+    children,
+    ...rest
+  } = props;
   const ContentSlot = asChild ? Slot : BannerContent;
-
+  useLockBodyScroll(!!props.lockBodyScroll);
   return (
-    <div className="fixed inset-x-0 bottom-10 max-w-3xl z-10 mx-auto">
-      <div className={cn(background, bannerClass)}>
-        {leftElement ? leftElement : <Cookie className="w-8 h-8" />}
-        <ContentSlot {...rest}>{props.children}</ContentSlot>
-        {buttonGroup ? buttonGroup : <BannerTriggerGroup />}
+    <>
+      {props.lockBodyScroll ? (
+        <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md" />
+      ) : null}
+
+      <div
+        className={cn("py-9 absolute inset-0 flex flex-col items-center z-10", {
+          "justify-end": placement === "bottom",
+          "justify-center": placement === "centered",
+        })}
+      >
+        <div className={"max-w-3xl z-50 animate-in slide-in-from-bottom-10"}>
+          <div
+            className={cn(background, bannerClass, "border-2 border-muted/30")}
+          >
+            {leftElement ? leftElement : <Icons.logo className="w-12 h-12" />}
+            <ContentSlot {...rest}>{children}</ContentSlot>
+            {buttonGroup ? buttonGroup : <BannerTriggerGroup />}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
