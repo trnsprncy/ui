@@ -1,10 +1,11 @@
+"use client";
+
 import { BannerTriggerGroup } from "./banner-trigger";
 import { background } from "./utils/constants";
 import { useLockBodyScroll } from "./utils/use-lock-body-scroll";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
-import { Cookie } from "lucide-react";
 import Link from "next/link";
 
 export interface IBannerContentProps extends React.PropsWithChildren {
@@ -82,7 +83,7 @@ export default function Banner(props: IBannerProps) {
   const ContentSlot = asChild ? Slot : BannerContent;
   useLockBodyScroll(!!props.lockBodyScroll);
   return (
-    <>
+    <BannerShell>
       {props.lockBodyScroll ? (
         <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md transition" />
       ) : null}
@@ -107,6 +108,10 @@ export default function Banner(props: IBannerProps) {
           </div>
         </div>
       </div>
-    </>
+    </BannerShell>
   );
+}
+
+function BannerShell(props: React.PropsWithChildren<{}>) {
+  return <div>{props.children}</div>;
 }

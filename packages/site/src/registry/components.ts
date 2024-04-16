@@ -4,7 +4,7 @@ const extension: Registry = [
   {
     name: "banner-shell",
     type: "components:library",
-    dependencies: ["lucide-react", "@radix-ui/react-slot"], // include radix & 3td party dependencies
+    dependencies: ["@radix-ui/react-slot"], // include radix & 3td party dependencies
     registryDependencies: ["banner-trigger"],
     uiDependencies: [],
     files: ["library/banner/banner-shell.tsx"],

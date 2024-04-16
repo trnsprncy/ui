@@ -1,6 +1,6 @@
 "use client";
 
-import Banner from "@/registry/alpha/library/banner/banner-shell";
+import BannerShell from "@/registry/alpha/library/banner/banner-shell";
 import TrnsprncyProvider from "@trnsprncy/oss";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
@@ -21,7 +21,7 @@ export const ClientProviders = ({
             "security_storage",
           ]}
         >
-          <Banner lockBodyScroll placement="bottom" />
+          <BannerShell lockBodyScroll placement="bottom" />
         </TrnsprncyProvider>
         <Analytics />
       </ThemeProvider>
