@@ -107,6 +107,7 @@
   }
 
   .gradient-box {
+    /* https://www.ibelick.com/blog/create-animated-gradient-borders-with-css */
     --highlight-color: rgb(106, 106, 254);
     @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[2px] border-solid border-[#0000];
     background: padding-box,
