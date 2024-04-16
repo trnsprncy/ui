@@ -1,16 +1,17 @@
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
-interface IBannerSwitchProps {
-  type: "category" | "tag";
-  label: string;
-  description: string;
-  cookieName: string;
-  isDisabled?: boolean;
-  onCheckedChange: (checked: boolean) => void; // Function to update cookie state
-  className?: string;
-  isChecked: boolean;
-}
+interface IBannerSwitchProps
+  extends React.PropsWithChildren<{
+    type: "category" | "tag";
+    label: string;
+    description: string;
+    cookieName: string;
+    isDisabled?: boolean;
+    onCheckedChange: (checked: boolean) => void; // Function to update cookie state
+    className?: string;
+    isChecked: boolean;
+  }> {}
 /**
  * This component renders a custom switch component with a label and is responsible for handling the toggle interaction
  *
@@ -30,7 +31,7 @@ export function BannerSwitch({
   onCheckedChange,
   className,
   isChecked,
-}: React.PropsWithChildren<IBannerSwitchProps>) {
+}: IBannerSwitchProps) {
   const isCategory = type === "category";
   const { id } = {
     id: isCategory ? label.toLowerCase() : cookieName,

@@ -21,7 +21,7 @@ export const ClientProviders = ({
             "security_storage",
           ]}
         >
-          <Banner lockBodyScroll placement="centered" />
+          <Banner lockBodyScroll placement="bottom" />
         </TrnsprncyProvider>
         <Analytics />
       </ThemeProvider>

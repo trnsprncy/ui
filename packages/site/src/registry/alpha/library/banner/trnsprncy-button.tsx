@@ -19,12 +19,12 @@ import { cn } from "@/lib/utils";
  * @param {ButtonProps} {...HTMLButtonProps, variant, asChild }
  * @return {*} {React.ReactNode}
  */
-export function TrnsprncyButton({ ...rest }: ButtonProps) {
+export function TrnsprncyButton(props: ButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
         {/* @FIXME: what should happen on click? */}
-        <Button {...rest} onClick={console.log} />
+        <Button {...props} onClick={console.log} />
       </PopoverTrigger>
       <PopoverContent
         align="end"

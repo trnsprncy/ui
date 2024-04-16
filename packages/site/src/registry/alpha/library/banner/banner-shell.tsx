@@ -44,15 +44,16 @@ export function BannerContent(props: IBannerContentProps) {
 }
 
 export interface IBannerProps
-  extends React.PropsWithChildren<IBannerContentProps> {
-  bannerClass?: string;
-  asChild?: boolean;
-  buttonGroup?: React.ReactNode;
-  leftElement?: React.ReactNode;
-  lockBodyScroll?: boolean;
-  placement?: "bottom" | "centered";
-  className?: string;
-}
+  extends React.PropsWithChildren<{
+    bannerClass?: string;
+    asChild?: boolean;
+    buttonGroup?: React.ReactNode;
+    leftElement?: React.ReactNode;
+    lockBodyScroll?: boolean;
+    placement?: "bottom" | "centered";
+    className?: string;
+    content?: IBannerContentProps;
+  }> {}
 
 /**
  *
@@ -63,7 +64,7 @@ export interface IBannerProps
  * @export
  * @param {BannerProps} props: React.PropsWithChildren<{
  *    asChild?: boolean; buttonGroup?: React.ReactNode; leftElement?: React.ReactNode; placement: 'centered' | 'bottom';
- *    bannerClass: string; className: string;
+ *    bannerClass: string; className: string; content?: BannerContentProps;
  * }>
  * @return {*} {React.ReactNode}
  */
@@ -76,28 +77,32 @@ export default function Banner(props: IBannerProps) {
     bannerClass,
     className,
     children,
-    ...rest
+    content,
   } = props;
   const ContentSlot = asChild ? Slot : BannerContent;
   useLockBodyScroll(!!props.lockBodyScroll);
   return (
     <>
       {props.lockBodyScroll ? (
-        <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md" />
+        <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md transition" />
       ) : null}
 
       <div
-        className={cn("py-9 absolute inset-0 flex flex-col items-center z-10", {
-          "justify-end": placement === "bottom",
-          "justify-center": placement === "centered",
-        })}
+        className={cn(
+          "py-9 absolute inset-0 flex flex-col items-center z-10",
+          className,
+          {
+            "justify-end": placement === "bottom",
+            "justify-center": placement === "centered",
+          }
+        )}
       >
-        <div className={"max-w-3xl z-50 animate-in slide-in-from-bottom-10"}>
+        <div className="max-w-3xl z-50 animate-in slide-in-from-bottom-60 animate-out slide-out-top-60 duration-1000 delay-200">
           <div
             className={cn(background, bannerClass, "border-2 border-muted/30")}
           >
             {leftElement ? leftElement : <Icons.logo className="w-12 h-12" />}
-            <ContentSlot {...rest}>{children}</ContentSlot>
+            <ContentSlot {...content}>{children}</ContentSlot>
             {buttonGroup ? buttonGroup : <BannerTriggerGroup />}
           </div>
         </div>
