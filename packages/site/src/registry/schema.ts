@@ -10,7 +10,7 @@ export const registrySchema = z.array(
     files: z.array(z.string()),
     type: z.enum([
       "components:library",
-      "components:extension",
+      "components:extension", // @TODO: remove extension type
       "components:demo",
       "components:example",
     ]),

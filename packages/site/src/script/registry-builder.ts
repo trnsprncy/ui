@@ -1,11 +1,11 @@
 // @ts-nocheck
-import fs from "fs";
-import path, { basename } from "path";
-import { rimraf } from "rimraf";
-
-import { registry } from "../registry/components";
+import { extension, registry } from "../registry/components";
 import { registrySchema } from "../registry/schema";
 import { styles } from "../registry/styles";
+import fs from "fs";
+import path, { basename } from "path";
+import * as prettier from "prettier";
+import { rimraf } from "rimraf";
 
 console.log("📝 Writing registry index...");
 
@@ -70,5 +70,30 @@ if (!fs.existsSync(registryPath)) {
 // Write style index.
 rimraf.sync(path.join(process.cwd(), "src/__registry__/index.tsx"));
 fs.writeFileSync(path.join(process.cwd(), "src/__registry__/index.tsx"), index);
+
+// write the registry to public dir
+console.log("📝 Building index...");
+const registryJson = JSON.stringify(result.data, null, 2);
+console.log("📝 getting registry path registry...");
+const publicRegistryPath = path.join(process.cwd(), "public/registry");
+if (!fs.existsSync(publicRegistryPath)) {
+  console.log("📝 Creating registry directory...");
+  fs.mkdirSync(publicRegistryPath);
+}
+console.log("📝 Formatting registry file...");
+const formattedRegistryJson = prettier.format(registryJson, {
+  parser: "json",
+});
+
+console.log("📝 Writing registry...");
+
+// check if file exists
+const registryFilePath = path.join(publicRegistryPath, "index.json");
+if (fs.existsSync(registryFilePath)) {
+  console.log("📝 Removing existing registry file...");
+  fs.unlinkSync(registryFilePath);
+}
+
+fs.writeFileSync(registryFilePath, formattedRegistryJson);
 
 console.log("✅ Done!");
