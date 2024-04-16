@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
 import {
   AnalyticsTags,
+  EssentialTags,
   type BrowserCookies,
   type EssentialAnalyticsTagsTupleArrays,
-  EssentialTags,
   type TagArray,
 } from "@trnsprncy/oss/dist/types";
 import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
