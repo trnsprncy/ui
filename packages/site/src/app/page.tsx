@@ -3,20 +3,16 @@ import { SiteFooter } from "@/components/layouts/site-footer";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowRightToLine,
-  MoveDownLeft,
-  MoveDownRight,
-} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
 export default async function Home() {
   return (
-    <main id="main-content" className="w-full h-full flex-1 flex flex-col">
+    <main
+      id="main-content"
+      className="w-full h-full flex-1 flex flex-col mt-12"
+    >
       <div className="absolute inset-0 opacity-50 bg-dots -z-1" />
       <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4 ">
         <h1
@@ -49,7 +45,7 @@ export default async function Home() {
             animationFillMode: "forwards",
           }}
         >
-          <div className="p-0 bg-white motion-safe:gradient-box rounded-xl">
+          <div className="p-0 bg-white motion-safe:gradient-box rounded-xl mb-12">
             <Image
               src="/banner-shot-light.png"
               alt="Banner"
@@ -68,6 +64,9 @@ export default async function Home() {
             />
           </div>
         </div>
+        <strong className="max-w-4xl my-4 px-6 text-">
+          Simply drop it in and go!
+        </strong>
         <div
           className="motion-safe:animate-fade-up flex items-center gap-4 opacity-0"
           style={{
@@ -77,21 +76,11 @@ export default async function Home() {
         >
           <Link
             href={siteConfig.links.docs}
-            className={cn(buttonVariants({ variant: "default" }))}
+            className={cn(buttonVariants({ variant: "gooeyLeft" }))}
           >
             Get Started
           </Link>
-          <Link
-            href={siteConfig.links.github}
-            className={cn("gap-2", buttonVariants({ variant: "outline" }))}
-          >
-            <span>GitHub</span>
-            <Icons.gitHub className="h-4 w-4 fill-current" />
-          </Link>
         </div>
-        <strong className="max-w-4xl my-4 px-6 text-">
-          Simply drop it in and go!
-        </strong>
       </section>
 
       <SiteFooter />
