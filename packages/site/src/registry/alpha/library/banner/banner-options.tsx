@@ -1,7 +1,7 @@
 "use-client";
 
 import { CookieSwitch } from "./banner-switch";
-import { categoryDescriptions, tagDetails } from "./constants";
+import { categoryDescriptions, tagDetails } from "./utils/constants";
 import {
   Accordion,
   AccordionContent,

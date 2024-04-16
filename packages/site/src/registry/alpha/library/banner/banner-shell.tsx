@@ -1,10 +1,9 @@
-import Link from "next/link";
+import { BannerTriggerGroup } from "./banner-trigger";
+import { background } from "./utils/constants";
+import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { Cookie } from "lucide-react";
-import { BannerTriggerGroup } from "./banner-trigger";
-import { cn } from "@/lib/utils";
-import { background } from "./constants";
-
+import Link from "next/link";
 
 export interface IBannerContentProps extends React.PropsWithChildren {
   heading?: string;

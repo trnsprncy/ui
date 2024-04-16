@@ -1,15 +1,14 @@
-import { Slot } from '@radix-ui/react-slot';
-import {convertTagsToCookies } from "@trnsprncy/oss/dist/utils/";
-import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
+import { TrnsprncyButton } from "./trnsprncy-button";
+import { _buttons } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { TrnsprncyButton } from './trnsprncy-button';
-import { _buttons } from './constants';
+import { Slot } from "@radix-ui/react-slot";
+import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
+import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils/";
 
 export interface IBannerTriggersProps {
   buttons?: ButtonProps[];
   asChild?: boolean;
 }
-
 
 /**
  * This component renders the trigger buttons for the consent banner.
@@ -80,4 +79,3 @@ export function BannerTriggerGroup({ asChild, children }: ButtonGroupProps) {
     </div>
   );
 }
-

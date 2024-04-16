@@ -1,12 +1,12 @@
+import { BannerOptions } from "./banner-options";
+import { background } from "./utils/constants";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button, type ButtonProps } from "@/components/ui/button";
-import { BannerOptions } from "./banner-options";
-import { cn } from '@/lib/utils';
-import { background } from './constants';
+import { cn } from "@/lib/utils";
 
 /**
  * This button renders with a popup trigger wrapped around it.
@@ -24,7 +24,7 @@ export function TrnsprncyButton({ ...rest }: ButtonProps) {
     <Popover>
       <PopoverTrigger asChild>
         {/* @FIXME: what should happen on click? */}
-        <Button {...rest} onClick={console.log} /> 
+        <Button {...rest} onClick={console.log} />
       </PopoverTrigger>
       <PopoverContent
         align="end"
