@@ -1,30 +1,29 @@
-import { Slot } from '@radix-ui/react-slot';
-import {convertTagsToCookies } from "@trnsprncy/oss/dist/utils/";
-import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
+"use client";
+
+import { TrnsprncyButton } from "./trnsprncy-button";
+import { _buttons } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { TrnsprncyButton } from './trnsprncy-button';
-import { _buttons } from './constants';
+import { Slot } from "@radix-ui/react-slot";
+import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
+import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils/";
 
-export interface IBannerTriggersProps {
-  buttons?: ButtonProps[];
-  asChild?: boolean;
-}
-
+export interface IBannerTriggersProps
+  extends React.PropsWithChildren<{
+    buttons?: ButtonProps[];
+    asChild?: boolean;
+  }> {}
 
 /**
  * This component renders the trigger buttons for the consent banner.
- * It orchestrates the rendering of the default buttons and also allows for the addition of custom buttons.
- * It also allows for the rendering of the buttons directly as children of the component.
+ * It orchestrates the rendering of the default buttons and can support completely custom buttons.
  *
- * When rendering default buttons or custom configured buttons the component will assign functionality based on the button's index
+ * When rendering default buttons or custom configured buttons the component will assign functionality based on the button's type
  * @export
  * @type {React.PropsWithChildren<BannerTriggersProps>}
  * @param  {BannerTriggerProps} { asChild, buttons: ButtonProps[], children }
  * @return {*} {React.ReactNode}
  */
-export function BannerTriggers(
-  props: React.PropsWithChildren<IBannerTriggersProps>
-) {
+export function BannerTriggers(props: IBannerTriggersProps) {
   const { asChild, buttons, children } = props;
   const { handleConsentUpdate, setHasConsent } = useConsentDispatch();
   const { tags } = useConsent();
@@ -32,7 +31,6 @@ export function BannerTriggers(
   let btns = buttons ?? (_buttons as ButtonProps[]);
   if (btns && btns.length > 2) {
     btns.length = 2; // removes all buttons after the 2nd
-    console.log(btns);
     console.warn("BannerTriggers: Only 2 buttons are supported");
   }
 
@@ -42,18 +40,19 @@ export function BannerTriggers(
     <>
       {btns
         ? btns.map((btn, i) => {
-            // only show the feature button if the user has pro subscription
+            if (btn.type === "submit") {
+              return (
+                <Button
+                  key={i}
+                  {...btn}
+                  onClick={() => {
+                    setHasConsent(true);
+                    handleConsentUpdate(convertTagsToCookies(tags));
+                  }}
+                />
+              );
+            }
             return <TrnsprncyButton key={i} {...btn} />;
-            return (
-              <Button
-                key={i}
-                {...btn}
-                onClick={() => {
-                  setHasConsent(true);
-                  handleConsentUpdate(convertTagsToCookies(tags));
-                }}
-              />
-            );
           })
         : null}
     </>
@@ -75,9 +74,8 @@ type ButtonGroupProps = React.PropsWithChildren<{
 export function BannerTriggerGroup({ asChild, children }: ButtonGroupProps) {
   const ButtonGroupSlot = asChild ? Slot : BannerTriggers;
   return (
-    <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2">
+    <div className="flex flex-col md:flex-row">
       <ButtonGroupSlot>{children}</ButtonGroupSlot>
     </div>
   );
 }
-

@@ -78,7 +78,7 @@
 
 @layer base {
   * {
-    @apply border-border selection:bg-accent selection:text-accent;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -93,10 +93,6 @@
   input[type="number"] {
     appearance: none;
   }
-}
-
-::-moz-selection {
-  background: #555;
 }
 
 @layer utilities {
