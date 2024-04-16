@@ -78,7 +78,7 @@
 
 @layer base {
   * {
-    @apply border-border selection:bg-accent selection:text-accent;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -95,11 +95,17 @@
   }
 }
 
-::-moz-selection {
-  background: #555;
-}
-
 @layer utilities {
+  .bg-dots {
+    background-image: linear-gradient(
+        #090a0c,
+        #0b0c0e 23%,
+        rgba(0, 0, 0, 0) 40%,
+        rgba(0, 0, 0, 0) 92%,
+        #181b20
+      ),
+      url("/dot.png");
+  }
   .step {
     counter-increment: step;
   }
@@ -108,6 +114,24 @@
     @apply absolute w-9 h-9 bg-muted rounded-full font-mono font-medium text-center text-base inline-flex items-center justify-center -indent-px border-4 border-background;
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
+  }
+
+  .gradient-box {
+    /* https://www.ibelick.com/blog/create-animated-gradient-borders-with-css */
+    --highlight-color: rgb(106, 106, 254);
+    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[2px] border-solid border-[#0000];
+    background: padding-box,
+      linear-gradient(var(--angle), #070707, var(--highlight-color)) border-box;
+  }
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
   }
 }
 

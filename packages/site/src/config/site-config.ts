@@ -3,7 +3,7 @@ export const siteConfig = {
   url: "https://trnsprncy.vercel.app/",
   ogImage: "https://trnsprncy.vercel.app/og.png",
   description:
-    "Optimized Google Tag Manager implementation for performance in next.js applications. Simply drop it in and go!",
+    "Optimized Google Tag Manager implementation for performance in next.js applications.",
   links: {
     twitter: "https://twitter.com/soham_asmi",
     github: "https://github.com/trnsprncy",

@@ -1,18 +1,28 @@
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
-interface ICookieSwitchProps {
-  type: "category" | "tag";
-  label: string;
-  description: string;
-  cookieName: string;
-  isDisabled?: boolean;
-  onCheckedChange: (checked: boolean) => void; // Function to update cookie state
-  className?: string;
-  isChecked: boolean;
-}
-
-export function CookieSwitch({
+interface IBannerSwitchProps
+  extends React.PropsWithChildren<{
+    type: "category" | "tag";
+    label: string;
+    description: string;
+    cookieName: string;
+    isDisabled?: boolean;
+    onCheckedChange: (checked: boolean) => void; // Function to update cookie state
+    className?: string;
+    isChecked: boolean;
+  }> {}
+/**
+ * This component renders a custom switch component with a label and is responsible for handling the toggle interaction
+ *
+ * @export
+ * @param {React.PropsWithChildren<IBannerSwitchProps>} {
+ *    type: 'category' | 'tag'; label: string; description: string; cookieName: string; isDisabled?: boolean;
+ *    onCheckedChange: (checked: boolean) => void; className?: string; isChecked: boolean;
+ * }
+ * @return {*}
+ */
+export function BannerSwitch({
   type,
   label,
   description,
@@ -21,7 +31,7 @@ export function CookieSwitch({
   onCheckedChange,
   className,
   isChecked,
-}: React.PropsWithChildren<ICookieSwitchProps>) {
+}: IBannerSwitchProps) {
   const isCategory = type === "category";
   const { id } = {
     id: isCategory ? label.toLowerCase() : cookieName,
@@ -30,7 +40,7 @@ export function CookieSwitch({
   return (
     <div
       className={cn(
-        "flex items-center space-y-6",
+        "flex items-center space-y-1",
         !isCategory && "text-sm",
         isDisabled && "hover:opacity-80 hover:cursor-not-allowed",
         className
@@ -55,7 +65,7 @@ export function CookieSwitch({
           htmlFor={id}
           className={cn(
             "text-lg font-medium",
-            !isCategory && "text-base font-normal text-white/50"
+            !isCategory && "text-sm font-normal text-foreground/40"
           )}
         >
           {label}
