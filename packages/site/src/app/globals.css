@@ -96,6 +96,16 @@
 }
 
 @layer utilities {
+  .bg-dots {
+    background-image: linear-gradient(
+        #090a0c,
+        #0b0c0e 23%,
+        rgba(0, 0, 0, 0) 40%,
+        rgba(0, 0, 0, 0) 92%,
+        #181b20
+      ),
+      url("/dot.png");
+  }
   .step {
     counter-increment: step;
   }

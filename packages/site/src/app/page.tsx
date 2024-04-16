@@ -16,8 +16,9 @@ import Balancer from "react-wrap-balancer";
 
 export default async function Home() {
   return (
-    <main id="main-content" className="max-w-4xl mx-auto flex-1 flex flex-col">
-      <section className="flex-1 flex flex-col items-center justify-center gap-4 ">
+    <main id="main-content" className="w-full h-full flex-1 flex flex-col">
+      <div className="absolute inset-0 opacity-50 bg-dots -z-1" />
+      <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4 ">
         <h1
           className="px-4 text-center motion-safe:animate-fade-up text-4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
           style={{
@@ -41,27 +42,6 @@ export default async function Home() {
             <Balancer>{siteConfig.description}</Balancer>
           </span>
         </p>
-        <div
-          className="motion-safe:animate-fade-up flex items-center gap-4 opacity-0"
-          style={{
-            animationDelay: "0.4s",
-            animationFillMode: "forwards",
-          }}
-        >
-          <Link
-            href={siteConfig.links.docs}
-            className={cn(buttonVariants({ variant: "default" }))}
-          >
-            Get Started
-          </Link>
-          <Link
-            href={siteConfig.links.github}
-            className={cn("gap-2", buttonVariants({ variant: "outline" }))}
-          >
-            <span>GitHub</span>
-            <Icons.gitHub className="h-4 w-4 fill-current" />
-          </Link>
-        </div>
         <div
           className="motion-safe:animate-fade-up opacity-0 mt-6"
           style={{
@@ -87,6 +67,27 @@ export default async function Home() {
               priority
             />
           </div>
+        </div>
+        <div
+          className="motion-safe:animate-fade-up flex items-center gap-4 opacity-0"
+          style={{
+            animationDelay: "0.4s",
+            animationFillMode: "forwards",
+          }}
+        >
+          <Link
+            href={siteConfig.links.docs}
+            className={cn(buttonVariants({ variant: "default" }))}
+          >
+            Get Started
+          </Link>
+          <Link
+            href={siteConfig.links.github}
+            className={cn("gap-2", buttonVariants({ variant: "outline" }))}
+          >
+            <span>GitHub</span>
+            <Icons.gitHub className="h-4 w-4 fill-current" />
+          </Link>
         </div>
         <strong className="max-w-4xl my-4 px-6 text-">
           Simply drop it in and go!
