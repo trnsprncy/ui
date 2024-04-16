@@ -103,9 +103,7 @@ export default function Banner(props: IBannerProps) {
             className={cn(background, bannerClass, "border-2 border-muted/30")}
           >
             {leftElement ? leftElement : <Icons.logo className="w-12 h-12" />}
-            <BannerShell>
-              <ContentSlot {...content}>{children}</ContentSlot>
-            </BannerShell>
+            <ContentSlot {...content}>{children}</ContentSlot>
             {buttonGroup ? buttonGroup : <BannerTriggerGroup />}
           </div>
         </div>
