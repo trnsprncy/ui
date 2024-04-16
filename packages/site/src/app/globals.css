@@ -105,6 +105,23 @@
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
   }
+
+  .gradient-box {
+    --highlight-color: rgb(106, 106, 254);
+    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[2px] border-solid border-[#0000];
+    background: padding-box,
+      linear-gradient(var(--angle), #070707, var(--highlight-color)) border-box;
+  }
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
 }
 
 @media (max-width: 640px) {
