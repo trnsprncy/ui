@@ -104,6 +104,10 @@ export default {
           "0%, 100%": { transform: "translate(0, 0)" },
           "50%": { transform: "translate(0, 20px)" },
         },
+        shine: {
+          from: { backgroundPosition: "200% 0" },
+          to: { backgroundPosition: "-200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -114,6 +118,7 @@ export default {
         "slide-down": "slide-down 0.75s ease-in-out infinite",
         "highlight-border":
           "highlight-border 1s infinite alternate cubic-bezier(0.5,700,0.5,-700)",
+        shine: "shine 8s ease-in-out infinite",
       },
     },
   },
