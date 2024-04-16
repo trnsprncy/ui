@@ -1,3 +1,5 @@
+"use client";
+
 import { BannerOptions } from "./banner-options";
 import { background } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";

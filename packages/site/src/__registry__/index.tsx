@@ -12,13 +12,6 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-shell.tsx")),
       files: ["src/registry/alpha/library/banner/banner-shell.tsx"],
     },
-    "banner-options": {
-      name: "banner-options",
-      type: "components:library",
-      registryDependencies: ["banner-switch"],
-      component: React.lazy(() => import("@/registry/alpha/library/banner/banner-options.tsx")),
-      files: ["src/registry/alpha/library/banner/banner-options.tsx"],
-    },
     "banner-switch": {
       name: "banner-switch",
       type: "components:library",

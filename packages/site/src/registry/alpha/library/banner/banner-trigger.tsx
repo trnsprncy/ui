@@ -1,3 +1,5 @@
+"use client";
+
 import { TrnsprncyButton } from "./trnsprncy-button";
 import { _buttons } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";

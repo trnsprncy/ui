@@ -9,14 +9,14 @@ const extension: Registry = [
     uiDependencies: [],
     files: ["library/banner/banner-shell.tsx"],
   },
-  {
-    name: "banner-options",
-    type: "components:library",
-    dependencies: ["trnsprncy/oss"], // include radix & 3td party dependencies
-    registryDependencies: ["banner-switch"],
-    uiDependencies: ["accordion", "button"],
-    files: ["library/banner/banner-options.tsx"],
-  },
+  // {
+  //   name: "banner-options",
+  //   type: "components:library",
+  //   dependencies: ["trnsprncy/oss"], // include radix & 3td party dependencies
+  //   registryDependencies: ["banner-switch"],
+  //   uiDependencies: ["accordion", "button"],
+  //   files: ["library/banner/banner-options.tsx"],
+  // },
   {
     name: "banner-switch",
     type: "components:library",

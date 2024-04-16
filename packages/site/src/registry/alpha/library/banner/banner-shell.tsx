@@ -83,7 +83,7 @@ export default function Banner(props: IBannerProps) {
   const ContentSlot = asChild ? Slot : BannerContent;
   useLockBodyScroll(!!props.lockBodyScroll);
   return (
-    <BannerShell>
+    <>
       {props.lockBodyScroll ? (
         <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md transition" />
       ) : null}
@@ -103,12 +103,14 @@ export default function Banner(props: IBannerProps) {
             className={cn(background, bannerClass, "border-2 border-muted/30")}
           >
             {leftElement ? leftElement : <Icons.logo className="w-12 h-12" />}
-            <ContentSlot {...content}>{children}</ContentSlot>
+            <BannerShell>
+              <ContentSlot {...content}>{children}</ContentSlot>
+            </BannerShell>
             {buttonGroup ? buttonGroup : <BannerTriggerGroup />}
           </div>
         </div>
       </div>
-    </BannerShell>
+    </>
   );
 }
 
