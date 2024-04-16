@@ -4,7 +4,6 @@ import { registrySchema } from "../registry/schema";
 import { styles } from "../registry/styles";
 import fs from "fs";
 import path, { basename } from "path";
-import * as prettier from "prettier";
 import { rimraf } from "rimraf";
 
 console.log("📝 Writing registry index...");
@@ -80,10 +79,6 @@ if (!fs.existsSync(publicRegistryPath)) {
   console.log("📝 Creating registry directory...");
   fs.mkdirSync(publicRegistryPath);
 }
-console.log("📝 Formatting registry file...");
-const formattedRegistryJson = prettier.format(registryJson, {
-  parser: "json",
-});
 
 console.log("📝 Writing registry...");
 
@@ -94,6 +89,6 @@ if (fs.existsSync(registryFilePath)) {
   fs.unlinkSync(registryFilePath);
 }
 
-fs.writeFileSync(registryFilePath, formattedRegistryJson);
+fs.writeFileSync(registryFilePath, registryJson);
 
 console.log("✅ Done!");
