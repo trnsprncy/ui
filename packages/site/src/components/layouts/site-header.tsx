@@ -52,7 +52,7 @@ export const SiteHeader = () => {
             })}
           </div>
           <div className="flex items-center gap-1 xs:gap-2">
-            <SearchPopOver />
+            {/* <SearchPopOver /> #TODO: #JB4fsn/  */}
             <SocialLinks className="hidden xs:flex" />
             <div className="flex xs:hidden">
               <ModeToggle />

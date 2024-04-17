@@ -9,7 +9,7 @@ export const SiteFooter = () => {
         <span>
           Consent by{" "}
           <Link
-            href={siteConfig.links.github}
+            href={siteConfig.links.twitter}
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
