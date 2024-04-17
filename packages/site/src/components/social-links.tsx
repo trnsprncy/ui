@@ -21,7 +21,7 @@ export const SocialLinks = ({ className }: { className: string }) => {
       >
         <Icons.twitter className="h-3 w-3 fill-current" />
       </Link>
-      <Link
+      {/* <Link #TODO: #JB4fsn/
         aria-label="GitHub"
         href={siteConfig.links.github}
         className={cn(
@@ -32,7 +32,7 @@ export const SocialLinks = ({ className }: { className: string }) => {
         )}
       >
         <Icons.gitHub className="h-4 w-4" />
-      </Link>
+      </Link> */}
       <div className="hidden xs:flex">
         <ModeToggle />
       </div>
