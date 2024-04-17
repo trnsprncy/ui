@@ -1,12 +1,7 @@
 import { LabelInput } from "@/components/label-input";
 import { SiteFooter } from "@/components/layouts/site-footer";
-import { ShinyInput } from "@/components/shiny-input";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site-config";
-import { cn } from "@/lib/utils";
-import { Send } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
 export default async function Home() {
