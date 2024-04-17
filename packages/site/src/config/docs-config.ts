@@ -5,14 +5,14 @@ export type DocsConfig = {
 };
 
 export const Pages: DocsConfig[] = [
-  {
-    title: "Kit",
-    path: "/kit",
-  },
-  {
-    title: "Docs",
-    path: "/docs/introduction",
-  },
+  // {
+  //   title: "Kit",
+  //   path: "/kit",
+  // },
+  // {
+  //   title: "Docs",
+  //   path: "/docs/introduction",
+  // },
 ];
 
 export const docsConfig: DocsConfig[] = [
