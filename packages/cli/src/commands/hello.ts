@@ -1,7 +1,8 @@
 import { ascii_logo } from "./ascii-logo";
 import {
   getComponentInfo,
-  fetchFileContentFromGithub
+  fetchFileContentFromGithub,
+  getPaths,
 } from "@/utils/registry/index";
 // import { renderTitle } from "@/utils/render-title.js";
 import chalk from "chalk";
@@ -37,11 +38,9 @@ export const helloCommand = new Command()
 
     const selectedComponents = await getComponentInfo(options.components);
     // // get the path of the selected component
-    const pathArray: string[] = selectedComponents
-      .map((obj) => obj.files)
-      .flat();
+    const componentPaths = getPaths(selectedComponents);
 
-    const data = await fetchFileContentFromGithub(pathArray[0]);
+    const data = await fetchFileContentFromGithub(componentPaths);
     console.log(data);
     process.exit(0);
   });

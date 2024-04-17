@@ -1,12 +1,11 @@
-import { registryIndexSchema } from "@/registry/schema";
+import { registryIndexSchema, Registry } from "@/registry/schema";
 import fs from "fs";
 import { HttpsProxyAgent } from "https-proxy-agent";
 import fetch from "node-fetch";
 import path from "path";
 import { z } from "zod";
 
-const GithubUrl =
-  "https://raw.githubusercontent.com/trnsprncy/ui/main";
+const GithubUrl = "https://raw.githubusercontent.com/trnsprncy/ui/main";
 const baseUrl =
   process.env.COMPONENTS_REGISTRY_URL ?? "https://trnsprncy.vercel.app";
 const agent = process.env.https_proxy
@@ -64,24 +63,35 @@ export async function getComponentInfo(componentName: string[] | undefined) {
   return tree;
 }
 
+export function getPaths(components: Registry) {
+  const pathArray: string[] = components.map((obj) => obj.files).flat();
+  return pathArray;
+}
+
 export async function fetchFileContentFromGithub(
-  path: string
-): Promise<string> {
+  paths: string[]
+): Promise<string[]> {
   try {
-    // Convert GitHub repository URL to raw file URL
-    const rawUrl = `${GithubUrl}/packages/site/src/registry/alpha/${path}`;
-    console.log(rawUrl)
-    // Fetch file content
-    const response = await fetch(rawUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch file: ${response.statusText}`);
+    const contents: string[] = [];
+
+    for (const path of paths) {
+      const rawUrl = `${GithubUrl}/packages/site/src/registry/alpha/${path}`;
+
+      const response = await fetch(rawUrl);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch file '${path}': ${response.statusText}`
+        );
+      }
+
+      const content = await response.text();
+      contents.push(content);
     }
 
-    // Read and return file content
-    const content = await response.text();
-    return content;
+    return contents;
   } catch (error) {
-    console.error("Error fetching file from GitHub:", error);
+    console.error("Error fetching files from GitHub:", error);
     throw error;
   }
 }
