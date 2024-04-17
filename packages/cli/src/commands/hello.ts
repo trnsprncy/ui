@@ -1,9 +1,7 @@
 import { ascii_logo } from "./ascii-logo";
-import { registryIndexSchema } from "@/registry/schema";
 import {
-  getParsedRegistry,
   getComponentInfo,
-  printContentsOfFile,
+  fetchFileContentFromGithub
 } from "@/utils/registry/index";
 // import { renderTitle } from "@/utils/render-title.js";
 import chalk from "chalk";
@@ -37,19 +35,13 @@ export const helloCommand = new Command()
       process.exit(1);
     }
 
-    // get the registry file
-    const registryIndex = registryIndexSchema.parse(await getParsedRegistry());
-    const selectedComponents = await getComponentInfo(
-      registryIndex,
-      options.components
-    );
-    // get the path of the selected component
+    const selectedComponents = await getComponentInfo(options.components);
+    // // get the path of the selected component
     const pathArray: string[] = selectedComponents
       .map((obj) => obj.files)
       .flat();
 
-    const data = printContentsOfFile("../src/registry", pathArray[0]);
-
+    const data = await fetchFileContentFromGithub(pathArray[0]);
     console.log(data);
     process.exit(0);
   });
