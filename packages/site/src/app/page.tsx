@@ -1,10 +1,7 @@
-import { Icons } from "@/components/icons";
+import { LabelInput } from "@/components/label-input";
 import { SiteFooter } from "@/components/layouts/site-footer";
-import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site-config";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
 export default async function Home() {
@@ -39,13 +36,13 @@ export default async function Home() {
           </span>
         </p>
         <div
-          className="motion-safe:animate-fade-up opacity-0 mt-6"
+          className="motion-safe:animate-fade-up opacity-0 mt-2"
           style={{
             animationDelay: "0.4s",
             animationFillMode: "forwards",
           }}
         >
-          <div className="p-0 bg-white motion-safe:gradient-box rounded-xl mb-12">
+          <div className="p-0 motion-safe:gradient-box rounded-xl mb-6">
             <Image
               src="/banner-shot-light.png"
               alt="Banner"
@@ -64,23 +61,24 @@ export default async function Home() {
             />
           </div>
         </div>
-        <strong className="max-w-4xl my-4 px-6 text-">
-          Simply drop it in and go!
+        <strong className="max-w-4xl px-6 text-">
+          Sign up for early access to our alpha preview.
         </strong>
-        <div
-          className="motion-safe:animate-fade-up flex items-center gap-4 opacity-0"
+        <form
+          className="motion-safe:animate-fade-up flex items-center justify-center gap-y-4 opacity-0 w-full"
           style={{
             animationDelay: "0.4s",
             animationFillMode: "forwards",
           }}
         >
-          <Link
+          <LabelInput />
+          {/* <Link @TODO: #JB4fsn/
             href={siteConfig.links.docs}
             className={cn(buttonVariants({ variant: "gooeyLeft" }))}
           >
             Get Started
-          </Link>
-        </div>
+          </Link> */}
+        </form>
       </section>
 
       <SiteFooter />
