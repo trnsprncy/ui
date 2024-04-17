@@ -5,7 +5,7 @@ export const siteConfig = {
   description:
     "Optimized Google Tag Manager implementation for performance in next.js applications.",
   links: {
-    twitter: "https://twitter.com/soham_asmi",
+    twitter: "https://twitter.com/_trnsprncy",
     github: "https://github.com/trnsprncy",
     docs: "/docs/introduction",
     components: "/components",
