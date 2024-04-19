@@ -2,7 +2,7 @@
 import { renderTitle } from "../utils/render-title.js";
 import chalk from "chalk";
 import { Command } from "commander";
-import fs, { mkdir } from "fs";
+import fs from "fs";
 import ora from "ora";
 import path from "path";
 import prompt from "prompts";

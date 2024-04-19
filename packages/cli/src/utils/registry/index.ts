@@ -1,8 +1,6 @@
 import { registryIndexSchema, Registry } from "@/registry/schema";
-import fs from "fs";
 import { HttpsProxyAgent } from "https-proxy-agent";
 import fetch from "node-fetch";
-import path from "path";
 import { z } from "zod";
 
 const GithubUrl = "https://raw.githubusercontent.com/trnsprncy/ui/main";
