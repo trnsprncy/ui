@@ -124,7 +124,7 @@
 
   .gradient-box {
     /* https://www.ibelick.com/blog/create-animated-gradient-borders-with-css */
-    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[2px] border-solid border-[hsl(var(--background))];
+    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[0px] border-solid border-[hsl(var(--background))] overflow-hidden;
     background: padding-box,
       linear-gradient(
           var(--angle),

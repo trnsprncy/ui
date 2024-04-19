@@ -37,17 +37,17 @@ export default async function Home() {
           </span>
         </p>
         <div
-          className="motion-safe:animate-fade-up opacity-0 mt-2 shadow-[0px_0px_133px_4px_rgba(6,53,111,0.9)]"
+          className="motion-safe:animate-fade-up opacity-0 mt-2 mb-4 shadow-[0px_0px_100px_4px_rgba(73,8,242,0.48)] dark:shadow-[0px_0px_133px_4px_rgba(6,53,111,0.9)] rounded-xl overflow-hidden"
           style={{
             animationDelay: "0.4s",
             animationFillMode: "forwards",
           }}
         >
-          <div className="p-0 motion-safe:gradient-box rounded-xl mb-6">
+          <div className="motion-safe:gradient-box">
             <Image
               src="/banner-shot-light.png"
               alt="Banner"
-              className="w-full dark:hidden shadow-md"
+              className="w-full dark:hidden rounded-xl"
               width="600"
               height="100"
               priority
@@ -55,7 +55,7 @@ export default async function Home() {
             <Image
               src="/banner-shot.png"
               alt="Banner"
-              className="w-full hidden dark:inline-block shadow-md"
+              className="w-full hidden dark:inline-block rounded-xl"
               width="600"
               height="100"
               priority
