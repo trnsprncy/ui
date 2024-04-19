@@ -37,7 +37,7 @@ export default async function Home() {
           </span>
         </p>
         <div
-          className="motion-safe:animate-fade-up opacity-0 mt-2"
+          className="motion-safe:animate-fade-up opacity-0 mt-2 shadow-[0px_0px_133px_4px_rgba(6,53,111,0.9)]"
           style={{
             animationDelay: "0.4s",
             animationFillMode: "forwards",
