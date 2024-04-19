@@ -10,8 +10,8 @@ export default async function Home() {
       id="main-content"
       className="w-full h-full flex-1 flex flex-col mt-12"
     >
-      <div className="absolute inset-0 opacity-50 bg-dots -z-1" />
-      <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4 ">
+      <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid" />
+      <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4">
         <h1
           className="px-4 text-center motion-safe:animate-fade-up text-4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
           style={{
@@ -21,7 +21,8 @@ export default async function Home() {
         >
           <Balancer>
             Cookie Consent Compliance{" "}
-            <span className="text-foreground leading-relaxed">Simplified.</span>{" "}
+            <span className="text-foreground leading-relaxed">Simplified</span>
+            <span className="text-gray-500">.</span>{" "}
           </Balancer>
         </h1>
         <p className="max-w-4xl my-4 px-6">
@@ -36,7 +37,7 @@ export default async function Home() {
           </span>
         </p>
         <div
-          className="motion-safe:animate-fade-up opacity-0 mt-2"
+          className="motion-safe:animate-fade-up opacity-0 mt-2 shadow-[0px_0px_133px_4px_rgba(6,53,111,0.9)]"
           style={{
             animationDelay: "0.4s",
             animationFillMode: "forwards",
@@ -80,7 +81,15 @@ export default async function Home() {
           </Link> */}
         </form>
       </section>
-
+      {/* <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="800px"
+        height="800px"
+        viewBox="0 0 20 20"
+        className="fill-foreground"
+      >
+        <path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z" />
+      </svg> */}
       <SiteFooter />
     </main>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { TailwindIndicator } from "./tailwind-indicator";
 import BannerShell from "@/registry/alpha/library/banner/banner-shell";
 import TrnsprncyProvider from "@trnsprncy/oss";
 import { Analytics } from "@vercel/analytics/react";
@@ -23,6 +24,7 @@ export const ClientProviders = ({
         >
           <BannerShell lockBodyScroll placement="bottom" />
         </TrnsprncyProvider>
+        <TailwindIndicator />
         <Analytics />
       </ThemeProvider>
     </>
