@@ -1,6 +1,8 @@
 import { LabelInput } from "@/components/label-input";
 import { SiteFooter } from "@/components/layouts/site-footer";
+import { WaitListForm } from "@/components/waitlist-form";
 import { siteConfig } from "@/config/site-config";
+import { env } from "@/env.mjs";
 import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 
@@ -8,7 +10,7 @@ export default async function Home() {
   return (
     <main
       id="main-content"
-      className="w-full h-full flex-1 flex flex-col mt-12"
+      className="w-full h-full flex-1 flex flex-col mt-12 p-3 md:p-0"
     >
       <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid" />
       <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4">
@@ -64,34 +66,23 @@ export default async function Home() {
             />
           </div>
         </div>
-        <strong className="max-w-4xl px-6 text-">
-          Sign up for early access to our alpha preview.
-        </strong>
-        <form
-          className="motion-safe:animate-fade-up flex items-center justify-center gap-y-4 opacity-0 w-full"
+        <strong
+          className="motion-safe:animate-fade-up opacity-0 max-w-4xl px-6 text-center"
           style={{
-            animationDelay: "0.4s",
+            animationDelay: "0.5s",
             animationFillMode: "forwards",
           }}
         >
-          <LabelInput />
-          {/* <Link @TODO: #JB4fsn/
+          <Balancer>Sign up for early access.</Balancer>
+        </strong>
+        <WaitListForm />
+        {/* <Link @TODO: #JB4fsn/
             href={siteConfig.links.docs}
             className={cn(buttonVariants({ variant: "gooeyLeft" }))}
           >
             Get Started
           </Link> */}
-        </form>
       </section>
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="800px"
-        height="800px"
-        viewBox="0 0 20 20"
-        className="fill-foreground"
-      >
-        <path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z" />
-      </svg> */}
       <SiteFooter />
     </main>
   );

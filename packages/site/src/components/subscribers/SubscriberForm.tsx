@@ -1,35 +1,34 @@
-import { z } from "zod";
-
-import { useState, useTransition } from "react";
-import { useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useValidatedForm } from "@/lib/hooks/useValidatedForm";
-
-import { type Action, cn } from "@/lib/utils";
 import { type TAddOptimistic } from "@/app/(app)/subscribers/useOptimisticSubscribers";
-
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { useBackPath } from "@/components/shared/BackButton";
-
-
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
-
-import { type Subscriber, insertSubscriberParams } from "@/lib/db/schema/subscribers";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   createSubscriberAction,
   deleteSubscriberAction,
   updateSubscriberAction,
 } from "@/lib/actions/subscribers";
-
+import {
+  insertSubscriberParams,
+  type Subscriber,
+} from "@/lib/db/schema/subscribers";
+import { useValidatedForm } from "@/lib/hooks/useValidatedForm";
+import { cn, type Action } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const SubscriberForm = ({
-  
   subscriber,
   openModal,
   closeModal,
@@ -37,7 +36,7 @@ const SubscriberForm = ({
   postSuccess,
 }: {
   subscriber?: Subscriber | null;
-  
+
   openModal?: (subscriber?: Subscriber) => void;
   closeModal?: () => void;
   addOptimistic?: TAddOptimistic;
@@ -46,8 +45,8 @@ const SubscriberForm = ({
   const { errors, hasErrors, setErrors, handleChange } =
     useValidatedForm<Subscriber>(insertSubscriberParams);
   const editing = !!subscriber?.id;
-    const [verified, setVerified] = useState<Date | undefined>(
-    subscriber?.verified,
+  const [verified, setVerified] = useState<Date | undefined>(
+    subscriber?.verified ?? undefined
   );
 
   const [isDeleting, setIsDeleting] = useState(false);
@@ -56,10 +55,9 @@ const SubscriberForm = ({
   const router = useRouter();
   const backpath = useBackPath("subscribers");
 
-
   const onSuccess = (
     action: Action,
-    data?: { error: string; values: Subscriber },
+    data?: { error: string; values: Subscriber }
   ) => {
     const failed = Boolean(data?.error);
     if (failed) {
@@ -79,7 +77,9 @@ const SubscriberForm = ({
     setErrors(null);
 
     const payload = Object.fromEntries(data.entries());
-    const subscriberParsed = await insertSubscriberParams.safeParseAsync({  ...payload });
+    const subscriberParsed = await insertSubscriberParams.safeParseAsync({
+      ...payload,
+    });
     if (!subscriberParsed.success) {
       setErrors(subscriberParsed?.error.flatten().fieldErrors);
       return;
@@ -88,17 +88,22 @@ const SubscriberForm = ({
     closeModal && closeModal();
     const values = subscriberParsed.data;
     const pendingSubscriber: Subscriber = {
-      updatedAt: subscriber?.updatedAt ?? new Date().toISOString().slice(0, 19).replace("T", " "),
-      createdAt: subscriber?.createdAt ?? new Date().toISOString().slice(0, 19).replace("T", " "),
+      updatedAt:
+        subscriber?.updatedAt ??
+        new Date().toISOString().slice(0, 19).replace("T", " "),
+      createdAt:
+        subscriber?.createdAt ??
+        new Date().toISOString().slice(0, 19).replace("T", " "),
       id: subscriber?.id ?? "",
       ...values,
     };
     try {
       startMutation(async () => {
-        addOptimistic && addOptimistic({
-          data: pendingSubscriber,
-          action: editing ? "update" : "create",
-        });
+        addOptimistic &&
+          addOptimistic({
+            data: pendingSubscriber,
+            action: editing ? "update" : "create",
+          });
 
         const error = editing
           ? await updateSubscriberAction({ ...values, id: subscriber.id })
@@ -106,11 +111,11 @@ const SubscriberForm = ({
 
         const errorFormatted = {
           error: error ?? "Error",
-          values: pendingSubscriber 
+          values: pendingSubscriber,
         };
         onSuccess(
           editing ? "update" : "create",
-          error ? errorFormatted : undefined,
+          error ? errorFormatted : undefined
         );
       });
     } catch (e) {
@@ -123,11 +128,11 @@ const SubscriberForm = ({
   return (
     <form action={handleSubmit} onChange={handleChange} className={"space-y-8"}>
       {/* Schema fields start */}
-              <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.email ? "text-destructive" : "",
+            errors?.email ? "text-destructive" : ""
           )}
         >
           Email
@@ -144,11 +149,11 @@ const SubscriberForm = ({
           <div className="h-6" />
         )}
       </div>
-<div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.verified ? "text-destructive" : "",
+            errors?.verified ? "text-destructive" : ""
           )}
         >
           Verified
@@ -168,7 +173,7 @@ const SubscriberForm = ({
               variant={"outline"}
               className={cn(
                 "w-[240px] pl-3 text-left font-normal",
-                !subscriber?.verified && "text-muted-foreground",
+                !subscriber?.verified && "text-muted-foreground"
               )}
             >
               {verified ? (
@@ -197,11 +202,11 @@ const SubscriberForm = ({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.name ? "text-destructive" : "",
+            errors?.name ? "text-destructive" : ""
           )}
         >
           Name
@@ -233,7 +238,8 @@ const SubscriberForm = ({
             setIsDeleting(true);
             closeModal && closeModal();
             startMutation(async () => {
-              addOptimistic && addOptimistic({ action: "delete", data: subscriber });
+              addOptimistic &&
+                addOptimistic({ action: "delete", data: subscriber });
               const error = await deleteSubscriberAction(subscriber.id);
               setIsDeleting(false);
               const errorFormatted = {
