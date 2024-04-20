@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import path from "path";
-import fs from "fs";
-import { Command } from "commander";
-import * as semver from "semver";
-import chalk from "chalk"
-import ora from "ora"
-import prompt from "prompts"
 import { renderTitle } from "../utils/render-title.js";
+import chalk from "chalk";
+import { Command } from "commander";
+import fs from "fs";
+import ora from "ora";
+import path from "path";
+import prompt from "prompts";
+import * as semver from "semver";
 
 const highlights = {
   info: (text: string) => chalk.blueBright(text),
@@ -23,21 +23,30 @@ const ALIAS_EXAMPLE = `
       `"aliases": {
         "trnsprncy": "@/components/ui/trnsprncy"
       }`
-  )}
+    )}
 `;
 
 const prompts = {
   greet: "Hello, There! Fellow frontend Fanatic!",
   missingPackages: "This project does not meet the minimum requirements:",
   outdatedPackages: "This project does not meet the minimum requirements:",
-  noDependencies: `No dependencies found in ${highlights.success("package.json")} file.`,
+  noDependencies: `No dependencies found in ${highlights.success(
+    "package.json"
+  )} file.`,
   meetsRequirements: "This project meets the minimum requirements!",
-  writeConfiguration: `Adding configuration alias to ${highlights.success("components.json")}.${ALIAS_EXAMPLE}  Proceed?`,
-  configurationWritten: `Configuration written to ${highlights.success("components.json")}.`,
-  operationAborted: `${highlights.error("Operation aborted. Configuration not saved.")}`,
+  writeConfiguration: `Adding configuration alias to ${highlights.success(
+    "components.json"
+  )}.${ALIAS_EXAMPLE}  Proceed?`,
+  configurationWritten: `Configuration written to ${highlights.success(
+    "components.json"
+  )}.`,
+  operationAborted: `${highlights.error(
+    "Operation aborted. Configuration not saved."
+  )}`,
   componentsFileNotChanged: "Components file will not be changed.",
-  shadcnRequired:
-    `shadcn ${highlights.success("components.json")} file in your project root is required before running this command`,
+  shadcnRequired: `shadcn ${highlights.success(
+    "components.json"
+  )} file in your project root is required before running this command`,
 };
 
 const COMPONENTS_JSON_PATH = path.join(process.cwd(), "components.json");
@@ -64,7 +73,11 @@ export const init = new Command()
   .action(() => {
     renderTitle("Initializing:");
     if (isInitialized()) {
-      ora(`trnsprncy alias already exists in ${highlights.success("components.json")}`).fail();
+      ora(
+        `trnsprncy alias already exists in ${highlights.success(
+          "components.json"
+        )}`
+      ).fail();
       process.exit(1);
     }
     checkRequiredPackages()
@@ -109,7 +122,7 @@ export const init = new Command()
 const normalizeVersion = (version: string) => {
   // Check if the version contains only major version (e.g., '^18')
   if (/^\^\d+$/.test(version)) {
-      version = version + '.0.0'; // Append '.0.0' to indicate minor and patch versions
+    version = version + ".0.0"; // Append '.0.0' to indicate minor and patch versions
   }
   return version.replace(/[^0-9.]/g, ""); // Replace all characters except digits and dot
 };
@@ -148,40 +161,83 @@ async function loadDependencies(): Promise<Record<string, string>> {
     // packageJson.dependencies[dependency] = normalizeVersion(
     //   packageJson.dependencies[dependency]
     // );
-    packageJson.dependencies[dependency] = normalizeVersion(packageJson.dependencies[dependency]);
+    packageJson.dependencies[dependency] = normalizeVersion(
+      packageJson.dependencies[dependency]
+    );
   }
   return packageJson.dependencies;
 }
 
-async function config() {
-    const { confirmation } = await prompt({
-      type: "toggle",
-      name: "confirmation",
-      message: prompts.writeConfiguration,
-      initial:true,
-      active: "yes",
-      inactive: "no",
-    })
-    if (confirmation) {
-      if (!fs.existsSync(COMPONENTS_JSON_PATH)) {
-        // technically this may not be necessary. as the isInitialized fn will check if the file exists.
-        ora(prompts.shadcnRequired).fail();
-        process.exit(1);
-      }
-      const componentsJson = parseComponentsJson();
+const TSCONFIG_JSON_PATH = path.join(process.cwd(), "tsconfig.json");
+export function parseTsconfigJson() {
+  if (fs.existsSync(TSCONFIG_JSON_PATH)) {
+    return JSON.parse(fs.readFileSync(TSCONFIG_JSON_PATH, "utf-8"));
+  } else {
+    return {};
+  }
+}
 
-      // Create trnsprncy alias
-      componentsJson.aliases.trnsprncy = TRNSPRNCY_PATH;
+function hasSrcPath(): boolean {
+  try {
+    const tsconfig = parseTsconfigJson();
+    const paths = tsconfig.compilerOptions?.paths || {};
+    return !!paths["@/*"] && paths["@/*"][0] === "./src/*";
+  } catch (error) {
+    console.error("Error parsing tsconfig:", error);
+    return false;
+  }
+}
 
-      fs.writeFileSync(
-        COMPONENTS_JSON_PATH,
-        JSON.stringify(componentsJson, null, 2)
-      );
-      ora(prompts.configurationWritten).succeed();
-    } else {
-      ora(prompts.operationAborted).fail();
+const mkdir_components = (path: string) => {
+  fs.mkdir(path, { recursive: true }, (err) => {
+    if (err) {
+      console.error("Error creating directory:", err);
     }
-  
+  });
+};
+
+const decide = {
+  true: () =>
+    mkdir_components(
+      path.join(process.cwd(), "/src", TRNSPRNCY_PATH.replace("@", ""))
+    ),
+  false: () =>
+    mkdir_components(path.join(process.cwd(), TRNSPRNCY_PATH.replace("@", ""))),
+};
+
+async function config() {
+  const { confirmation } = await prompt({
+    type: "toggle",
+    name: "confirmation",
+    message: prompts.writeConfiguration,
+    initial: true,
+    active: "yes",
+    inactive: "no",
+  });
+  if (confirmation) {
+    if (!fs.existsSync(COMPONENTS_JSON_PATH)) {
+      // technically this may not be necessary. as the isInitialized fn will check if the file exists.
+      ora(prompts.shadcnRequired).fail();
+      process.exit(1);
+    }
+    const componentsJson = parseComponentsJson();
+
+    // Create trnsprncy alias
+    componentsJson.aliases.trnsprncy = TRNSPRNCY_PATH;
+
+    fs.writeFileSync(
+      COMPONENTS_JSON_PATH,
+      JSON.stringify(componentsJson, null, 2)
+    );
+
+    const srcPath = hasSrcPath() ? "true" : "false";
+    const mkdir_components = decide[srcPath];
+    mkdir_components();
+
+    ora(prompts.configurationWritten).succeed();
+  } else {
+    ora(prompts.operationAborted).fail();
+  }
 }
 
 /**
@@ -226,6 +282,7 @@ async function checkRequiredPackages(): Promise<PackageCheckResult> {
         // @TODO: @Raphael-08 -- can we handle this error?
         // what should we do if the installed version is not found?
         // I assume that means the package is not installed.
+        missingPackages.push(packageName);
       }
 
       if (
