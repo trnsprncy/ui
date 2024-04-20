@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import { helloWorldCommand } from "./commands/hello-world.js";
-import { helloCommand } from "./commands/hello.js";
+import { add } from "./commands/add.js";
 import { init } from "./commands/init.js";
 import { packageJSON } from "@/utils/package-json.js";
 import { Command } from "commander";
@@ -19,7 +19,7 @@ import { Command } from "commander";
 
   program
     .addCommand(init)
-    .addCommand(helloCommand)
+    .addCommand(add)
     .addCommand(helloWorldCommand);
   program.parse();
 })();

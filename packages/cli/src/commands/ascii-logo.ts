@@ -43,5 +43,5 @@ export const ascii_logo_tease = `
                                         .-+*#%%%+                                         
                                            .::.                                           
                                                                                           
-                                   trnsprncy coming soon!
+                                  trnsprncy coming soon!
 `;
