@@ -30,7 +30,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "velite.config.ts",
     ".contentlayer/generated",
     "contentlayer.config.js"
   ],
