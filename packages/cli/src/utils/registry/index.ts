@@ -1,24 +1,31 @@
-import { registry } from "@/registry/registry";
-import { registryIndexSchema } from "@/registry/schema";
-import fs from "fs";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import { registryIndexSchema, Registry } from "@/registry/schema";
+import { HttpsProxyAgent } from "https-proxy-agent";
+import fetch from "node-fetch";
 import { z } from "zod";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const GithubUrl = "https://raw.githubusercontent.com/trnsprncy/ui/main";
+const baseUrl =
+  process.env.COMPONENTS_REGISTRY_URL ?? "https://trnsprncy.vercel.app";
+const agent = process.env.https_proxy
+  ? new HttpsProxyAgent(process.env.https_proxy)
+  : undefined;
+
 /**
- * Responsible for fetching and parsing the bundled registry
+ * Responsible for fetching the bundled registry
  *
  * @export
  * @return {*}
  */
-export async function getParsedRegistry() {
+
+export async function fetchRegistry() {
   try {
-    const registryData = registryIndexSchema.parse(registry);
-    return registryData;
+    const response = await fetch(`${baseUrl}/registry/index.json`, {
+      agent,
+    });
+    return await response.json();
   } catch (error) {
-    console.error("Failed to fetch registry:", error);
+    console.log(error);
+    throw new Error(`Failed to fetch registry from ${baseUrl}.`);
   }
 }
 
@@ -26,14 +33,12 @@ export async function getParsedRegistry() {
  * Retrieves component information from the component registry based on the provided component names.
  *
  * @export
- * @param componentRegistry - The component registry to search in.
  * @param componentName - An array of component names to retrieve information for.
  * @returns An array of component objects matching the provided component names.
  */
-export async function getComponentInfo(
-  componentRegistry: z.infer<typeof registryIndexSchema>,
-  componentName: string[] | undefined
-) {
+export async function getComponentInfo(componentName: string[] | undefined) {
+  const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
+
   if (!componentName) {
     console.log("no components selected");
     process.exit(1);
@@ -56,15 +61,35 @@ export async function getComponentInfo(
   return tree;
 }
 
-export function printContentsOfFile(basePath: string, filePath: string) {
-  const combinedPath: string = path.join(basePath, filePath);
+export function getPaths(components: Registry) {
+  const pathArray: string[] = components.map((obj) => obj.files).flat();
+  return pathArray;
+}
+
+export async function fetchFileContentFromGithub(
+  paths: string[]
+): Promise<string[]> {
   try {
-    const fileContents: string = fs.readFileSync(
-      path.resolve(__dirname, combinedPath),
-      "utf8"
-    );
-    return fileContents;
+    const contents: string[] = [];
+
+    for (const path of paths) {
+      const rawUrl = `${GithubUrl}/packages/site/src/registry/alpha/${path}`;
+
+      const response = await fetch(rawUrl);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch file '${path}': ${response.statusText}`
+        );
+      }
+
+      const content = await response.text();
+      contents.push(content);
+    }
+
+    return contents;
   } catch (error) {
-    console.error(`Error reading file ${combinedPath}:`, error);
+    console.error("Error fetching files from GitHub:", error);
+    throw error;
   }
 }
