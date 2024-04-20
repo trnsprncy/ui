@@ -39,3 +39,7 @@ next-env.d.ts
 .contentlayer
 .vscode
 tsconfig.tsbuildinfo
+
+local.db
+local.db-shm
+local.db-wal

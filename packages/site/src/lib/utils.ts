@@ -1,4 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
+import { customAlphabet } from "nanoid";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -25,3 +26,5 @@ export const EXCLUDED_FILES = [
   "/styles.css",
   "/tsconfig.json",
 ];
+
+export const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789");
