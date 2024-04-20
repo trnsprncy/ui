@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -10,7 +14,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,10 +24,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"],
-      "@ui/*": ["./src/components/ui/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "contentlayer/generated": [
+        "./.contentlayer/generated"
+      ],
+      "@ui/*": [
+        "./src/components/ui/*"
+      ]
+    },
+    "target": "esnext"
   },
   "include": [
     "next-env.d.ts",
@@ -34,5 +45,8 @@
     ".contentlayer/generated",
     "contentlayer.config.js"
   ],
-  "exclude": ["node_modules", "packages/site/src/script/registry-builder.ts"]
+  "exclude": [
+    "node_modules",
+    "packages/site/src/script/registry-builder.ts"
+  ]
 }
