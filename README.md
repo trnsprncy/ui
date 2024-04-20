@@ -1,4 +1,4 @@
-# shadcn extension
+# trnsprncy
 
 Accessible and customizable components , that extends [shadcn](https://ui.shadcn.com/) components.
 
