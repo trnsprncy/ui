@@ -39,3 +39,7 @@ next-env.d.ts
 .contentlayer
 .vscode
 tsconfig.tsbuildinfo
+
+trnsprncy.db
+trnsprncy.db-shm
+trnsprncy.db-wal
