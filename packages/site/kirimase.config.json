@@ -1,0 +1,19 @@
+{
+  "hasSrc": true,
+  "packages": [
+    "shadcn-ui",
+    "drizzle",
+    "lucia",
+    "resend"
+  ],
+  "preferredPackageManager": "npm",
+  "t3": false,
+  "alias": "@",
+  "analytics": true,
+  "rootPath": "src/",
+  "componentLib": "shadcn-ui",
+  "driver": "sqlite",
+  "provider": "turso",
+  "orm": "drizzle",
+  "auth": "lucia"
+}

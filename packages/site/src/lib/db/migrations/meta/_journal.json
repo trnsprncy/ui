@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1713572477297,
+      "tag": "0000_aspiring_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713572726205,
+      "tag": "0001_nostalgic_harry_osborn",
+      "breakpoints": true
+    }
+  ]
+}
