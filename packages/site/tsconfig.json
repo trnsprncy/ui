@@ -10,7 +10,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,14 +23,14 @@
       "@/*": ["./src/*"],
       "contentlayer/generated": ["./.contentlayer/generated"],
       "@ui/*": ["./src/components/ui/*"]
-    }
+    },
+    "target": "esnext"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "velite.config.ts",
     ".contentlayer/generated",
     "contentlayer.config.js"
   ],
