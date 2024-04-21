@@ -1,0 +1,114 @@
+"use client";
+
+import { LabelInput } from "../label-input";
+import { Loading } from "../loading";
+import { Button } from "../ui/button";
+import { useFormStateResponse } from "./hooks/use-form-state-response";
+import { FormState, addToWaitList } from "@/lib/actions/add-to-waitlsit";
+import { cn } from "@/lib/utils";
+import { Send } from "lucide-react";
+import React, { ComponentProps, Fragment, createRef, useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { toast } from "sonner";
+
+// export type Fields = ComponentProps<"input">[];
+const fields = [
+  {
+    type: "email",
+    placeholder: "you@youremail.com",
+    name: "email",
+    autoComplete: "off",
+    defaultValue: "",
+    required: true,
+  },
+];
+
+export function FormMessage({
+  hasError,
+  message,
+}: {
+  hasError: boolean;
+  message: string;
+}) {
+  return (
+    <div
+      className={cn(
+        hasError
+          ? "scale-y-100 visible opacity-100 my-4"
+          : "scale-y-0 hidden opacity-0",
+        "transition-all ease-in-out text-sm p-2 bg-gray-950/40 rounded-md text-gray-400 flex gap-4"
+      )}
+    >
+      {message}
+    </div>
+  );
+}
+
+function SubmitButton({ className, ...props }: ComponentProps<"button">) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      className={cn(
+        className,
+        "!absolute -mt-0.5 right-3 top-1 z-10 select-none rounded bg-indigo-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none",
+        { "bg-transparent pointer-events-none": pending }
+      )}
+      type="submit"
+      variant="gooeyLeft"
+      aria-label="Submit"
+      disabled={pending}
+      aria-disabled={pending}
+      size="icon"
+      {...props}
+    >
+      {pending ? (
+        <Loading className="scale-90" />
+      ) : (
+        <Send size={16} className="inline-block mr-1" />
+      )}
+    </Button>
+  );
+}
+
+export function WaitListForm() {
+  const [state, addToWaitListAction] = useFormState(addToWaitList, {
+    email: "",
+  } as FormState);
+  const { success, message, field } = useFormStateResponse(state);
+
+  const formRef = createRef<HTMLFormElement>();
+
+  useEffect(() => {
+    if (success) {
+      console.log("resetting form");
+      toast.success(
+        message ??
+          "Thank you for your interest! Please check your inbox for instructions to verify your email."
+      );
+      formRef.current?.reset();
+    }
+  }, [success, message, formRef]);
+
+  return (
+    <form
+      className="motion-safe:animate-fade-up flex items-center justify-center gap-y-4 opacity-0 w-full relative h-10 min-w-[200px] max-w-[24rem]"
+      style={{
+        animationDelay: "0.4s",
+        animationFillMode: "forwards",
+      }}
+      action={addToWaitListAction}
+      ref={formRef}
+    >
+      <SubmitButton />
+      {fields.map((field, index) => (
+        <Fragment key={index}>
+          <LabelInput key={index} {...field} />
+          <div className={cn(!field && !!message ? "my-0" : "-my-2")}>
+            <FormMessage hasError={!field && !!message} message={message} />
+          </div>
+        </Fragment>
+      ))}
+    </form>
+  );
+}

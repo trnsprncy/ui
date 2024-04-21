@@ -1,3 +1,4 @@
+import { WaitListForm } from "@/components/forms/waitlist-form";
 import { LabelInput } from "@/components/label-input";
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { siteConfig } from "@/config/site-config";
@@ -67,21 +68,15 @@ export default async function Home() {
         <strong className="max-w-4xl px-6 text-">
           Sign up for early access to our alpha preview.
         </strong>
-        <form
-          className="motion-safe:animate-fade-up flex items-center justify-center gap-y-4 opacity-0 w-full"
-          style={{
-            animationDelay: "0.4s",
-            animationFillMode: "forwards",
-          }}
-        >
-          <LabelInput />
-          {/* <Link @TODO: #JB4fsn/
+
+        <WaitListForm />
+
+        {/* <Link @TODO: #JB4fsn/
             href={siteConfig.links.docs}
             className={cn(buttonVariants({ variant: "gooeyLeft" }))}
           >
             Get Started
           </Link> */}
-        </form>
       </section>
       {/* <svg
         xmlns="http://www.w3.org/2000/svg"

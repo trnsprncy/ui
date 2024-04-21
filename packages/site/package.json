@@ -19,7 +19,7 @@
     "db:drop": "drizzle-kit drop",
     "db:pull": "drizzle-kit introspect:sqlite",
     "db:push": "drizzle-kit push:sqlite",
-    "db:studio": "drizzle-kit studio",
+    "db:studio": "drizzle-kit studio — port 3333",
     "db:check": "drizzle-kit check:sqlite",
     "db:dev": "turso dev",
     "db:persist": "turso dev --db-file ./local.db"
