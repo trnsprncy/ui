@@ -1,15 +1,26 @@
+import { Button } from "./ui/button";
+import { Input, InputProps } from "./ui/input";
 import { cn } from "@/lib/utils";
-import type { ComponentProps } from "react";
+import { Slot } from "@radix-ui/react-slot";
+import type { ComponentProps, PropsWithChildren } from "react";
 
 // source: https://tailwindcomponents.com/component/tailwind-css-input-with-button-by-material-tailwind
-export function LabelInput({ className, ...props }: ComponentProps<"input">) {
+export function LabelInput({
+  asChild,
+  className,
+  children,
+  ...props
+}: PropsWithChildren<InputProps> & { asChild?: boolean }) {
+  const SubmitButton = asChild ? Slot : Button;
+
   return (
-    <>
+    <div className="flex items-center  justify-center gap-y-4 w-full relative h-10 min-w-[400px] max-w-[24rem]">
+      <SubmitButton>{children}</SubmitButton>
       <input
         {...props}
         className={cn(
           className,
-          "peer h-full w-full rounded-[7px] border border-indigo-200 bg-indigo-400/30 dark:bg-indigo-900/30 border-blue-gray-200 px-3 py-4 pr-14 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+          "peer h-full w-full rounded-[7px] border border-indigo-200  bg-indigo-400/30 dark:bg-indigo-900/30 border-blue-gray-200 px-3 py-4 pr-14 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
         )}
       />
       <label
@@ -18,6 +29,6 @@ export function LabelInput({ className, ...props }: ComponentProps<"input">) {
       >
         {props.placeholder ?? props.name}
       </label>
-    </>
+    </div>
   );
 }
