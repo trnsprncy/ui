@@ -1,6 +1,9 @@
 import { registryIndexSchema, Registry } from "@/registry/schema";
+import { decide, hasSrcPath } from "@/utils/get-json";
+import fs from "fs";
 import { HttpsProxyAgent } from "https-proxy-agent";
 import fetch from "node-fetch";
+import path from "path";
 import { z } from "zod";
 
 const GithubUrl = "https://raw.githubusercontent.com/trnsprncy/ui/main";
@@ -91,5 +94,25 @@ export async function fetchFileContentFromGithub(
   } catch (error) {
     console.error("Error fetching files from GitHub:", error);
     throw error;
+  }
+}
+
+export function createFiles(fileNames: string[], contents: string[]): void {
+  const srcPath = hasSrcPath() ? "true" : "false";
+  const basePath = decide[srcPath];
+
+  if (fileNames.length !== contents.length) {
+      console.error("Number of file names and contents must be equal");
+      return;
+  }
+
+  try {
+      fileNames.forEach((fileName, index) => {
+          const filePath = path.join(basePath, fileName + ".tsx");
+          fs.writeFileSync(filePath, contents[index], 'utf8');
+          console.log(`File ${fileName} created successfully.`);
+      });
+  } catch (err) {
+      console.error("Error creating files:", err);
   }
 }

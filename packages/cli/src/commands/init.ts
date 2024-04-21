@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 import { renderTitle } from "../utils/render-title.js";
+import {
+  COMPONENTS_JSON_PATH,
+  TRNSPRNCY_PATH,
+  decide,
+  hasSrcPath,
+  mkdir_components,
+  parseComponentsJson,
+} from "@/utils/get-json.js";
 import chalk from "chalk";
 import { Command } from "commander";
 import fs from "fs";
@@ -15,7 +23,6 @@ const highlights = {
   warning: (text: string) => chalk.yellowBright(text),
 };
 
-const TRNSPRNCY_PATH = "@/components/ui/trnsprncy";
 const ALIAS_EXAMPLE = `
   this alias will be added to your ${highlights.success("components.json")} file
 
@@ -48,15 +55,6 @@ const prompts = {
     "components.json"
   )} file in your project root is required before running this command`,
 };
-
-const COMPONENTS_JSON_PATH = path.join(process.cwd(), "components.json");
-function parseComponentsJson() {
-  if (fs.existsSync(COMPONENTS_JSON_PATH)) {
-    return JSON.parse(fs.readFileSync(COMPONENTS_JSON_PATH, "utf-8"));
-  } else {
-    return {};
-  }
-}
 
 const isInitialized = () => {
   const componentsJson = parseComponentsJson();
@@ -168,43 +166,6 @@ async function loadDependencies(): Promise<Record<string, string>> {
   return packageJson.dependencies;
 }
 
-const TSCONFIG_JSON_PATH = path.join(process.cwd(), "tsconfig.json");
-export function parseTsconfigJson() {
-  if (fs.existsSync(TSCONFIG_JSON_PATH)) {
-    return JSON.parse(fs.readFileSync(TSCONFIG_JSON_PATH, "utf-8"));
-  } else {
-    return {};
-  }
-}
-
-function hasSrcPath(): boolean {
-  try {
-    const tsconfig = parseTsconfigJson();
-    const paths = tsconfig.compilerOptions?.paths || {};
-    return !!paths["@/*"] && paths["@/*"][0] === "./src/*";
-  } catch (error) {
-    console.error("Error parsing tsconfig:", error);
-    return false;
-  }
-}
-
-const mkdir_components = (path: string) => {
-  fs.mkdir(path, { recursive: true }, (err) => {
-    if (err) {
-      console.error("Error creating directory:", err);
-    }
-  });
-};
-
-const decide = {
-  true: () =>
-    mkdir_components(
-      path.join(process.cwd(), "/src", TRNSPRNCY_PATH.replace("@", ""))
-    ),
-  false: () =>
-    mkdir_components(path.join(process.cwd(), TRNSPRNCY_PATH.replace("@", ""))),
-};
-
 async function config() {
   const { confirmation } = await prompt({
     type: "toggle",
@@ -231,8 +192,8 @@ async function config() {
     );
 
     const srcPath = hasSrcPath() ? "true" : "false";
-    const mkdir_components = decide[srcPath];
-    mkdir_components();
+    const componentPath = decide[srcPath];
+    mkdir_components(componentPath);
 
     ora(prompts.configurationWritten).succeed();
   } else {
