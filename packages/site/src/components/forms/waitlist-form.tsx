@@ -83,9 +83,9 @@ export function WaitListForm() {
       console.log("resetting form");
 
       if (state.message?.error) {
-        toast.info(state.message.error);
+        toast.error(state.message.error);
       } else {
-        toast.info(state.message?.success);
+        toast.success(state.message?.success);
       }
       formRef.current?.reset();
     }
