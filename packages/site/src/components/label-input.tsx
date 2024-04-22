@@ -14,7 +14,7 @@ export function LabelInput({
   const SubmitButton = asChild ? Slot : Button;
 
   return (
-    <div className="flex items-center  justify-center gap-y-4 w-full relative h-10 min-w-[400px] max-w-[24rem]">
+    <div className="flex items-center  justify-center gap-y-4 w-full relative h-10 min-w-[400px] sm:max-w-[16rem] max-w-[24rem]">
       <SubmitButton>{children}</SubmitButton>
       <input
         {...props}

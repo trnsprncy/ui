@@ -4,14 +4,13 @@ import { LabelInput } from "../label-input";
 import { Loading } from "../loading";
 import { Button } from "../ui/button";
 import { useFormStateResponse } from "./hooks/use-form-state-response";
-import { FormState, addToWaitList } from "@/lib/actions/add-to-waitlsit";
+import { FormState, addToWaitList } from "@/lib/actions/add-to-waitlist";
 import { cn } from "@/lib/utils";
 import { Send } from "lucide-react";
 import React, { ComponentProps, Fragment, createRef, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 
-// export type Fields = ComponentProps<"input">[];
 const fields = [
   {
     type: "email",
@@ -82,13 +81,15 @@ export function WaitListForm() {
   useEffect(() => {
     if (success) {
       console.log("resetting form");
-      toast.success(
-        message ??
-          "Thank you for your interest! Please check your inbox for instructions to verify your email."
-      );
+
+      if (state.message?.error) {
+        toast.info(state.message.error);
+      } else {
+        toast.info(state.message?.success);
+      }
       formRef.current?.reset();
     }
-  }, [success, message, formRef]);
+  }, [success, state.message, formRef]);
 
   return (
     <form
