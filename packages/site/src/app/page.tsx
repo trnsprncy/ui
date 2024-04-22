@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <main
       id="main-content"
-      className="w-full h-full flex-1 flex flex-col mt-12"
+      className="w-full h-full flex-1 flex flex-col mt-12 p-5 md:p-0"
     >
       <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid" />
       <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4">
@@ -65,8 +65,8 @@ export default async function Home() {
             />
           </div>
         </div>
-        <strong className="max-w-4xl px-6 text-">
-          Sign up for early access to our alpha preview.
+        <strong className="max-w-4xl px-6 text-center">
+          <Balancer>Sign up for early access to our alpha preview.</Balancer>
         </strong>
 
         <WaitListForm />

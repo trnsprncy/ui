@@ -6,7 +6,6 @@ import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,7 +55,6 @@ export default function RootLayout({
           <SkipNav />
           <SiteHeader />
           {children}
-          <Toaster richColors position="bottom-center" />
         </ClientProviders>
       </body>
     </html>
