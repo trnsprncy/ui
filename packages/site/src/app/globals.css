@@ -29,6 +29,13 @@
     --warning-foreground: 48 96% 89%;
 
     --info: 218 81% 59%;
+    --info-foreground: 0 0% 98%;
+
+    --success: 120 100% 50%;
+    --success-foreground: 120 100% 50%;
+
+    --warning: 48 100% 50%;
+    --warning-foreground: 48 100% 50%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -61,8 +68,14 @@
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
+    --info: 218 81% 59%;
+    --info-foreground: 0 0% 98%;
+
     --warning: 48 100% 50%;
     --warning-foreground: 38 92% 50%;
+
+    --success: 120 100% 50%;
+    --success-foreground: 120 100% 50%;
 
     --info: 218 81% 59%;
 

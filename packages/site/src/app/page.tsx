@@ -1,3 +1,4 @@
+import { WaitListForm } from "@/components/forms/waitlist-form";
 import { LabelInput } from "@/components/label-input";
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { siteConfig } from "@/config/site-config";
@@ -8,7 +9,7 @@ export default async function Home() {
   return (
     <main
       id="main-content"
-      className="w-full h-full flex-1 flex flex-col mt-12"
+      className="w-full h-full flex-1 flex flex-col mt-12 p-5 md:p-0"
     >
       <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid" />
       <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4">
@@ -64,24 +65,18 @@ export default async function Home() {
             />
           </div>
         </div>
-        <strong className="max-w-4xl px-6 text-">
-          Sign up for early access to our alpha preview.
+        <strong className="max-w-4xl px-6 text-center">
+          <Balancer>Sign up for early access to our alpha preview.</Balancer>
         </strong>
-        <form
-          className="motion-safe:animate-fade-up flex items-center justify-center gap-y-4 opacity-0 w-full"
-          style={{
-            animationDelay: "0.4s",
-            animationFillMode: "forwards",
-          }}
-        >
-          <LabelInput />
-          {/* <Link @TODO: #JB4fsn/
+
+        <WaitListForm />
+
+        {/* <Link @TODO: #JB4fsn/
             href={siteConfig.links.docs}
             className={cn(buttonVariants({ variant: "gooeyLeft" }))}
           >
             Get Started
           </Link> */}
-        </form>
       </section>
       {/* <svg
         xmlns="http://www.w3.org/2000/svg"

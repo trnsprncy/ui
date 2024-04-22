@@ -4,7 +4,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
 // @NOTE: users are not required for subscribers to exist this may change eventually.
-export const users = sqliteTable("user", {
+export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
   // other user attributes
   name: text("name"),
@@ -15,7 +15,7 @@ export const users = sqliteTable("user", {
 });
 
 export const subscribers = sqliteTable(
-  "user_subscriber",
+  "subscribers",
   {
     id: text("id").primaryKey(),
     userId: text("user_id").references(() => users.id, {
@@ -23,7 +23,7 @@ export const subscribers = sqliteTable(
       onDelete: "cascade",
     }),
     email: text("email").notNull().unique(),
-    verified: integer("verified", { mode: "boolean" }).notNull(),
+    verified: integer("verified", { mode: "timestamp" }),
     createdAt: integer("created_at", { mode: "timestamp" }).default(
       sql`CURRENT_TIMESTAMP`
     ),
@@ -36,10 +36,10 @@ export const subscribers = sqliteTable(
   })
 );
 
-const selectSubscriberSchema = createSelectSchema(subscribers);
-const insertSubscriberSchema = createInsertSchema(subscribers, {
-  userId: z.string().optional(),
-  email: (schema) => schema.email.email().optional(),
+export const selectSubscriberSchema = createSelectSchema(subscribers);
+export const insertSubscriberSchema = createInsertSchema(subscribers, {
+  // userId: z.string().optional(),
+  email: (schema) => schema.email.email().min(1),
   verified: z.boolean().optional(),
 }).omit({
   id: true,
