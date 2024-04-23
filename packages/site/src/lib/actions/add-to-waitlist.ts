@@ -29,6 +29,7 @@ export async function addToWaitList(
   formData: FormData
 ): Promise<FormState> {
   const result = validateSchema(formData, waitlistSchema);
+  console.log("🚀 | result:", result);
 
   if (result && !result.data) {
     return {
@@ -39,6 +40,7 @@ export async function addToWaitList(
 
   try {
     const email = result?.data.email;
+    console.log("🚀 | email:", email);
     // send sub to https://waitlist.email
     const response = await fetch(
       "https://www.waitlist.email/api/subscribers/create",
@@ -56,6 +58,7 @@ export async function addToWaitList(
     );
 
     const body = (await response.json()) as WaitListResponse;
+    console.log("🚀 | body:", body);
 
     if (!response.ok) {
       return {
