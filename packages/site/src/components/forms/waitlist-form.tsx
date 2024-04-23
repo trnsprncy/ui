@@ -80,27 +80,12 @@ export function WaitListForm() {
 
   useEffect(() => {
     if (success) {
-      console.log("resetting form");
-
-      if (state.message?.error) {
-        toast.error(state.message.error);
-      } else {
-        toast.success(state.message?.success);
-      }
       formRef.current?.reset();
     }
   }, [success, state.message, formRef]);
 
   return (
-    <form
-      className="opacity-0 motion-safe:animate-fade-up"
-      style={{
-        animationDelay: "0.4s",
-        animationFillMode: "forwards",
-      }}
-      action={addToWaitListAction}
-      ref={formRef}
-    >
+    <form action={addToWaitListAction} ref={formRef}>
       {fields.map((field, index) => (
         <Fragment key={index}>
           <LabelInput asChild key={index} {...field}>

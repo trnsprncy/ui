@@ -21,7 +21,8 @@ type WaitListResponse = {
 
 export type FormState = {
   email?: string;
-  message: Record<string, string> | undefined;
+  message: string;
+  success: boolean;
 };
 export async function addToWaitList(
   prevState: FormState,
@@ -31,7 +32,8 @@ export async function addToWaitList(
 
   if (result && !result.data) {
     return {
-      message: { error: JSON.stringify(result.message) },
+      success: false,
+      message: JSON.stringify(result.message),
     };
   }
 
@@ -58,23 +60,22 @@ export async function addToWaitList(
     const body = (await response.json()) as WaitListResponse;
 
     if (!response.ok) {
-      console.error("🚀 NOT_OK | body:", body);
       return {
-        message: { error: body.message },
+        success: false,
+        message: body.message,
       };
     }
 
     return {
       email: body.subscriber.email,
-      message: {
-        success: body.message,
-      },
+      message: body.message,
+      success: true,
     };
   } catch (error) {
-    console.error("🚀 | Server Error");
     return {
       email: prevState.email,
-      message: { error: "Server Error" },
+      message: "Server Error",
+      success: false,
     };
   }
 }
