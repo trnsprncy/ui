@@ -83,7 +83,6 @@ export function WaitListForm() {
       formRef.current?.reset();
     }
   }, [success, state.message, formRef]);
-
   return (
     <form action={addToWaitListAction} ref={formRef}>
       {fields.map((field, index) => (
