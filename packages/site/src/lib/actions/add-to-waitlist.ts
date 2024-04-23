@@ -48,13 +48,19 @@ export async function addToWaitList(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Waitlist-Api-Key": process.env.WAITLIST_API_KEY!!,
+          "X-Waitlist-Api-Key":
+            process.env.WAITLIST_API_KEY ?? "clvaimg6d0003adigapy0otn7",
         },
         body: JSON.stringify({
-          waitlist: process.env.WAITLIST_ID,
+          waitlist: process.env.WAITLIST_ID ?? "clvaimg6d0002adig2po2ohx7",
           email,
         }),
       }
+    );
+    console.log("🚀 | process.env.WAITLIST_ID:", process.env.WAITLIST_ID);
+    console.log(
+      "🚀 | process.env.WAITLIST_API_KEY:",
+      process.env.WAITLIST_API_KEY
     );
 
     const body = (await response.json()) as WaitListResponse;
