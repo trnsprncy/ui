@@ -29,6 +29,13 @@
     --warning-foreground: 48 96% 89%;
 
     --info: 218 81% 59%;
+    --info-foreground: 0 0% 98%;
+
+    --success: 120 100% 50%;
+    --success-foreground: 120 100% 50%;
+
+    --warning: 48 100% 50%;
+    --warning-foreground: 48 100% 50%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -38,6 +45,8 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+
+    --highlight-color: rgb(89, 89, 244);
   }
 
   .dark {
@@ -59,8 +68,14 @@
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
+    --info: 218 81% 59%;
+    --info-foreground: 0 0% 98%;
+
     --warning: 48 100% 50%;
     --warning-foreground: 38 92% 50%;
+
+    --success: 120 100% 50%;
+    --success-foreground: 120 100% 50%;
 
     --info: 218 81% 59%;
 
@@ -73,6 +88,8 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+
+    --highlight-color: rgb(106, 106, 254);
   }
 }
 
@@ -96,15 +113,17 @@
 }
 
 @layer utilities {
-  .bg-dots {
-    background-image: linear-gradient(
-        #090a0c,
-        #0b0c0e 23%,
-        rgba(0, 0, 0, 0) 40%,
-        rgba(0, 0, 0, 0) 92%,
-        #181b20
-      ),
-      url("/dot.png");
+  .dot-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle,
+      transparent 0%,
+      hsl(var(--background, 0.45))
+    );
+    opacity: 1;
+    z-index: 0;
   }
   .step {
     counter-increment: step;
@@ -118,10 +137,14 @@
 
   .gradient-box {
     /* https://www.ibelick.com/blog/create-animated-gradient-borders-with-css */
-    --highlight-color: rgb(106, 106, 254);
-    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[2px] border-solid border-[#0000];
+    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[0px] border-solid border-[hsl(var(--background))] overflow-hidden;
     background: padding-box,
-      linear-gradient(var(--angle), #070707, var(--highlight-color)) border-box;
+      linear-gradient(
+          var(--angle),
+          hsl(var(--background)),
+          var(--highlight-color)
+        )
+        border-box;
   }
   @keyframes rotate {
     to {
