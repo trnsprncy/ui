@@ -9,12 +9,12 @@ export default async function Home() {
   return (
     <main
       id="main-content"
-      className="w-full h-full flex-1 flex flex-col mt-12 p-5 md:p-0"
+      className="w-full h-full flex-1 flex flex-col p-5 md:p-0"
     >
       <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid" />
       <section className="max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center gap-4">
         <h1
-          className="px-4 text-center motion-safe:animate-fade-up text-4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
+          className="px-4 text-center motion-safe:animate-fade-up text:4xl font-extrabold tracking-tight opacity-0 sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
           style={{
             animationDelay: "0.25s",
             animationFillMode: "forwards",
@@ -28,7 +28,7 @@ export default async function Home() {
             </span>{" "}
           </Balancer>
         </h1>
-        <p className="max-w-4xl my-4 px-6">
+        <p className="max-w-3xl my-4 px-6">
           <span
             className="text-center motion-safe:animate-fade-up text-base text-muted-foreground sm:text-xl opacity-0"
             style={{
