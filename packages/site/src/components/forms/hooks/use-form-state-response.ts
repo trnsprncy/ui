@@ -7,6 +7,7 @@ type Message = {
   success: boolean;
 };
 
+// @SEE Kirimase scaffolding
 export function useFormStateResponse(state: any) {
   const [message, setMessage] = useState<Message>({
     message: "",

@@ -65,18 +65,25 @@ export default async function Home() {
             />
           </div>
         </div>
-        <strong className="max-w-4xl px-6 text-center">
-          <Balancer>Sign up for early access to our alpha preview.</Balancer>
-        </strong>
+        <div
+          className="opacity-0 motion-safe:animate-fade-up flex flex-col items-center gap-y-4"
+          style={{
+            animationDelay: "0.4s",
+            animationFillMode: "forwards",
+          }}
+        >
+          <strong className="max-w-4xl px-6 text-center">
+            <Balancer>Sign up for early access to our alpha preview.</Balancer>
+          </strong>
+          <WaitListForm />
 
-        <WaitListForm />
-
-        {/* <Link @TODO: #JB4fsn/
-            href={siteConfig.links.docs}
-            className={cn(buttonVariants({ variant: "gooeyLeft" }))}
-          >
-            Get Started
-          </Link> */}
+          {/* <Link @TODO: #JB4fsn/
+              href={siteConfig.links.docs}
+              className={cn(buttonVariants({ variant: "gooeyLeft" }))}
+            >
+              Get Started
+            </Link> */}
+        </div>
       </section>
       {/* <svg
         xmlns="http://www.w3.org/2000/svg"
