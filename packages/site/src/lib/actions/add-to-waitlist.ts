@@ -48,10 +48,11 @@ export async function addToWaitList(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Waitlist-Api-Key": String(env.WAITLIST_API_KEY),
+          "X-Waitlist-Api-Key":
+            process.env.WAITLIST_API_KEY ?? "clvaimg6d0003adigapy0otn7",
         },
         body: JSON.stringify({
-          waitlist: env.WAITLIST_ID,
+          waitlist: process.env.WAITLIST_ID ?? "clvaimg6d0002adig2po2ohx7",
           email,
         }),
       }
