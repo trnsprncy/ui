@@ -29,7 +29,6 @@ export async function addToWaitList(
   formData: FormData
 ): Promise<FormState> {
   const result = validateSchema(formData, waitlistSchema);
-  console.log("🚀 | result:", result);
 
   if (result && !result.data) {
     return {
@@ -40,7 +39,6 @@ export async function addToWaitList(
 
   try {
     const email = result?.data.email;
-    console.log("🚀 | email:", email);
     // send sub to https://waitlist.email
     const response = await fetch(
       "https://www.waitlist.email/api/subscribers/create",
@@ -48,23 +46,16 @@ export async function addToWaitList(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Waitlist-Api-Key":
-            process.env.WAITLIST_API_KEY ?? "clvaimg6d0003adigapy0otn7",
+          "X-Waitlist-Api-Key": String(process.env.WAITLIST_API_KEY),
         },
         body: JSON.stringify({
-          waitlist: process.env.WAITLIST_ID ?? "clvaimg6d0002adig2po2ohx7",
+          waitlist: process.env.WAITLIST_ID,
           email,
         }),
       }
     );
-    console.log("🚀 | process.env.WAITLIST_ID:", process.env.WAITLIST_ID);
-    console.log(
-      "🚀 | process.env.WAITLIST_API_KEY:",
-      process.env.WAITLIST_API_KEY
-    );
 
     const body = (await response.json()) as WaitListResponse;
-    console.log("🚀 | body:", body);
 
     if (!response.ok) {
       return {
