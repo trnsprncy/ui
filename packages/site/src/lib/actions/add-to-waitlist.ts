@@ -39,19 +39,17 @@ export async function addToWaitList(
 
   try {
     const email = result?.data.email;
-    console.log("🚀 | email:", email);
-
-    // send sub to drizzle
+    // send sub to https://waitlist.email
     const response = await fetch(
       "https://www.waitlist.email/api/subscribers/create",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Waitlist-Api-Key": String(env.WAITLIST_API_KEY),
+          "X-Waitlist-Api-Key": String(process.env.WAITLIST_API_KEY),
         },
         body: JSON.stringify({
-          waitlist: env.WAITLIST_ID,
+          waitlist: String(process.env.WAITLIST_ID),
           email,
         }),
       }
