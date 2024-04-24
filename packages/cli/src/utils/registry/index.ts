@@ -43,30 +43,69 @@ export async function getComponentInfo(componentName: string[] | undefined) {
   const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
 
   if (!componentName) {
-    console.log("no components selected");
+    console.log("No components selected");
     process.exit(1);
   }
+
   const tree: z.infer<typeof registryIndexSchema> = [];
+  const addedComponents = new Set<string>(); // Set to store added component names
+
+  async function fetchDependencies(dependencies: string[]) {
+    const dependencyInfo: z.infer<typeof registryIndexSchema> = [];
+
+    for (const depName of dependencies) {
+      // Check if dependency has already been added to avoid duplicates
+      if (addedComponents.has(depName)) {
+        continue;
+      }
+
+      const dependency = componentRegistry.find(
+        (component: { name: string }) => component.name === depName
+      );
+
+      if (!dependency) {
+        console.log(`Dependency ${depName} not found in registry`);
+        continue;
+      }
+
+      addedComponents.add(depName); // Add dependency name to Set
+      dependencyInfo.push(dependency);
+
+      if (dependency.registryDependencies) {
+        const subDependencies = await fetchDependencies(dependency.registryDependencies);
+        dependencyInfo.push(...subDependencies);
+      }
+    }
+
+    return dependencyInfo;
+  }
+
   for (const name of componentName) {
     const component = componentRegistry.find(
       (component: { name: string }) => component.name === name
     );
+
     if (!component) {
-      // @FIXME: If we're going to exit, we should do so with a non-zero exit code
-      // i.e. process.exit(1)?
       console.log(`Component ${name} not found in registry`);
       continue;
-    } else {
-      // only push the component if it's found
-      tree.push(component);
     }
+
+    if (addedComponents.has(name)) {
+      continue;
+    }
+
+    tree.push(component);
+    addedComponents.add(name); // Add component name to Set
+
     if (component.registryDependencies) {
-      const dependencies = await getComponentInfo(component.registryDependencies)
-      tree.push(...dependencies)
+      const dependencies = await fetchDependencies(component.registryDependencies);
+      tree.push(...dependencies);
     }
   }
+
   return tree;
 }
+
 
 export function getPaths(components: Registry) {
   const pathArray: string[] = components.map((obj) => obj.files).flat();
