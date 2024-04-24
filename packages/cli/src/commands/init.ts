@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { renderTitle } from "../utils/render-title.js";
 import {
   COMPONENTS_JSON_PATH,
   TRNSPRNCY_PATH,
@@ -8,6 +7,7 @@ import {
   mkdir_components,
   parseComponentsJson,
 } from "@/utils/get-json.js";
+import { renderTitle } from "@/utils/render-title.js";
 import chalk from "chalk";
 import { Command } from "commander";
 import fs from "fs";
@@ -193,7 +193,19 @@ async function config() {
 
     const srcPath = hasSrcPath() ? "true" : "false";
     const componentPath = decide[srcPath];
-    mkdir_components(componentPath);
+
+    if (!fs.existsSync(componentPath)) {
+      fs.mkdirSync(componentPath, { recursive: true });
+    }
+
+    console.log(componentPath)
+    
+    const filePath = path.join(componentPath, ".gitkeep");
+    fs.writeFile(filePath, "", (err) => {
+      if (err) {
+        console.error('Error writing file:', err);
+      }
+    });
 
     ora(prompts.configurationWritten).succeed();
   } else {
