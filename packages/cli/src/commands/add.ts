@@ -116,21 +116,27 @@ export const add = new Command()
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
-          message: `to install ${item.name} you need (${item.uiDependencies.join(", ")}). Proceed?`,
+          message: `to install ${
+            item.name
+          } you need (${item.uiDependencies.join(", ")}). Proceed?`,
           initial: true,
         });
         if (proceed) {
-          spinner.start(`installing ${item.uiDependencies.join(", ")} for ${item.name}...`)
+          spinner.start(
+            `installing ${item.uiDependencies.join(", ")} for ${item.name}...`
+          );
           await execa(
             "npx",
-            ["shadcn-ui@latest","add", ...item.uiDependencies, "--overwrite"],
+            ["shadcn-ui@latest", "add", ...item.uiDependencies, "--overwrite"],
             {
               cwd,
             }
           );
-        }
-        else{
-          spinner.fail(`you need (${item.uiDependencies.join(", ")}) for ${item.name}!`)
+          spinner.text = `Installing ${item.name}...`;
+        } else {
+          spinner.fail(
+            `you need (${item.uiDependencies.join(", ")}) for ${item.name}!`
+          );
           process.exit(0);
         }
       }
