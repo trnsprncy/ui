@@ -34,7 +34,7 @@ export const add = new Command()
   .name("add")
   .description("Prints a greeting message")
   .argument("[components...]", "the components to add")
-  .option("-a, --all", "add all available components", false)
+  .option("-y, --yes", "skip confirmation prompt.", true)
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option(
     "-c, --cwd <cwd>",
