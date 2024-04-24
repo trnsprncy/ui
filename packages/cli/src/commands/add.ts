@@ -1,16 +1,18 @@
 import { Registry } from "@/registry/schema";
 import { registryIndexSchema } from "@/registry/schema";
+import { getPackageManager } from "@/utils/get-package-manager";
 import {
   fetchRegistry,
   getComponentInfo,
   fetchFileContentFromGithub,
-  getPaths,
   createFiles,
 } from "@/utils/registry/index";
-// import { renderTitle } from "@/utils/render-title.js";
 import chalk from "chalk";
 import { Command } from "commander";
+// import { renderTitle } from "@/utils/render-title.js";
+import { execa } from "execa";
 import ora from "ora";
+import path from "path";
 import prompts from "prompts";
 import { z } from "zod";
 
@@ -45,6 +47,8 @@ export const add = new Command()
   .option("-p, --path <path>", "the path to add the component to.")
   .action(async (components, opts) => {
     const options = addOptionsSchema.parse({ components, ...opts });
+
+    const cwd = path.resolve(options.cwd);
 
     const registryIndex: Registry = registryIndexSchema.parse(
       await fetchRegistry()
@@ -104,11 +108,62 @@ export const add = new Command()
     for (const item of selectedComponentsInfo) {
       spinner.text = `Installing ${item.name}...`;
 
+      const packageManager = await getPackageManager(cwd);
 
+      // Install uiDependencies.
+      if (item.uiDependencies?.length) {
+        spinner.stop();
+        const { proceed } = await prompts({
+          type: "confirm",
+          name: "proceed",
+          message: `to install ${item.name} you need (${item.uiDependencies.join(", ")}). Proceed?`,
+          initial: true,
+        });
+        if (proceed) {
+          spinner.start(`installing ${item.uiDependencies.join(", ")} for ${item.name}...`)
+          await execa(
+            "npx",
+            ["shadcn-ui@latest","add", ...item.uiDependencies, "--overwrite"],
+            {
+              cwd,
+            }
+          );
+        }
+        else{
+          spinner.fail(`you need (${item.uiDependencies.join(", ")}) for ${item.name}!`)
+          process.exit(0);
+        }
+      }
 
-      const data = await fetchFileContentFromGithub(item.files)
-      createFiles(data.filenames,data.contents);
+      // Install dependencies.
+      if (item.dependencies?.length) {
+        await execa(
+          packageManager,
+          [packageManager === "npm" ? "install" : "add", ...item.dependencies],
+          {
+            cwd,
+          }
+        );
+      }
+
+      // Install devDependencies.
+      if (item.devDependencies?.length) {
+        await execa(
+          packageManager,
+          [
+            packageManager === "npm" ? "install" : "add",
+            "-D",
+            ...item.devDependencies,
+          ],
+          {
+            cwd,
+          }
+        );
+      }
+
+      const data = await fetchFileContentFromGithub(item.files);
+      createFiles(data.filenames, data.contents);
     }
-
+    spinner.succeed("Done.");
     process.exit(0);
   });
