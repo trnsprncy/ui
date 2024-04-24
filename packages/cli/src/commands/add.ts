@@ -23,7 +23,11 @@ const highlights = {
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
+  yes: z.boolean(),
+  overwrite: z.boolean(),
+  cwd: z.string(),
   all: z.boolean(),
+  path: z.string().optional(),
 });
 
 export const add = new Command()
@@ -31,6 +35,14 @@ export const add = new Command()
   .description("Prints a greeting message")
   .argument("[components...]", "the components to add")
   .option("-a, --all", "add all available components", false)
+  .option("-o, --overwrite", "overwrite existing files.", false)
+  .option(
+    "-c, --cwd <cwd>",
+    "the working directory. defaults to the current directory.",
+    process.cwd()
+  )
+  .option("-a, --all", "add all available components", false)
+  .option("-p, --path <path>", "the path to add the component to.")
   .action(async (components, opts) => {
     const options = addOptionsSchema.parse({ components, ...opts });
 
@@ -70,10 +82,33 @@ export const add = new Command()
 
     // get the path of the selected component
     const selectedComponentsInfo = await getComponentInfo(selectedComponents);
-    const componentPaths = getPaths(selectedComponentsInfo);
+    // const componentPaths = getPaths(selectedComponentsInfo);
 
-    const data = await fetchFileContentFromGithub(componentPaths);
-    createFiles(selectedComponents, data);
+    // const data = await fetchFileContentFromGithub(componentPaths);
+    // createFiles(selectedComponents, data);
+
+    if (!options.yes) {
+      const { proceed } = await prompts({
+        type: "confirm",
+        name: "proceed",
+        message: `Ready to install components and dependencies. Proceed?`,
+        initial: true,
+      });
+
+      if (!proceed) {
+        process.exit(0);
+      }
+    }
+
+    const spinner = ora(`Installing components...`).start();
+    for (const item of selectedComponentsInfo) {
+      spinner.text = `Installing ${item.name}...`;
+
+
+
+      const data = await fetchFileContentFromGithub(item.files)
+      createFiles(data.filenames,data.contents);
+    }
 
     process.exit(0);
   });

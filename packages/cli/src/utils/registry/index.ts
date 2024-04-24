@@ -60,6 +60,10 @@ export async function getComponentInfo(componentName: string[] | undefined) {
       // only push the component if it's found
       tree.push(component);
     }
+    if (component.registryDependencies) {
+      const dependencies = await getComponentInfo(component.registryDependencies)
+      tree.push(...dependencies)
+    }
   }
   return tree;
 }
@@ -71,12 +75,14 @@ export function getPaths(components: Registry) {
 
 export async function fetchFileContentFromGithub(
   paths: string[]
-): Promise<string[]> {
+): Promise<{ filenames: string[], contents: string[] }> {
   try {
+    const filenames: string[] = [];
     const contents: string[] = [];
 
     for (const path of paths) {
       const rawUrl = `${GithubUrl}/packages/site/src/registry/alpha/${path}`;
+      const filename = path.substring(path.lastIndexOf('/') + 1); // Extract filename from path
 
       const response = await fetch(rawUrl);
 
@@ -87,10 +93,11 @@ export async function fetchFileContentFromGithub(
       }
 
       const content = await response.text();
+      filenames.push(filename);
       contents.push(content);
     }
+    return { filenames, contents };
 
-    return contents;
   } catch (error) {
     console.error("Error fetching files from GitHub:", error);
     throw error;
@@ -108,9 +115,8 @@ export function createFiles(fileNames: string[], contents: string[]): void {
 
   try {
       fileNames.forEach((fileName, index) => {
-          const filePath = path.join(basePath, fileName + ".tsx");
+          const filePath = path.join(basePath, fileName);
           fs.writeFileSync(filePath, contents[index], 'utf8');
-          console.log(`File ${fileName} created successfully.`);
       });
   } catch (err) {
       console.error("Error creating files:", err);
