@@ -1,5 +1,6 @@
 import { Registry } from "@/registry/schema";
 import { registryIndexSchema } from "@/registry/schema";
+import { decide, hasSrcPath } from "@/utils/get-json";
 import { getPackageManager } from "@/utils/get-package-manager";
 import {
   fetchRegistry,
@@ -10,6 +11,7 @@ import {
 import chalk from "chalk";
 import { Command } from "commander";
 // import { renderTitle } from "@/utils/render-title.js";
+import fs from "fs"
 import { execa } from "execa";
 import ora from "ora";
 import path from "path";
@@ -102,6 +104,18 @@ export const add = new Command()
       if (!proceed) {
         process.exit(0);
       }
+    }
+    
+    const srcPath = hasSrcPath() ? "true" : "false";
+    const componentPath = decide[srcPath];
+
+    if (fs.existsSync(componentPath+"/.gitkeep")) {
+      // Delete the file
+      fs.unlink(componentPath+"/.gitkeep", (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+        }
+      });
     }
 
     const spinner = ora(`Installing components...`).start();
