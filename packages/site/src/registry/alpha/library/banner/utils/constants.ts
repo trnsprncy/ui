@@ -1,3 +1,4 @@
+import { ButtonProps } from "@/components/ui/button";
 import { AnalyticsTags, EssentialTags } from "@trnsprncy/oss/dist/types";
 
 export const background =
@@ -46,7 +47,9 @@ export const tagDetails: TagDetails = {
   },
 };
 
+export type TriggerButton = ButtonProps & { label: string };
+
 export const _buttons = [
-  { children: "Show Me", variant: "outline", type: "button", size: "sm" },
-  { children: "Got it", variant: "default", type: "submit", size: "sm" },
-];
+  { label: "Show Me", variant: "outline", type: "button", size: "sm" },
+  { label: "Got it", variant: "default", type: "submit", size: "sm" },
+] as TriggerButton[];
