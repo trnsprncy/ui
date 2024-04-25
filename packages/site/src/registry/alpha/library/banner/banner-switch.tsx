@@ -1,25 +1,21 @@
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "./switch-w-thumb";
 import { cn } from "@/lib/utils";
 
-interface IBannerSwitchProps
-  extends React.PropsWithChildren<{
-    type: "category" | "tag";
-    label: string;
-    description: string;
-    cookieName: string;
-    isDisabled?: boolean;
-    onCheckedChange: (checked: boolean) => void; // Function to update cookie state
-    className?: string;
-    isChecked: boolean;
-  }> {}
+type BannerSwitchProps = React.PropsWithChildren<{
+  type: "category" | "tag";
+  label: string;
+  description: string;
+  cookieName: string;
+  isDisabled?: boolean;
+  onCheckedChange: (checked: boolean) => void; // Function to update cookie state
+  className?: string;
+  isChecked: boolean;
+}>;
 /**
  * This component renders a custom switch component with a label and is responsible for handling the toggle interaction
  *
  * @export
- * @param {React.PropsWithChildren<IBannerSwitchProps>} {
- *    type: 'category' | 'tag'; label: string; description: string; cookieName: string; isDisabled?: boolean;
- *    onCheckedChange: (checked: boolean) => void; className?: string; isChecked: boolean;
- * }
+ * @param {BannerSwitchProps} { type: "category" | "tag", label: string, description: string, cookieName: string, isDisabled?: boolean, onCheckedChange: (checked: boolean) => void, className: string, isChecked: boolean }
  * @return {*}
  */
 export function BannerSwitch({
@@ -31,7 +27,7 @@ export function BannerSwitch({
   onCheckedChange,
   className,
   isChecked,
-}: IBannerSwitchProps) {
+}: BannerSwitchProps) {
   const isCategory = type === "category";
   const { id } = {
     id: isCategory ? label.toLowerCase() : cookieName,
@@ -52,7 +48,7 @@ export function BannerSwitch({
         checked={isChecked}
         onCheckedChange={onCheckedChange}
         className={cn(
-          "data-[state=checked]:bg-gray-700 data-[state=unchecked]:bg-gray-500",
+          "data-[state=checked]:bg-indigo-700 data-[state=unchecked]:bg-indigo-900/50",
           !isCategory && "scale-75"
         )}
         thumb={{
@@ -65,12 +61,14 @@ export function BannerSwitch({
           htmlFor={id}
           className={cn(
             "text-lg font-medium",
-            !isCategory && "text-sm font-normal text-foreground/40"
+            !isCategory && "text-sm font-normal text-foreground/60"
           )}
         >
           {label}
         </label>
-        <p className={cn("text-gray-500 text-sm", !isCategory && "text-xs")}>
+        <p
+          className={cn("text-foreground/40 text-sm", !isCategory && "text-xs")}
+        >
           {description}
         </p>
       </div>

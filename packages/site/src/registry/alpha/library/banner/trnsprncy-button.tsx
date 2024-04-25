@@ -1,6 +1,5 @@
 "use client";
 
-import { BannerOptions } from "./banner-options";
 import { background } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import {
@@ -18,15 +17,19 @@ import { cn } from "@/lib/utils";
  * @type {React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants>, {asChild?: Boolean}}
  *
  * @export
- * @param {ButtonProps} {...HTMLButtonProps, variant, asChild }
+ * @param {ButtonProps} {...HTMLButtonProps, typeof buttonVariants , asChild?: Boolean, label: string} }
  * @return {*} {React.ReactNode}
  */
-export function TrnsprncyButton(props: ButtonProps) {
+export function TrnsprncyButton({
+  children,
+  label,
+  open,
+  ...props
+}: React.PropsWithChildren<ButtonProps & { label: string; open?: boolean }>) {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        {/* @FIXME: what should happen on click? */}
-        <Button {...props} onClick={console.log} />
+    <Popover open={open}>
+      <PopoverTrigger>
+        <Button {...props}>{label}</Button>
       </PopoverTrigger>
       <PopoverContent
         align="end"
@@ -34,7 +37,7 @@ export function TrnsprncyButton(props: ButtonProps) {
         sideOffset={24}
         className={cn("relative, w-[500px] ", background)}
       >
-        <BannerOptions />
+        {children}
       </PopoverContent>
     </Popover>
   );

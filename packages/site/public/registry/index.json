@@ -1,11 +1,23 @@
 [
   {
+    "name": "banner-content",
+    "dependencies": [],
+    "registryDependencies": [],
+    "uiDependencies": [],
+    "files": [
+      "library/banner/banner-content.tsx"
+    ],
+    "type": "components:library"
+  },
+  {
     "name": "banner-shell",
     "dependencies": [
       "@radix-ui/react-slot"
     ],
     "registryDependencies": [
-      "banner-trigger"
+      "banner-content",
+      "utils",
+      "logic"
     ],
     "uiDependencies": [],
     "files": [
@@ -16,38 +28,30 @@
   {
     "name": "banner-switch",
     "dependencies": [],
-    "registryDependencies": [],
-    "uiDependencies": [
+    "registryDependencies": [
       "switch"
     ],
+    "uiDependencies": [],
     "files": [
       "library/banner/banner-switch.tsx"
     ],
     "type": "components:library"
   },
   {
-    "name": "banner-trigger",
+    "name": "switch-w-thumb",
     "dependencies": [
-      "@radix-ui/react-slot",
-      "trnsprncy/oss"
+      "@radix-ui/react-switch"
     ],
-    "registryDependencies": [
-      "trnsprncy-button"
-    ],
-    "uiDependencies": [
-      "button"
-    ],
+    "registryDependencies": [],
+    "uiDependencies": [],
     "files": [
-      "library/banner/banner-switch.tsx"
+      "library/banner/switch-w-thumb.tsx"
     ],
     "type": "components:library"
   },
   {
     "name": "trnsprncy-button",
-    "dependencies": [
-      "@radix-ui/react-slot",
-      "trnsprncy/oss"
-    ],
+    "dependencies": [],
     "registryDependencies": [
       "banner-options"
     ],
