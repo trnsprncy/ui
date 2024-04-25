@@ -52,7 +52,7 @@ export default function RootLayout({
         )}
       >
         <ClientProviders>
-          <SkipNav />
+          <SkipNav href="#main-content" />
           <SiteHeader />
           {children}
         </ClientProviders>
