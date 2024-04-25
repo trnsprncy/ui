@@ -46,7 +46,7 @@
 
     --radius: 0.5rem;
 
-    --highlight-color: rgb(89, 89, 244);
+    --highlight-color: 240, 88%, 65%;
   }
 
   .dark {
@@ -89,7 +89,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
-    --highlight-color: rgb(106, 106, 254);
+    --highlight-color: 240, 99%, 71%;
   }
 }
 
@@ -137,14 +137,12 @@
 
   .gradient-box {
     /* https://www.ibelick.com/blog/create-animated-gradient-borders-with-css */
-    @apply flex justify-center items-center animate-[5s_rotate_linear_infinite] p-1 rounded-xl border-[0px] border-solid border-[hsl(var(--background))] overflow-hidden;
-    background: padding-box,
-      linear-gradient(
-          var(--angle),
-          hsl(var(--background)),
-          var(--highlight-color)
-        )
-        border-box;
+    @apply flex justify-center items-center animate-gradient-bx rounded-xl overflow-hidden;
+    background: linear-gradient(
+      var(--angle),
+      hsla(var(--background)),
+      var(--indigo-500)
+    );
   }
   @keyframes rotate {
     to {
