@@ -5,26 +5,33 @@ import * as React from "react"
 
 export const Index: Record<string, any> = {
     "alpha": {
+    "banner-content": {
+      name: "banner-content",
+      type: "components:library",
+      registryDependencies: [],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/banner-content.tsx")),
+      files: ["src/registry/alpha/library/banner/banner-content.tsx"],
+    },
     "banner-shell": {
       name: "banner-shell",
       type: "components:library",
-      registryDependencies: ["banner-trigger"],
+      registryDependencies: ["banner-content","utils","logic"],
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-shell.tsx")),
       files: ["src/registry/alpha/library/banner/banner-shell.tsx"],
     },
     "banner-switch": {
       name: "banner-switch",
       type: "components:library",
-      registryDependencies: [],
+      registryDependencies: ["switch"],
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-switch.tsx")),
       files: ["src/registry/alpha/library/banner/banner-switch.tsx"],
     },
-    "banner-trigger": {
-      name: "banner-trigger",
+    "switch-w-thumb": {
+      name: "switch-w-thumb",
       type: "components:library",
-      registryDependencies: ["trnsprncy-button"],
-      component: React.lazy(() => import("@/registry/alpha/library/banner/banner-switch.tsx")),
-      files: ["src/registry/alpha/library/banner/banner-switch.tsx"],
+      registryDependencies: [],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/switch-w-thumb.tsx")),
+      files: ["src/registry/alpha/library/banner/switch-w-thumb.tsx"],
     },
     "trnsprncy-button": {
       name: "trnsprncy-button",

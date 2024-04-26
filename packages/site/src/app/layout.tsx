@@ -48,11 +48,11 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth"
+          "flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth pt-9"
         )}
       >
         <ClientProviders>
-          <SkipNav />
+          <SkipNav href="#main-content" />
           <SiteHeader />
           {children}
         </ClientProviders>
