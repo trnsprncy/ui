@@ -41,6 +41,7 @@ export async function fetchRegistry() {
  */
 export async function getComponentInfo(componentName: string[] | undefined) {
   const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
+  const addedComponents = new Set<string>(componentName); // Set to store added component names
 
   if (!componentName) {
     console.log("No components selected");
@@ -48,37 +49,6 @@ export async function getComponentInfo(componentName: string[] | undefined) {
   }
 
   const tree: z.infer<typeof registryIndexSchema> = [];
-  const addedComponents = new Set<string>(); // Set to store added component names
-
-  async function fetchDependencies(dependencies: string[]) {
-    const dependencyInfo: z.infer<typeof registryIndexSchema> = [];
-
-    for (const depName of dependencies) {
-      // Check if dependency has already been added to avoid duplicates
-      if (addedComponents.has(depName)) {
-        continue;
-      }
-
-      const dependency = componentRegistry.find(
-        (component: { name: string }) => component.name === depName
-      );
-
-      if (!dependency) {
-        console.log(`Dependency ${depName} not found in registry`);
-        continue;
-      }
-
-      addedComponents.add(depName); // Add dependency name to Set
-      dependencyInfo.push(dependency);
-
-      if (dependency.registryDependencies) {
-        const subDependencies = await fetchDependencies(dependency.registryDependencies);
-        dependencyInfo.push(...subDependencies);
-      }
-    }
-
-    return dependencyInfo;
-  }
 
   for (const name of componentName) {
     const component = componentRegistry.find(
@@ -90,16 +60,16 @@ export async function getComponentInfo(componentName: string[] | undefined) {
       continue;
     }
 
-    if (addedComponents.has(name)) {
-      continue;
-    }
-
     tree.push(component);
-    addedComponents.add(name); // Add component name to Set
 
     if (component.registryDependencies) {
-      const dependencies = await fetchDependencies(component.registryDependencies);
-      tree.push(...dependencies);
+      const dependencies = await getComponentInfo(component.registryDependencies);
+      for(const dependency of dependencies){
+        if(addedComponents.has(dependency.name)){
+          continue
+        }
+        tree.push(...dependencies);
+      }
     }
   }
 
