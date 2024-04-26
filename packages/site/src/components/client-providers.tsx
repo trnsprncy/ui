@@ -17,11 +17,8 @@ export const ClientProviders = ({
       <ThemeProvider attribute="class">
         {children}
         <TrnsprncyProvider
-          essentialTags={[
-            "functionality_storage",
-            "personalization_storage",
-            "security_storage",
-          ]}
+          essentialTags={["functionality_storage", "personalization_storage"]}
+          nonEssentialTags={["security_storage"]}
         >
           <BannerShell lockBodyScroll placement="bottom" />
         </TrnsprncyProvider>

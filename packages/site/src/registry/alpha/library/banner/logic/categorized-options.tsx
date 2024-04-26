@@ -7,14 +7,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  AnalyticsTags,
   EssentialTags,
+  NonEssentialTags,
   type BrowserCookies,
   type TagArray,
 } from "@trnsprncy/oss/dist/types";
 
 type CategorizedOptions = {
-  tagGroup: TagArray<EssentialTags> | TagArray<AnalyticsTags> | undefined;
+  tagGroup: TagArray<EssentialTags> | TagArray<NonEssentialTags> | undefined;
   index: number;
   updateCookiesState: (cookies: Partial<BrowserCookies>) => void;
   isChecked: (boolean | undefined)[];
@@ -22,12 +22,12 @@ type CategorizedOptions = {
 };
 /**
  * This component renders the categorized options for the consent banner.\
- * It orchestrates the rendering of the essential and analytics options.
+ * It orchestrates the rendering of the essential and nonEssential options.
  * nested within the categorized headers.
  *
  * @export
  * @param {CategorizedOptions} {
- *   tagGroup: TagArray<EssentialTags> | TagArray<AnalyticsTags> | undefined,
+ *   tagGroup: TagArray<EssentialTags> | TagArray<NonEssentialTags> | undefined,
  *   index: number,
  *   updateCookiesState: (cookies: Partial<BrowserCookies>) => void,
  *   isChecked: (boolean | undefined)[],
@@ -42,7 +42,7 @@ export const CategorizedOptions = ({
   isChecked,
   cookies,
 }: CategorizedOptions) => {
-  const category = index ? "Analytics" : "Essential";
+  const category = index ? "NonEssential" : "Essential";
   if (!tagGroup?.length) return null;
   const isDisabled = category === "Essential";
 
