@@ -17,6 +17,7 @@ import ora from "ora";
 import path from "path";
 import prompts from "prompts";
 import { z } from "zod";
+import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
 
 const highlights = {
   info: (text: string) => chalk.cyan.underline(text),
@@ -130,9 +131,9 @@ export const add = new Command()
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
-          message: `to install ${
+          message: `in order for ${
             item.name
-          } you need (${item.uiDependencies.join(", ")}). Proceed?`,
+          } to work it needs\n--${item.uiDependencies.join("\n--")}\n Proceed?`,
           initial: true,
         });
         if (proceed) {
