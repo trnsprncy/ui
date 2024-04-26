@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
 import {
   type BrowserCookies,
-  type EssentialAnalyticsTagsTupleArrays,
+  type EssentialTagsTupleArrays,
 } from "@trnsprncy/oss/dist/types";
 import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
 import { useCallback, useState } from "react";
@@ -21,7 +21,7 @@ export function BannerOptions() {
   const { handleConsentUpdate } = useConsentDispatch();
   const { tags } = useConsent(); // provide only the options that the user has selected
   const [cookies, setCookies] = useState<Partial<BrowserCookies>>(() =>
-    convertTagsToCookies(tags as EssentialAnalyticsTagsTupleArrays)
+    convertTagsToCookies(tags as EssentialTagsTupleArrays)
   );
 
   const [ESSENTIAL, ANALYTICS] = tags;

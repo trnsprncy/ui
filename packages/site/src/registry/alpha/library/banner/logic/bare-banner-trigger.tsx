@@ -4,14 +4,14 @@ import { TrnsprncyButton } from "../trnsprncy-button";
 import { TriggerButton, _buttons } from "../utils/constants";
 import { BannerOptionsBase } from "./banner-opt-base";
 import { Button } from "@/components/ui/button";
-import { EssentialAnalyticsTagsTupleArrays } from "@trnsprncy/oss/dist/types";
+import { EssentialTagsTupleArrays } from "@trnsprncy/oss/dist/types";
 import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
 import { toast } from "sonner";
 
 export type BannerTriggersProps = React.PropsWithChildren<{
   buttons?: TriggerButton[];
   asChild?: boolean;
-  tags?: EssentialAnalyticsTagsTupleArrays;
+  tags?: EssentialTagsTupleArrays;
   open?: boolean;
   onClose?: () => void;
   onAccept?: () => void;

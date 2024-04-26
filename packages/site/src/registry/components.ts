@@ -1,6 +1,6 @@
 import { Registry } from "./schema";
 
-// @TODO rename extension to library
+// @TODO: rename extension to library
 const extension: Registry = [
   {
     name: "banner-content",
