@@ -4,14 +4,12 @@ import { CategorizedOptions } from "./categorized-options";
 import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
 import { cn } from "@/lib/utils";
 import {
-  AnalyticsTags,
   EssentialTags,
+  NonEssentialTags,
   type BrowserCookies,
-  type EssentialAnalyticsTagsTupleArrays,
-  type TagArray,
+  type EssentialTagsTupleArrays,
 } from "@trnsprncy/oss/dist/types";
 import {
-  ANALYTICS_TAGS,
   ESSENTIAL_TAGS,
   convertTagsToCookies,
 } from "@trnsprncy/oss/dist/utils";
@@ -21,7 +19,7 @@ import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
 type BannerOptionsBaseProps = {
-  tags: EssentialAnalyticsTagsTupleArrays;
+  tags: EssentialTagsTupleArrays;
   consentCookie: string;
   open?: boolean;
   onClose?: () => void;
@@ -52,17 +50,17 @@ function checkEssentialTags(tags: EssentialTags[]) {
  * Check if the user has opted out of all tracking tags
  * This will return a warning if the user has opted out of all tracking tags
  *
- * @param {AnalyticsTags[]} tags
+ * @param {NonEssentialTags[]} tags
  * @return {*} {boolean}
  */
-function checkTargetingTags(tags: AnalyticsTags[]) {
+function checkNonEssentialTags(tags: NonEssentialTags[]) {
   if (!tags.length || !Array.isArray(tags)) {
     console.warn(
       "You have opted out of all tracking tags. Please ensure that this was intentional."
     );
     return false;
   }
-  return tags.every((tag) => ANALYTICS_TAGS.includes(tag));
+  return tags.every((tag) => ESSENTIAL_TAGS.includes(tag));
 }
 
 /**
@@ -83,14 +81,14 @@ export function BannerOptionsBase({
   );
 
   const [isChecked, setIsChecked] = useState([
+    true,
     ESSENTIAL_TAGS?.every((tag) => !!cookies[tag as keyof typeof cookies]),
-    ANALYTICS_TAGS?.every((tag) => !!cookies[tag as keyof typeof cookies]),
   ]);
 
-  const [selectedKeys] = useState<EssentialAnalyticsTagsTupleArrays>(() => {
+  const [selectedKeys] = useState<EssentialTagsTupleArrays>(() => {
     // coerce tags into selectedKeys shape
     const hasEssentialTags = tags[0] && checkEssentialTags(tags[0]);
-    const hasAnalyticsTags = tags[1] && checkTargetingTags(tags[1]);
+    const hasAnalyticsTags = tags[1] && checkNonEssentialTags(tags[1]);
 
     return [
       hasEssentialTags ? tags[0] : [], // essential tags should never be empty
@@ -136,7 +134,7 @@ export function BannerOptionsBase({
           ESSENTIAL_TAGS?.every(
             (tag) => !!updatedCookies[tag as keyof typeof updatedCookies]
           ),
-          ANALYTICS_TAGS?.every(
+          ESSENTIAL_TAGS?.every(
             (tag) => !!updatedCookies[tag as keyof typeof updatedCookies]
           ),
         ]);

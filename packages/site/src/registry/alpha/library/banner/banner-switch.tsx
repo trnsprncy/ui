@@ -60,7 +60,7 @@ export function BannerSwitch({
         <label
           htmlFor={id}
           className={cn(
-            "text-lg font-medium",
+            "text-sm font-medium",
             !isCategory && "text-sm font-normal text-foreground/60"
           )}
         >
