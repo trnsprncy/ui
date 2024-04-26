@@ -131,9 +131,9 @@ export const add = new Command()
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
-          message: `in order for ${
+          message: `${
             item.name
-          } to work it needs\n--${item.uiDependencies.join("\n--")}\n Proceed?`,
+          } requires the following shadcn-ui components\n-->${item.uiDependencies.join("\n-->")}\n   Proceed?`,
           initial: true,
         });
         if (proceed) {
