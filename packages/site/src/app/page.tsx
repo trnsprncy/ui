@@ -1,11 +1,26 @@
 import { WaitListForm } from "@/components/forms/waitlist-form";
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { Loading } from "@/components/loading";
+import Ticker from "@/components/ticker";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { siteConfig } from "@/config/site-config";
 import { BannerContent } from "@/registry/alpha/library/banner/banner-content";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
+
+const _card = {
+  title: "Card Heading",
+  description: "This is a card description",
+  body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum eveniet pariatur labore blanditiis fugit. Obcaecati repudiandae error nisi a distinctio.",
+  footer: "card Footer",
+};
 
 const BannerDemo = dynamic(() => import("./components/fake-banner-demo"), {
   ssr: false,
@@ -80,16 +95,38 @@ export default async function Home() {
             </Link> */}
         </div>
       </section>
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="800px"
-        height="800px"
-        viewBox="0 0 20 20"
-        className="fill-foreground"
-      >
-        <path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z" />
-      </svg> */}
+
+      <Ticker logos={["logo", "twitter", "Ui", "Npmjs", "RadixUi"]} />
+      <section className="relative w-full max-w-5xl mx-auto my-36">
+        <p className="text-4xl text-center font-semibold pb-12">
+          Features & Benefits
+        </p>
+        <div className="flex gap-x-6">
+          {[...Array(3).fill("")].map((_, i) => (
+            <FeatureCard key={i} {..._card} />
+          ))}
+        </div>
+      </section>
       <SiteFooter />
     </main>
+  );
+}
+
+type FeatureCardProps = {
+  title: string;
+  description: string;
+  body: string;
+  footer: string;
+};
+function FeatureCard({ title, description, body, footer }: FeatureCardProps) {
+  return (
+    <Card className="shadow-md">
+      <CardHeader>
+        <p className="font-bold text-2xl">{title}</p>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>{body}</CardContent>
+      <CardFooter className="text-sm text-gray-500">{footer}</CardFooter>
+    </Card>
   );
 }
