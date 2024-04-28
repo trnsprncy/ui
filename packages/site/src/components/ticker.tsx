@@ -1,54 +1,46 @@
-import { Icons } from "./icons";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+"use client";
 
-const useTicker = () => {
-  const [position, setPosition] = useState(0);
-  const tickerRef = useRef<HTMLDivElement>(null);
-  const isHovering = useRef(false);
+import React from "react";
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isHovering.current) {
-        setPosition((prevPosition) => prevPosition - 1);
-      }
-    }, 50);
+// Interface for scroller props
+interface TickerProps {
+  speed?: "fast" | "slow";
+  direction?: "left" | "right";
+}
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    isHovering.current = true;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    isHovering.current = false;
-  }, []);
-
-  return {
-    position,
-    tickerRef,
-    handleMouseEnter,
-    handleMouseLeave,
-  };
-};
-export default function Ticker({ logos }: { logos: (keyof typeof Icons)[] }) {
-  const { position, tickerRef, handleMouseEnter, handleMouseLeave } =
-    useTicker();
+export const Ticker: React.FC<TickerProps & { children?: React.ReactNode }> = ({
+  speed = "fast",
+  direction = "right",
+  children,
+}) => {
   return (
-    <div
-      ref={tickerRef}
-      className="flex items-center overflow-hidden whitespace-wrap"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {logos.map((logo, index) => (
-        <div key={index}>
-          {Icons[logo]({
-            width: "12px",
-            height: "12px",
-          })}
-        </div>
-      ))}
+    <div className="max-w-4xl relative flex overflow-x-hidden ">
+      <ul className="px-4 flex flex-wrap gap-x-24 w-max animate-marquee whitespace-nowrap">
+        <>
+          {React.Children.toArray(children).map((child) => (
+            <li
+              key={child.toString()}
+              aria-hidden
+              className="opacity-0 animate-marquee whitespace-nowrap"
+            >
+              {child}
+            </li>
+          ))}
+        </>
+      </ul>
+      <ul className="absolute top-0 px-4 flex flex-wrap gap-x-24 w-max animate-marquee2 whitespace-nowrap">
+        <>
+          {React.Children.toArray(children).map((child) => (
+            <li
+              key={child.toString()}
+              aria-hidden
+              className="animate-marquee2 whitespace-nowrap"
+            >
+              {child}
+            </li>
+          ))}
+        </>
+      </ul>
     </div>
   );
-}
+};
