@@ -5,9 +5,10 @@ export const registryItemSchema = z.object({
   dependencies: z.array(z.string()).optional(),
   devDependencies: z.array(z.string()).optional(),
   uiDependencies: z.array(z.string()).optional(),
+  fileDependencies:z.array(z.string()).optional(),
   registryDependencies: z.array(z.string()).optional(),
   files: z.array(z.string()),
-  type: z.enum(["components:ui", "components:component", "components:example" , "components:library"]),
+  type: z.enum(["components:demo", "components:extension", "components:example" , "components:library"]),
 });
 
 export const registryIndexSchema = z.array(registryItemSchema);

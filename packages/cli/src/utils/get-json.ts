@@ -44,3 +44,6 @@ export const decide = {
   true: path.join(process.cwd(), "/src", TRNSPRNCY_PATH.replace("@", "")),
   false: path.join(process.cwd(), TRNSPRNCY_PATH.replace("@", "")),
 };
+
+const srcPath = hasSrcPath() ? "true" : "false";
+export const componentPath = decide[srcPath];

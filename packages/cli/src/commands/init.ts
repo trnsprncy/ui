@@ -2,6 +2,7 @@
 import {
   COMPONENTS_JSON_PATH,
   TRNSPRNCY_PATH,
+  componentPath,
   decide,
   hasSrcPath,
   mkdir_components,
@@ -191,8 +192,7 @@ async function config() {
       JSON.stringify(componentsJson, null, 2)
     );
 
-    const srcPath = hasSrcPath() ? "true" : "false";
-    const componentPath = decide[srcPath];
+
 
     if (!fs.existsSync(componentPath)) {
       fs.mkdirSync(componentPath, { recursive: true });

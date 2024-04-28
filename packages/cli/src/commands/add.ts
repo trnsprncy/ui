@@ -1,6 +1,6 @@
 import { Registry } from "@/registry/schema";
 import { registryIndexSchema } from "@/registry/schema";
-import { decide, hasSrcPath } from "@/utils/get-json";
+import { decide, hasSrcPath, componentPath } from "@/utils/get-json";
 import { getPackageManager } from "@/utils/get-package-manager";
 import {
   fetchRegistry,
@@ -10,14 +10,13 @@ import {
 } from "@/utils/registry/index";
 import chalk from "chalk";
 import { Command } from "commander";
-// import { renderTitle } from "@/utils/render-title.js";
-import fs from "fs"
 import { execa } from "execa";
+// import { renderTitle } from "@/utils/render-title.js";
+import fs from "fs";
 import ora from "ora";
 import path from "path";
 import prompts from "prompts";
 import { z } from "zod";
-import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
 
 const highlights = {
   info: (text: string) => chalk.cyan.underline(text),
@@ -87,12 +86,7 @@ export const add = new Command()
       process.exit(1);
     }
 
-    // get the path of the selected component
     const selectedComponentsInfo = await getComponentInfo(selectedComponents);
-    // const componentPaths = getPaths(selectedComponentsInfo);
-
-    // const data = await fetchFileContentFromGithub(componentPaths);
-    // createFiles(selectedComponents, data);
 
     if (!options.yes) {
       const { proceed } = await prompts({
@@ -106,15 +100,15 @@ export const add = new Command()
         process.exit(0);
       }
     }
-    
+
     const srcPath = hasSrcPath() ? "true" : "false";
     const componentPath = decide[srcPath];
 
-    if (fs.existsSync(componentPath+"/.gitkeep")) {
+    if (fs.existsSync(componentPath + "/.gitkeep")) {
       // Delete the file
-      fs.unlink(componentPath+"/.gitkeep", (err) => {
+      fs.unlink(componentPath + "/.gitkeep", (err) => {
         if (err) {
-          console.error('Error deleting file:', err);
+          console.error("Error deleting file:", err);
         }
       });
     }
@@ -133,7 +127,9 @@ export const add = new Command()
           name: "proceed",
           message: `${
             item.name
-          } requires the following shadcn-ui components\n-->${item.uiDependencies.join("\n-->")}\n   Proceed?`,
+          } requires the following shadcn-ui components\n-->${item.uiDependencies.join(
+            "\n-->"
+          )}\n   Proceed?`,
           initial: true,
         });
         if (proceed) {
@@ -180,6 +176,13 @@ export const add = new Command()
             cwd,
           }
         );
+      }
+      if (item.fileDependencies) {
+        for (const dir of item.fileDependencies) {
+          if (!fs.existsSync(path.join(componentPath, dir))) {
+            fs.mkdirSync(path.join(componentPath, dir), { recursive: true });
+          }
+        }
       }
 
       const data = await fetchFileContentFromGithub(item.files);
