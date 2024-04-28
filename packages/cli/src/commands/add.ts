@@ -1,6 +1,6 @@
 import { Registry } from "@/registry/schema";
 import { registryIndexSchema } from "@/registry/schema";
-import { decide, hasSrcPath, componentPath } from "@/utils/get-json";
+import { componentPath } from "@/utils/get-json";
 import { getPackageManager } from "@/utils/get-package-manager";
 import {
   fetchRegistry,
@@ -101,9 +101,6 @@ export const add = new Command()
       }
     }
 
-    const srcPath = hasSrcPath() ? "true" : "false";
-    const componentPath = decide[srcPath];
-
     if (fs.existsSync(componentPath + "/.gitkeep")) {
       // Delete the file
       fs.unlink(componentPath + "/.gitkeep", (err) => {
@@ -125,11 +122,11 @@ export const add = new Command()
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
-          message: `${
+          message: `${highlights.info(
             item.name
-          } requires the following shadcn-ui components\n-->${item.uiDependencies.join(
-            "\n-->"
-          )}\n   Proceed?`,
+          )} requires the following shadcn-ui components ${highlights.info(
+            item.uiDependencies.join(", ")
+          )} Proceed?`,
           initial: true,
         });
         if (proceed) {
@@ -156,7 +153,7 @@ export const add = new Command()
       if (item.dependencies?.length) {
         await execa(
           packageManager,
-          [packageManager === "npm" ? "install" : "add", ...item.dependencies],
+          [packageManager === "npm" ? "install" : "i", ...item.dependencies],
           {
             cwd,
           }
@@ -187,6 +184,7 @@ export const add = new Command()
 
       const data = await fetchFileContentFromGithub(item.files);
       createFiles(data.filenames, data.contents);
+      spinner.succeed(`installed ${item.name}`)
     }
     spinner.succeed("Done.");
     process.exit(0);

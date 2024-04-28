@@ -3,9 +3,6 @@ import {
   COMPONENTS_JSON_PATH,
   TRNSPRNCY_PATH,
   componentPath,
-  decide,
-  hasSrcPath,
-  mkdir_components,
   parseComponentsJson,
 } from "@/utils/get-json.js";
 import { renderTitle } from "@/utils/render-title.js";
