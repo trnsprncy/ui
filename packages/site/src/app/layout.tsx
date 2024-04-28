@@ -1,5 +1,6 @@
 import "./globals.css";
 import { ClientProviders } from "@/components/client-providers";
+import { SiteFooter } from "@/components/layouts/site-footer";
 import { SiteHeader } from "@/components/layouts/site-header";
 import { SkipNav } from "@/components/skip-nav";
 import { siteConfig } from "@/config/site-config";
@@ -48,13 +49,14 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth pt-12"
+          "flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth"
         )}
       >
         <ClientProviders>
           <SkipNav href="#main-content" />
           <SiteHeader />
           {children}
+          <SiteFooter />
         </ClientProviders>
       </body>
     </html>
