@@ -21,6 +21,15 @@ export default {
       },
     },
     extend: {
+      dropShadow: {
+        glow: [
+          "0 0px 2px rgba(255, 255, 255, 0.618)",
+          "0 0px 130px rgba(255, 255, 255, 0.2)",
+        ],
+      },
+      boxShadow: {
+        euphonious: "shadow-[0_8px_30px_rgba(255,255,255,0.5)]",
+      },
       screens: {
         xs: "480px",
         xxs: "380px",
@@ -115,6 +124,15 @@ export default {
           from: { backgroundPosition: "200% 0" },
           to: { backgroundPosition: "-200% 0" },
         },
+
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -127,6 +145,8 @@ export default {
           "highlight-border 1s infinite alternate cubic-bezier(0.5,700,0.5,-700)",
         shine: "shine 8s ease-in-out infinite",
         "gradient-bx": "6s rotate ease-in infinite", //var(--angle)
+        marquee: "marquee 25s linear infinite",
+        marquee2: "marquee2 25s linear infinite",
       },
       transitionTimingFunction: {
         cubic: "cubic-bezier(0.645,0.045,0.355,1)",
