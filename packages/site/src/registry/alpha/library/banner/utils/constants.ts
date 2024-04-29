@@ -24,11 +24,13 @@ export const tagDetails: TagDetails = {
   },
   functionality_storage: {
     label: "Functionality Related Cookies",
-    description: "Cookies for measuring and improving site performance.",
+    description:
+      "Cookies that provide enhanced functionalities and allow usage of modern features.",
   },
   personalization_storage: {
     label: "Personalization Related Cookies",
-    description: "Cookies for enhanced functionality and personalization.",
+    description:
+      "Cookies for custom personalization to provide the best experience possible.",
   },
 };
 
