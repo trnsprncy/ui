@@ -21,6 +21,7 @@ export const ui: Registry = [
       "library/banner/logic/categorized-options.tsx",
       "library/banner/utils/constants.ts",
       "library/banner/utils/use-lock-body-scroll.ts",
+      "library/banner/hooks/use-mock-browser-cookies.ts",
     ],
     type: "components:library",
   },
