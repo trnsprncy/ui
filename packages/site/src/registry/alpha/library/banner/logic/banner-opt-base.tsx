@@ -79,20 +79,25 @@ export function BannerOptionsBase({
   const [cookies, setCookies] = useState<Partial<BrowserCookies>>(() =>
     convertTagsToCookies(tags)
   );
-
+  /**
+   * isCheck state is used to determine if the user has opted out of all tags in a given category
+   * this tuple is used to determine if the category switch should be toggled on or off
+   *
+   *
+   */
   const [isChecked, setIsChecked] = useState([
-    true,
-    ESSENTIAL_TAGS?.every((tag) => !!cookies[tag as keyof typeof cookies]),
+    tags[0]?.every((tag) => !!cookies[tag as keyof typeof cookies]),
+    tags[1]?.every((tag) => !!cookies[tag as keyof typeof cookies]),
   ]);
 
   const [selectedKeys] = useState<EssentialTagsTupleArrays>(() => {
     // coerce tags into selectedKeys shape
     const hasEssentialTags = tags[0] && checkEssentialTags(tags[0]);
-    const hasAnalyticsTags = tags[1] && checkNonEssentialTags(tags[1]);
+    const hasNonEssentialTags = tags[1] && checkNonEssentialTags(tags[1]);
 
     return [
       hasEssentialTags ? tags[0] : [], // essential tags should never be empty
-      hasAnalyticsTags ? tags[1] : [], // analytics tags can be empty
+      hasNonEssentialTags ? tags[1] : [], // nonessential tags can be empty
     ];
   });
 
@@ -131,10 +136,10 @@ export function BannerOptionsBase({
         const updatedCookies = { ...prev, ...cookies };
 
         setIsChecked([
-          ESSENTIAL_TAGS?.every(
+          tags[0]?.every(
             (tag) => !!updatedCookies[tag as keyof typeof updatedCookies]
           ),
-          ESSENTIAL_TAGS?.every(
+          tags[1]?.every(
             (tag) => !!updatedCookies[tag as keyof typeof updatedCookies]
           ),
         ]);
@@ -143,10 +148,8 @@ export function BannerOptionsBase({
 
       handleConsentUpdate(cookies);
     },
-    [handleConsentUpdate]
+    [handleConsentUpdate, tags]
   );
-  // useRedecer to manager the state of the accordions, we have 2 accorionds and only one should be allowed to be open at a time.
-  // This will allow the user to toggle between the two accordions without having both open at the same time.
   const [accordion, setAccordion] = useState<"Essential" | "Analytics" | null>(
     null
   );
