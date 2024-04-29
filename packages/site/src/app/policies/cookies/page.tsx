@@ -76,7 +76,7 @@ const CookiePolicy = () => {
       <p>
         If you have any questions about this Cookie Policy, please contact us at{" "}
         {/* Update with your contact information */}
-        <a href="mailto:transparencyui@gmail.com">your-email@example.com</a>.
+        <a href="mailto:transparencyui@gmail.com">transparencyui@gmail.com</a>.
       </p>
       {/* Add a link to your cookie consent mechanism (if applicable) */}
       {/* <p>
