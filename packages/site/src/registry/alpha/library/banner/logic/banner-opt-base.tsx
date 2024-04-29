@@ -41,7 +41,10 @@ function checkEssentialTags(tags: EssentialTags[]) {
   }
   return tags.every((tag) => {
     const isEssentialTag = ESSENTIAL_TAGS.includes(tag);
-    if (!isEssentialTag) console.warn("Invalid essential tag provided: ", tag);
+    if (!isEssentialTag) {
+      console.warn("Invalid essential tag provided: ", tag);
+      return false;
+    }
     return isEssentialTag;
   });
 }
