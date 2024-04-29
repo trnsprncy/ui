@@ -108,7 +108,12 @@ export async function fetchFileContentFromGithub(
 
     for (const path of paths) {
       const rawUrl = `${GithubUrl}/packages/site/src/registry/alpha/${path}`;
-      const filename = path.substring(path.indexOf("/", path.indexOf("/") + 1));
+
+      //getting the filename index from path
+      const secondSlashIndex = path.indexOf("/", path.indexOf("/") + 1);
+      //getting the filename from the above index
+      const filename = path.substring(secondSlashIndex);
+
       const response = await fetch(rawUrl);
 
       if (!response.ok) {

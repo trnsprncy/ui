@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {
   COMPONENTS_JSON_PATH,
-  TRNSPRNCY_PATH,
+  DEFAULT_TRNSPRNCY_PATH,
   componentPath,
   parseComponentsJson,
 } from "@/utils/get-json.js";
@@ -182,7 +182,7 @@ async function config() {
     const componentsJson = parseComponentsJson();
 
     // Create trnsprncy alias
-    componentsJson.aliases.trnsprncy = TRNSPRNCY_PATH;
+    componentsJson.aliases.trnsprncy = DEFAULT_TRNSPRNCY_PATH;
 
     fs.writeFileSync(
       COMPONENTS_JSON_PATH,

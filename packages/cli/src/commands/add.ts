@@ -11,7 +11,6 @@ import {
 import chalk from "chalk";
 import { Command } from "commander";
 import { execa } from "execa";
-// import { renderTitle } from "@/utils/render-title.js";
 import fs from "fs";
 import ora from "ora";
 import path from "path";
