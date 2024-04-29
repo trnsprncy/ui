@@ -41,8 +41,8 @@ export async function fetchRegistry() {
  * @returns An array of component objects matching the provided component names.
  */
 export async function getComponentInfo(componentName: string[] | undefined) {
-  // const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
-  const componentRegistry = registryIndexSchema.parse(ui);
+  
+  const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
 
   const addedComponents = new Set<string>(componentName); // Set to store added component names
 
