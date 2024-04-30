@@ -43,5 +43,6 @@ export const ascii_logo_tease = `
                                         .-+*#%%%+                                         
                                            .::.                                           
                                                                                           
-                                  trnsprncy coming soon!
+                                   Wait list now open!
+                               https://trnsprncy.vercel.app
 `;
