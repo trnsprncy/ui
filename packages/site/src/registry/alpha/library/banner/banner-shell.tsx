@@ -49,12 +49,12 @@ export default function Banner(props: BannerProps) {
   return (
     <>
       {props.lockBodyScroll ? (
-        <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md transition" />
+        <div className="modal-overlay absolute inset-0 bg-background/30 backdrop-blur-md transition z-20" />
       ) : null}
 
       <div
         className={cn(
-          "py-9 absolute inset-0 flex flex-col items-center z-10",
+          "py-9 absolute inset-0 flex flex-col items-center z-50",
           className,
           {
             "justify-end": placement === "bottom",
