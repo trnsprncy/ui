@@ -70,8 +70,9 @@ export default function Banner(props: BannerProps) {
               leftElement
             ) : (
               <img
-                src="https://cdn.jsdelivr.net/gh/gaurangrshah/_shots@master/uPic/2024/trnsprncy.png"
+                src="https://cdn.jsdelivr.net/gh/trnsprncy/ui@dev/packages/site/public/trnsprncy.png"
                 alt="trnsprncy logo"
+                width=""
               />
             )}
             <ContentSlot {...content}>{children}</ContentSlot>
