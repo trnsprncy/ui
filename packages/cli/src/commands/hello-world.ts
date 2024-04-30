@@ -1,4 +1,4 @@
-// import { ascii_logo_tease } from "./ascii-logo";
+import { ascii_logo_tease } from "./ascii-logo";
 import { Command } from "commander";
 import chalkAnimation from "chalk-animation"
 
@@ -7,9 +7,9 @@ export const helloWorldCommand = new Command()
   .description("Prints a greeting message")
   .argument("[components...]", "the components to add")
   .action(() => {
-    // console.log(ascii_logo_tease)
-    logo()
-    process.exit(0);
+    const animation = chalkAnimation.rainbow(ascii_logo_tease);
+    setTimeout(() => {
+      animation.stop();
+    }, 5000);
   });
   
-  const logo = () => chalkAnimation.rainbow("hello");

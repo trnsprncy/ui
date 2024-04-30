@@ -33,8 +33,8 @@ export default function FakeBannerDemo({
           <BannerTriggerGroup className="gap-y-1 md:gap-x-1">
             <BareBannerTriggers
               tags={[
-                ["functionality_storage"],
-                ["security_storage", "personalization_storage"],
+                ["security_storage"],
+                ["functionality_storage", "personalization_storage"],
               ]}
               buttons={_buttons}
               open={open}

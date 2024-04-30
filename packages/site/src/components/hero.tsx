@@ -3,16 +3,19 @@ import { Loading } from "./loading";
 import { Badge } from "./ui/badge";
 import { siteConfig } from "@/config/site-config";
 import { BannerContent } from "@/registry/alpha/library/banner/banner-content";
-import { CheckCircle2, CircleCheckBig } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
 
-const BannerDemo = dynamic(() => import("../app/components/fake-banner-demo"), {
-  ssr: false,
-});
+const BannerDemo = dynamic(
+  () => import("../registry/alpha/demo/fake-banner-demo"),
+  {
+    ssr: false,
+  }
+);
 
-const _regulations = ["GDPR", "CCPA", "ePrivacy", "UK GDPR"];
+const REGULATIONS = ["GDPR", "CCPA", "ePrivacy", "UK GDPR"];
 
 export default function Hero() {
   return (
@@ -72,7 +75,7 @@ export default function Hero() {
             animationFillMode: "forwards",
           }}
         >
-          {_regulations.map((regulation, i) => {
+          {REGULATIONS.map((regulation, i) => {
             const _i = i * 0.2;
             const delay = _i + 0.6;
             return (
