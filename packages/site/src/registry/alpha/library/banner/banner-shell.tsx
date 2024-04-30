@@ -72,7 +72,7 @@ export default function Banner(props: BannerProps) {
               <img
                 src="https://cdn.jsdelivr.net/gh/trnsprncy/ui@dev/packages/site/public/trnsprncy.png"
                 alt="trnsprncy logo"
-                width=""
+                width="64px"
               />
             )}
             <ContentSlot {...content}>{children}</ContentSlot>
