@@ -5,7 +5,6 @@ import { BannerTriggerGroup, BannerTriggers } from "./logic/banner-trigger";
 import { background } from "./utils/constants";
 import { useLockBodyScroll } from "./utils/use-lock-body-scroll";
 // @FIXME: add icons directly
-import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
@@ -67,7 +66,14 @@ export default function Banner(props: BannerProps) {
           <div
             className={cn(background, bannerClass, "border-2 border-muted/30")}
           >
-            {leftElement ? leftElement : <Icons.logo className="w-12 h-12" />}
+            {leftElement ? (
+              leftElement
+            ) : (
+              <img
+                src="https://cdn.jsdelivr.net/gh/gaurangrshah/_shots@master/uPic/2024/trnsprncy.png"
+                alt="trnsprncy logo"
+              />
+            )}
             <ContentSlot {...content}>{children}</ContentSlot>
             <BannerTriggerGroup>
               <ButtonSlot>{buttonGroup}</ButtonSlot>
