@@ -1,48 +1,42 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import { cn } from "@/lib/utils";
-import { BannerTriggerGroup } from "@/registry/alpha/library/banner/logic/banner-trigger";
+import { BannerOptionsBase } from "../library/banner/logic/banner-opt-base";
+import { TrnsprncyButton } from "../library/banner/trnsprncy-button";
+import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
+import BannerShell from "@/registry/alpha/library/banner/banner-shell";
 import { BareBannerTriggers } from "@/registry/alpha/library/banner/logic/bare-banner-trigger";
-import {
-  _buttons,
-  background,
-} from "@/registry/alpha/library/banner/utils/constants";
+import { _buttons } from "@/registry/alpha/library/banner/utils/constants";
+import { EssentialTags, NonEssentialTags } from "@trnsprncy/oss/dist/types";
 import React from "react";
 
-export default function FakeBannerDemo({
-  className,
-  children,
-}: React.PropsWithChildren<{ className?: string }>) {
-  const [open, setOpen] = React.useState(false);
+const essentialCookies = ["security_storage"] as EssentialTags[];
+const nonEssentialCookies = [
+  "personalization_storage",
+  "functionality_storage",
+] as NonEssentialTags[];
+
+const consentCookie = "fake-consent";
+
+export default function FakeBannerDemo() {
+  const { getCookie, setCookie } = useMockBrowserCookies();
   return (
-    <div
-      className={cn(
-        className,
-        "flex flex-col items-center z-10 justify-center p-0.5 rounded-xl overflow-hidden"
-      )}
-    >
-      <div
-        className={cn(
-          "bg-background max-w-3xl z-50 animate-in slide-in-from-bottom-60 animate-out slide-out-top-60 duration-1000 delay-200 rounded-xl overflow-hidden"
-        )}
-      >
-        <div className={cn(background, "border-2 border-muted/30")}>
-          <Icons.logo className="w-12 h-12" />
-          {children}
-          <BannerTriggerGroup className="gap-y-1 md:gap-x-1">
-            <BareBannerTriggers
-              tags={[
-                ["security_storage"],
-                ["functionality_storage", "personalization_storage"],
-              ]}
-              buttons={_buttons}
-              open={open}
-              onClose={() => setOpen(false)}
+    <BannerShell
+      className="bg-background rounded-xl"
+      buttonGroup={
+        <BareBannerTriggers
+          buttons={_buttons}
+          tags={[essentialCookies, nonEssentialCookies]}
+        >
+          <TrnsprncyButton type="submit" label="Show Me" variant="ghost">
+            <BannerOptionsBase
+              tags={[essentialCookies, nonEssentialCookies]}
+              consentCookie={consentCookie}
+              getCookie={getCookie}
+              setCookie={setCookie}
             />
-          </BannerTriggerGroup>
-        </div>
-      </div>
-    </div>
+          </TrnsprncyButton>
+        </BareBannerTriggers>
+      }
+    />
   );
 }

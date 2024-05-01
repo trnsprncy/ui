@@ -2,6 +2,7 @@ import { WaitListForm } from "./forms/waitlist-form";
 import { Loading } from "./loading";
 import { Badge } from "./ui/badge";
 import { siteConfig } from "@/config/site-config";
+import FakeBannerDemo from "@/registry/alpha/demo/fake-banner-demo";
 import { BannerContent } from "@/registry/alpha/library/banner/banner-content";
 import { CircleCheckBig } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -53,13 +54,11 @@ export default function Hero() {
           animationFillMode: "forwards",
         }}
       >
-        <Suspense fallback={<Loading />}>
-          <div className="gradient-box">
-            <BannerDemo>
-              <BannerContent />
-            </BannerDemo>
-          </div>
-        </Suspense>
+        <div className="gradient-box p-1">
+          <Suspense fallback={<Loading />}>
+            <BannerDemo />
+          </Suspense>
+        </div>
       </div>
       <div
         className="opacity-0 motion-safe:animate-fade-up flex flex-col items-center gap-y-4"

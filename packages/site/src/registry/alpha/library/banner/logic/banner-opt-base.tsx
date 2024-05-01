@@ -1,7 +1,6 @@
 "use-client";
 
 import { CategorizedOptions } from "./categorized-options";
-import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
 import { cn } from "@/lib/utils";
 import {
   EssentialTags,
@@ -21,8 +20,8 @@ import { toast } from "sonner";
 type BannerOptionsBaseProps = {
   tags: EssentialTagsTupleArrays;
   consentCookie: string;
-  open?: boolean;
-  onClose?: () => void;
+  getCookie: (cookieName: string) => string;
+  setCookie: (cookie: string, cookieName: string, expiry: number) => void;
 };
 
 /**
@@ -77,8 +76,9 @@ function checkNonEssentialTags(tags: NonEssentialTags[]) {
 export function BannerOptionsBase({
   tags,
   consentCookie,
+  getCookie,
+  setCookie,
 }: BannerOptionsBaseProps) {
-  const { getCookie, setCookie } = useMockBrowserCookies();
   const [cookies, setCookies] = useState<Partial<BrowserCookies>>(() =>
     convertTagsToCookies(tags)
   );
@@ -153,18 +153,6 @@ export function BannerOptionsBase({
     },
     [handleConsentUpdate, tags]
   );
-  const [accordion, setAccordion] = useState<"Essential" | "Analytics" | null>(
-    null
-  );
-
-  const toggleAccordion = (accordionName: "Essential" | "Analytics") => {
-    if (accordion === accordionName) {
-      setAccordion(null);
-    } else {
-      setAccordion(accordionName);
-    }
-  };
-
   return (
     <div className="grid gap-2 min-w-2xl w-full">
       <div

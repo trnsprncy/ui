@@ -21,7 +21,9 @@ export function useMockBrowserCookies() {
 
   const removeCookie = (name: string) => {
     let updatedCookies = { ...cookies };
-    delete updatedCookies[name];
+    if (name in updatedCookies) {
+      delete updatedCookies[name];
+    }
     setCookies(updatedCookies);
   };
 
