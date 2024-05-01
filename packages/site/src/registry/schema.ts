@@ -6,6 +6,7 @@ export const registrySchema = z.array(
     dependencies: z.array(z.string()).optional(),
     devDependencies: z.array(z.string()).optional(),
     registryDependencies: z.array(z.string()).optional(),
+    fileDependencies: z.array(z.string()).optional(),
     uiDependencies: z.array(z.string()).optional(),
     files: z.array(z.string()),
     type: z.enum([

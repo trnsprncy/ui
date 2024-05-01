@@ -1,8 +1,8 @@
 "use client";
 
-import { TrnsprncyButton } from "../trnsprncy-button";
-import { TriggerButton, _buttons } from "../utils/constants";
 import { BannerOptions } from "./banner-options";
+import { TrnsprncyButton } from "./trnsprncy-button";
+import { TriggerButton, _buttons } from "./utils/triggers";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
@@ -40,7 +40,7 @@ export function BannerTriggers({ buttons }: BannerTriggersProps) {
             if (btn.type === "submit") {
               return (
                 <Button
-                  key={i}
+                  key={label}
                   {...btn}
                   onClick={() => {
                     setHasConsent(true);
@@ -52,7 +52,7 @@ export function BannerTriggers({ buttons }: BannerTriggersProps) {
               );
             }
             return (
-              <TrnsprncyButton key={i} {...btn} label={label}>
+              <TrnsprncyButton key={label} {...btn} label={label}>
                 <BannerOptions />
               </TrnsprncyButton>
             );

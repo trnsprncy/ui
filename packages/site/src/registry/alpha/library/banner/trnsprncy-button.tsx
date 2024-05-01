@@ -1,6 +1,5 @@
 "use client";
 
-import { background } from "./utils/constants";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import {
   Popover,
@@ -8,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { background } from "@trnsprncy/oss/dist/utils/styles";
 
 /**
  * This button renders with a popup trigger wrapped around it.

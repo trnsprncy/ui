@@ -1,6 +1,6 @@
 "use client";
 
-import { TriggerButton, _buttons } from "../utils/constants";
+import { TriggerButton, _buttons } from "./utils/triggers";
 import { Button } from "@/components/ui/button";
 import { EssentialTagsTupleArrays } from "@trnsprncy/oss/dist/types";
 import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";

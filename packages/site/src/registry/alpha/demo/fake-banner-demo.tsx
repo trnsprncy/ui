@@ -1,11 +1,11 @@
 "use client";
 
-import { BannerOptionsBase } from "../library/banner/logic/banner-opt-base";
+import { BannerOptionsBase } from "../library/banner/banner-opt-base";
 import { TrnsprncyButton } from "../library/banner/trnsprncy-button";
 import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
 import BannerShell from "@/registry/alpha/library/banner/banner-shell";
-import { BareBannerTriggers } from "@/registry/alpha/library/banner/logic/bare-banner-trigger";
-import { _buttons } from "@/registry/alpha/library/banner/utils/constants";
+import { BareBannerTriggers } from "@/registry/alpha/library/banner/bare-banner-trigger";
+import { _buttons } from "@/registry/alpha/library/banner/utils/triggers";
 import { EssentialTags, NonEssentialTags } from "@trnsprncy/oss/dist/types";
 import React from "react";
 

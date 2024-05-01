@@ -1,12 +1,24 @@
 "use client";
 
 import { BannerContent, BannerContentProps } from "./banner-content";
-import { BannerTriggerGroup, BannerTriggers } from "./logic/banner-trigger";
-import { background } from "./utils/constants";
-import { useLockBodyScroll } from "./utils/use-lock-body-scroll";
+import { BannerTriggerGroup, BannerTriggers } from "./banner-trigger";
 // @FIXME: add icons directly
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
+import { background } from "@trnsprncy/oss/dist/utils/styles";
+import React from "react";
+
+function useLockBodyScroll(enabled: boolean) {
+  // this hook was extended from the original at https://usehooks.com/uselockbodyscroll
+  React.useLayoutEffect(() => {
+    if (!enabled) return;
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [enabled]);
+}
 
 export type BannerProps = React.PropsWithChildren<{
   bannerClass?: string;

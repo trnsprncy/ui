@@ -1,5 +1,4 @@
-import { BannerSwitch } from "../banner-switch";
-import { categoryDescriptions, tagDetails } from "../utils/constants";
+import { BannerSwitch } from "./banner-switch";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +11,10 @@ import {
   type BrowserCookies,
   type TagArray,
 } from "@trnsprncy/oss/dist/types";
+import {
+  categoryDescriptions,
+  tagDetails,
+} from "@trnsprncy/oss/dist/utils/data";
 
 type CategorizedOptions = {
   tagGroup: TagArray<EssentialTags> | TagArray<NonEssentialTags> | undefined;

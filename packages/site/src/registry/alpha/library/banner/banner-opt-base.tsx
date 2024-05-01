@@ -2,9 +2,8 @@
 
 import { CategorizedOptions } from "./categorized-options";
 import { cn } from "@/lib/utils";
+// import { sendGTMEvent } from "@next/third-parties/google"; // @TODO: implement GTM
 import {
-  EssentialTags,
-  NonEssentialTags,
   type BrowserCookies,
   type EssentialTagsTupleArrays,
 } from "@trnsprncy/oss/dist/types";
@@ -13,7 +12,6 @@ import {
   convertTagsToCookies,
 } from "@trnsprncy/oss/dist/utils";
 import { cookieExpiry } from "@trnsprncy/oss/dist/utils/constants";
-import { convertCookieToConsent } from "@trnsprncy/oss/dist/utils/cookie-conversion-utils";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
@@ -23,47 +21,6 @@ type BannerOptionsBaseProps = {
   getCookie: (cookieName: string) => string;
   setCookie: (cookie: string, cookieName: string, expiry: number) => void;
 };
-
-/**
- * Check if the user has opted out of all essential tags
- * This will return a warning if the user has opted out of all essential tags
- *
- * @param {EssentialTags[]} {tags}
- * @return {*} {boolean}
- */
-function checkEssentialTags(tags: EssentialTags[]) {
-  if (!tags.length || !Array.isArray(tags)) {
-    console.warn(
-      "Analytics and tracking is not enabled. No essential tags were provided. Please ensure that this was intentional"
-    );
-    return false;
-  }
-  return tags.every((tag) => {
-    const isEssentialTag = ESSENTIAL_TAGS.includes(tag);
-    if (!isEssentialTag) {
-      console.warn("Invalid essential tag provided: ", tag);
-      return false;
-    }
-    return isEssentialTag;
-  });
-}
-
-/**
- * Check if the user has opted out of all tracking tags
- * This will return a warning if the user has opted out of all tracking tags
- *
- * @param {NonEssentialTags[]} tags
- * @return {*} {boolean}
- */
-function checkNonEssentialTags(tags: NonEssentialTags[]) {
-  if (!tags.length || !Array.isArray(tags)) {
-    console.warn(
-      "You have opted out of all tracking tags. Please ensure that this was intentional."
-    );
-    return false;
-  }
-  return tags.every((tag) => ESSENTIAL_TAGS.includes(tag));
-}
 
 /**
  * Responsible for building up and syncing the options object from cookies with the consent manager context
@@ -85,8 +42,6 @@ export function BannerOptionsBase({
   /**
    * isCheck state is used to determine if the user has opted out of all tags in a given category
    * this tuple is used to determine if the category switch should be toggled on or off
-   *
-   *
    */
   const [isChecked, setIsChecked] = useState([
     tags[0]?.every((tag) => !!cookies[tag as keyof typeof cookies]),
@@ -95,12 +50,19 @@ export function BannerOptionsBase({
 
   const [selectedKeys] = useState<EssentialTagsTupleArrays>(() => {
     // coerce tags into selectedKeys shape
-    const hasEssentialTags = tags[0] && checkEssentialTags(tags[0]);
-    const hasNonEssentialTags = tags[1] && checkNonEssentialTags(tags[1]);
-
     return [
-      hasEssentialTags ? tags[0] : [], // essential tags should never be empty
-      hasNonEssentialTags ? tags[1] : [], // nonessential tags can be empty
+      tags[0]?.every((tag) => {
+        const isEssentialTag = ESSENTIAL_TAGS.includes(tag);
+        if (!isEssentialTag) {
+          console.warn("Invalid essential tag provided: ", tag);
+        }
+        return isEssentialTag;
+      })
+        ? tags[0]
+        : undefined,
+      tags[1]?.every((tag) => ESSENTIAL_TAGS.includes(tag))
+        ? tags[1]
+        : undefined,
     ];
   });
 
@@ -117,9 +79,11 @@ export function BannerOptionsBase({
 
         // update the consent cookie
         setCookie(_updatedCookie, consentCookie, cookieExpiry);
-        // transform_updatedCookie  to consent
-        const consent = convertCookieToConsent(_updatedCookie);
-        // update the consent in GTM
+
+        // @TODO: update the consent in GTM
+        // // transform_updatedCookie  to consent
+        // const consent = convertCookieToConsent(_updatedCookie);
+        // // sendGTMEvent(consent);
         toast.success(
           `trnsprncy: Consent updated ${JSON.stringify(consentUpdate)}`,
           {
