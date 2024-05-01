@@ -1,5 +1,5 @@
-@tailwind base;
 @tailwind components;
+@tailwind base;
 @tailwind utilities;
 
 @layer base {
@@ -98,7 +98,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground scroll-smooth;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
