@@ -42,7 +42,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
           {backgroundComponent}
         </div>
       )}
-      <div ref={contentRef} className="relative z-10 py-32">
+      <div ref={contentRef} className="relative z-10 py-32 transform-gpu">
         {children}
       </div>
     </div>
