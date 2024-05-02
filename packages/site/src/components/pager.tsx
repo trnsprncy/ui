@@ -1,8 +1,8 @@
+import { Doc } from ".contentlayer/generated";
 import { buttonVariants } from "@/components/ui/button";
 import { DocsConfig, docsConfig } from "@/config/docs-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Doc } from "contentlayer/generated";
 import Link from "next/link";
 
 interface DocsPagerProps {

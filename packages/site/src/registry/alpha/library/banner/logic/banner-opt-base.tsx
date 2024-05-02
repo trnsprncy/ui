@@ -1,6 +1,6 @@
 "use-client";
 
-import { CategorizedOptions } from "./categorized-options";
+import { CategorizedOptions } from "../categorized-options";
 import { cn } from "@/lib/utils";
 // import { sendGTMEvent } from "@next/third-parties/google"; // @TODO: implement GTM
 import {
