@@ -1,6 +1,6 @@
 "use client";
 
-import { BannerOptionsBase } from "../library/banner/banner-opt-base";
+import { BannerOptionsBase } from "../library/banner/logic/banner-opt-base";
 import { TrnsprncyButton } from "../library/banner/trnsprncy-button";
 import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
 import BannerShell from "@/registry/alpha/library/banner/banner-shell";
