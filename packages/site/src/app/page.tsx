@@ -46,7 +46,7 @@ export default async function Home() {
             )}
           </Ticker>
         </section> */}
-        <section className="relative w-full mx-auto backdrop-blur-xl">
+        {/* <section className="relative w-full mx-auto backdrop-blur-xl">
           <p className="text-4xl text-center font-semibold py-12">
             Features & Benefits
           </p>
@@ -55,7 +55,7 @@ export default async function Home() {
               <FeatureCard key={i} {..._card} />
             ))}
           </div>
-        </section>
+        </section> */}
       </main>
     </>
   );

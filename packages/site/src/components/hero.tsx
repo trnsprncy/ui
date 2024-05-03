@@ -1,28 +1,31 @@
 import { WaitListForm } from "./forms/waitlist-form";
+import { Icons } from "./icons";
 import { Loading } from "./loading";
 import { Badge } from "./ui/badge";
+import { Button, buttonVariants } from "./ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 import { siteConfig } from "@/config/site-config";
-import FakeBannerDemo from "@/registry/alpha/demo/fake-banner-demo";
-import { BannerContent } from "@/registry/alpha/library/banner/banner-content";
-import { CircleCheckBig } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { CircleCheckBig, X } from "lucide-react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import Script from "next/script";
 import React, { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
 
-const BannerDemo = dynamic(
-  () => import("../registry/alpha/demo/fake-banner-demo"),
-  {
-    ssr: false,
-  }
-);
-
 const REGULATIONS = ["GDPR", "CCPA", "ePrivacy", "UK GDPR"];
+const followUrl = `https://twitter.com/intent/follow?screen_name=${"_trnsprncy"}`;
 
 export default function Hero() {
   return (
     <>
       <h1
-        className="px-4 text-center motion-safe:animate-fade-up text:4xl font-extrabold tracking-tight opacity-0 text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
+        className="max-w-4xl px-4 text-center motion-safe:animate-fade-up text:4xl font-extrabold tracking-tight opacity-0 text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
         style={{
           animationDelay: "0.25s",
           animationFillMode: "forwards",
@@ -93,11 +96,51 @@ export default function Hero() {
             );
           })}
         </ul>
-        <div className="w-full p-8 flex flex-col gap-y-4">
+        <div className="w-full p-8 flex flex-col gap-y-4 border  border-indigo-500 dark:border-indigo-300/40 rounded-md bg-background/40 backdrop-blur-md">
           <strong className="max-w-4xl text-center">
-            <Balancer>Sign up for early access</Balancer>
+            <Balancer>For Early Access, Updates and Exclusives:</Balancer>
           </strong>
-          <WaitListForm />
+          {/* <WaitListForm /> */}
+          <div className="max-w-40 mx-auto w-full gradient-box rounded-md overflow-hidden">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "sm" }),
+                      "scale-[0.93] group cursor-pointer transition-colors py-5 hover:bg-black/60 hover:backdrop-blur-md hover:animate-pulse"
+                    )}
+                    style={{
+                      animationDuration: "1.5s",
+                    }}
+                    href={followUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="flex items-center justify-between space-x-2">
+                      <span className="peer text-lg">Follow us on</span>
+                      {Icons["twitter"]({
+                        className:
+                          "peer w-6 h-6 fill-current group-hover:fill-current transition-colors",
+                      })}
+                    </div>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent
+                  align="center"
+                  side="bottom"
+                  sideOffset={10}
+                  className="bg-background border shadow-euphonious"
+                >
+                  <p className="text-foreground">
+                    (
+                    <span className="font-semibold text-indigo-400">Note:</span>{" "}
+                    this action will automatically follow our twitter account.)
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
 
         {/* <Link @TODO: #JB4fsn/
@@ -110,3 +153,10 @@ export default function Hero() {
     </>
   );
 }
+
+const BannerDemo = dynamic(
+  () => import("../registry/alpha/demo/fake-banner-demo"),
+  {
+    ssr: false,
+  }
+);
