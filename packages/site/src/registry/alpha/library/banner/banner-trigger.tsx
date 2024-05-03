@@ -1,6 +1,6 @@
 "use client";
 
-import { BannerOptions } from "./banner-options";
+import { BannerOptions } from "./logic/banner-options";
 import { TrnsprncyButton } from "./trnsprncy-button";
 import { TriggerButton, _buttons } from "./utils/triggers";
 import { Button } from "@/components/ui/button";

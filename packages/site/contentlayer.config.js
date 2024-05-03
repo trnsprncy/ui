@@ -15,11 +15,17 @@ import { visit } from "unist-util-visit";
 const computedFields = {
   slug: {
     type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => {
+      console.log(doc._raw);
+      return `/${doc._raw.flattenedPath}`;
+    },
   },
   slugAsParams: {
     type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+    resolve: (doc) => {
+      console.log("slugAsParams", doc._raw);
+      return doc._raw.flattenedPath.split("/").slice(1).join("/");
+    },
   },
 };
 
@@ -65,15 +71,39 @@ export const Doc = defineDocumentType(() => ({
   computedFields,
 }));
 
+/**
+ * Configures the ContentLayer source for the site.
+ * This function is exported as the default export of the file.
+ * It sets up the content directory, document types, and various Markdown/MDX processing plugins.
+ *
+ * @exports default
+ * @type {import('@contentlayer2/source-files').SourcePlugin}
+ * @see https://contentlayer.dev/docs/reference/source-files/make-source-a5ba4922
+ */
+// This line exports the function `makeSource` as the default export of the module.
 export default makeSource({
+  // This option specifies the directory containing the content (likely Markdown files).
   contentDirPath: "./content",
+
+  // This option defines the document types that the source can handle.
+  // Presumably, `Doc` is a custom type or an imported type.
   documentTypes: [Doc],
+
+  // This option configures how MDX files are processed.
   mdx: {
+    // This option specifies remark plugins used for parsing Markdown.
+    // Likely, `remarkGfm` enables GFM (GitHub Flavored Markdown) syntax.
+    // `codeImport` might be a custom plugin for handling code imports.
     remarkPlugins: [remarkGfm, codeImport],
+
+    // This option specifies rehype plugins used for transforming the AST.
     rehypePlugins: [
+      // These plugins likely handle slugs, components, and basic formatting.
       rehypeSlug,
       rehypeComponent,
+      // This custom plugin extracts event information from code blocks
       () => (tree) => {
+        // Traverse the tree and extract event information from code blocks
         visit(tree, (node) => {
           if (node?.type === "element" && node?.tagName === "pre") {
             const [codeEl] = node.children;
@@ -81,22 +111,25 @@ export default makeSource({
               return;
             }
 
+            // Extract event from code block meta data
             if (codeEl.data?.meta) {
-              // Extract event from meta and pass it down the tree.
               const regex = /event="([^"]*)"/;
               const match = codeEl.data?.meta.match(regex);
               if (match) {
+                // Store event data and remove it from meta
                 node.__event__ = match ? match[1] : null;
                 codeEl.data.meta = codeEl.data.meta.replace(regex, "");
               }
             }
 
+            // Store additional information about the code block
             node.__rawString__ = codeEl.children?.[0].value;
             node.__src__ = node.properties?.__src__;
             node.__style__ = node.properties?.__style__;
           }
         });
       },
+      // This plugin likely adds syntax highlighting with a dark theme
       rehypeNpmCommand,
       [
         rehypePrettyCode,
@@ -104,6 +137,7 @@ export default makeSource({
           theme: "one-dark-pro",
         },
       ],
+      // This custom plugin processes figure elements containing pre blocks
       () => (tree) => {
         visit(tree, (node) => {
           if (node?.type === "element" && node?.tagName === "figure") {
@@ -116,6 +150,7 @@ export default makeSource({
               return;
             }
 
+            // Set properties for the pre element based on the figure element
             preElement.properties["__withMeta__"] =
               node.children.at(0).tagName === "div";
             preElement.properties["__rawString__"] = node.__rawString__;

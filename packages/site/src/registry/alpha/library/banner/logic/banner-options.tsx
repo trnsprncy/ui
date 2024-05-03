@@ -1,6 +1,6 @@
 "use-client";
 
-import { CategorizedOptions } from "./categorized-options";
+import { CategorizedOptions } from "../categorized-options";
 import { cn } from "@/lib/utils";
 import { useConsent, useConsentDispatch } from "@trnsprncy/oss/dist/hooks";
 import {

@@ -1,0 +1,59 @@
+---
+title: Custom Banner
+description: Primitives to allow you to flexibly and semantically build your own banner.
+# links:
+#   - title: trnsprncy/oss
+#     url: https://ui.shadcn.com/docs/components/popover
+---
+
+<ComponentPreview name="custom-banner" />
+
+## Installation
+
+<Tabs defaultValue="manual">
+
+<TabsList>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+</TabsList>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx @trnsprncy/oss@latest
+```
+
+<Alert className="mt-4" variant="info">
+  <MdxIcons.Info className="size-4" />
+  <AlertTitle>Good to know</AlertTitle>
+  <AlertDescription>
+    @trnsprncy/oss is our consent manager, and allows you to easily install
+    google-tag-manager into your project. We use an optimized version of the
+    script, which is loaded asynchronously and does not block the rendering of
+    your page.
+  </AlertDescription>
+</Alert>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="fake-banner-demo" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="cli">
+  <Steps>
+    <Step>
+      Please run the following command to install all required components and
+      their dependencie.
+    </Step>
+  </Steps>
+</TabsContent>
+</Tabs>

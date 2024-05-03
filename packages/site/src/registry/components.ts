@@ -10,22 +10,22 @@ const extension: Registry = [
     uiDependencies: [],
     files: ["library/banner/banner-content.tsx"],
   },
-  {
-    name: "banner-opt-base",
-    type: "components:library",
-    dependencies: ["@trnsprncy/oss"],
-    registryDependencies: ["categorized-options"],
-    uiDependencies: ["toast"],
-    files: ["library/banner/banner-opt-base.tsx"],
-  },
-  {
-    name: "banner-options",
-    type: "components:library",
-    dependencies: ["@trnsprncy/oss"],
-    registryDependencies: ["categorized-options"],
-    uiDependencies: [],
-    files: ["library/banner/banner-options.tsx"],
-  },
+  // {
+  //   name: "banner-opt-base",
+  //   type: "components:library",
+  //   dependencies: ["@trnsprncy/oss"],
+  //   registryDependencies: ["categorized-options"],
+  //   uiDependencies: ["toast"],
+  //   files: ["library/banner/banner-opt-base.tsx"],
+  // },
+  // {
+  //   name: "banner-options",
+  //   type: "components:library",
+  //   dependencies: ["@trnsprncy/oss"],
+  //   registryDependencies: ["categorized-options"],
+  //   uiDependencies: [],
+  //   files: ["library/banner/banner-options.tsx"],
+  // },
   {
     name: "banner-shell",
     type: "components:library",
@@ -87,7 +87,21 @@ const extension: Registry = [
   },
 ];
 
-const demos: Registry = [];
+const demos: Registry = [
+  {
+    name: "custom-banner",
+    type: "components:demo",
+    dependencies: ["@trnsprncy/oss"],
+    registryDependencies: [
+      "banner-shell",
+      "banner-opts-base",
+      "trnsprncy-button",
+      "banner-triggers",
+    ],
+    uiDependencies: [""],
+    files: ["demo/fake-banner-demo.tsx"],
+  },
+];
 
 const examples: Registry = [];
 

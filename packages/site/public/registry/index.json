@@ -12,12 +12,12 @@
   {
     "name": "banner-shell",
     "dependencies": [
-      "@radix-ui/react-slot"
+      "@radix-ui/react-slot",
+      "@trnsprncy/oss"
     ],
     "registryDependencies": [
       "banner-content",
-      "utils",
-      "logic"
+      "banner-trigger"
     ],
     "uiDependencies": [],
     "files": [
@@ -29,11 +29,46 @@
     "name": "banner-switch",
     "dependencies": [],
     "registryDependencies": [
-      "switch"
+      "switch-w-thumb"
     ],
     "uiDependencies": [],
     "files": [
       "library/banner/banner-switch.tsx"
+    ],
+    "type": "components:library"
+  },
+  {
+    "name": "banner-trigger",
+    "dependencies": [
+      "@trnsprncy/oss"
+    ],
+    "registryDependencies": [],
+    "fileDependencies": [
+      "utils/triggers"
+    ],
+    "uiDependencies": [
+      "button"
+    ],
+    "files": [
+      "library/banner/banner-trigger.tsx"
+    ],
+    "type": "components:library"
+  },
+  {
+    "name": "bare-banner-trigger",
+    "dependencies": [
+      "@trnsprncy/oss"
+    ],
+    "registryDependencies": [],
+    "fileDependencies": [
+      "utils/triggers"
+    ],
+    "uiDependencies": [
+      "toast",
+      "button"
+    ],
+    "files": [
+      "library/banner/bare-banner-trigger.tsx"
     ],
     "type": "components:library"
   },
@@ -63,5 +98,40 @@
       "library/banner/trnsprncy-button.tsx"
     ],
     "type": "components:library"
+  },
+  {
+    "name": "categorized-options",
+    "dependencies": [
+      "@trnsprncy/oss"
+    ],
+    "registryDependencies": [
+      "banner-switch"
+    ],
+    "uiDependencies": [
+      "accordion"
+    ],
+    "files": [
+      "library/banner/categorized-options.tsx"
+    ],
+    "type": "components:library"
+  },
+  {
+    "name": "custom-banner",
+    "dependencies": [
+      "@trnsprncy/oss"
+    ],
+    "registryDependencies": [
+      "banner-shell",
+      "banner-opts-base",
+      "trnsprncy-button",
+      "banner-triggers"
+    ],
+    "uiDependencies": [
+      ""
+    ],
+    "files": [
+      "demo/fake-banner-demo.tsx"
+    ],
+    "type": "components:demo"
   }
 ]

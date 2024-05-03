@@ -305,7 +305,7 @@ interface MdxProps {
 
 export function Mdx({ code }: MdxProps) {
   const config = {
-    style: "default",
+    style: "alpha",
   };
   const Component = useMDXComponent(code, {
     style: config.style,
