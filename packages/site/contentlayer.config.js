@@ -15,11 +15,17 @@ import { visit } from "unist-util-visit";
 const computedFields = {
   slug: {
     type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => {
+      console.log(doc._raw);
+      return `/${doc._raw.flattenedPath}`;
+    },
   },
   slugAsParams: {
     type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+    resolve: (doc) => {
+      console.log("slugAsParams", doc._raw);
+      return doc._raw.flattenedPath.split("/").slice(1).join("/");
+    },
   },
 };
 
