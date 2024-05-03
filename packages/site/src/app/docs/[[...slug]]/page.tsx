@@ -1,4 +1,3 @@
-import { allDocs as docs } from ".contentlayer/generated";
 import { DocsBreadcrumb } from "@/components/doc-breadcrumb";
 import { DocMainTOC, Toc } from "@/components/layouts/toc";
 import { Mdx } from "@/components/mdx-component";
@@ -8,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { siteConfig } from "@/config/site-config";
 import { getTableOfContents } from "@/lib/toc";
 import { cn } from "@/lib/utils";
+import { allDocs as docs } from "contentlayer/generated";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";

@@ -98,7 +98,6 @@ export default makeSource({
       // This custom plugin extracts event information from code blocks
       () => (tree) => {
         // Traverse the tree and extract event information from code blocks
-        console.log("tree", tree);
         visit(tree, (node) => {
           if (node?.type === "element" && node?.tagName === "pre") {
             const [codeEl] = node.children;
