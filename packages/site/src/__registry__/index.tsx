@@ -15,16 +15,30 @@ export const Index: Record<string, any> = {
     "banner-shell": {
       name: "banner-shell",
       type: "components:library",
-      registryDependencies: ["banner-content","utils","logic"],
+      registryDependencies: ["banner-content","banner-trigger"],
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-shell.tsx")),
       files: ["src/registry/alpha/library/banner/banner-shell.tsx"],
     },
     "banner-switch": {
       name: "banner-switch",
       type: "components:library",
-      registryDependencies: ["switch"],
+      registryDependencies: ["switch-w-thumb"],
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-switch.tsx")),
       files: ["src/registry/alpha/library/banner/banner-switch.tsx"],
+    },
+    "banner-trigger": {
+      name: "banner-trigger",
+      type: "components:library",
+      registryDependencies: [],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/banner-trigger.tsx")),
+      files: ["src/registry/alpha/library/banner/banner-trigger.tsx"],
+    },
+    "bare-banner-trigger": {
+      name: "bare-banner-trigger",
+      type: "components:library",
+      registryDependencies: [],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/bare-banner-trigger.tsx")),
+      files: ["src/registry/alpha/library/banner/bare-banner-trigger.tsx"],
     },
     "switch-w-thumb": {
       name: "switch-w-thumb",
@@ -39,6 +53,20 @@ export const Index: Record<string, any> = {
       registryDependencies: ["banner-options"],
       component: React.lazy(() => import("@/registry/alpha/library/banner/trnsprncy-button.tsx")),
       files: ["src/registry/alpha/library/banner/trnsprncy-button.tsx"],
+    },
+    "categorized-options": {
+      name: "categorized-options",
+      type: "components:library",
+      registryDependencies: ["banner-switch"],
+      component: React.lazy(() => import("@/registry/alpha/library/banner/categorized-options.tsx")),
+      files: ["src/registry/alpha/library/banner/categorized-options.tsx"],
+    },
+    "custom-banner": {
+      name: "custom-banner",
+      type: "components:demo",
+      registryDependencies: ["banner-shell","banner-opts-base","trnsprncy-button","banner-triggers"],
+      component: React.lazy(() => import("@/registry/alpha/demo/fake-banner-demo.tsx")),
+      files: ["src/registry/alpha/demo/fake-banner-demo.tsx"],
     },
   },
 }

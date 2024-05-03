@@ -1,12 +1,24 @@
 "use client";
 
 import { BannerContent, BannerContentProps } from "./banner-content";
-import { BannerTriggerGroup, BannerTriggers } from "./logic/banner-trigger";
-import { background } from "./utils/constants";
-import { useLockBodyScroll } from "./utils/use-lock-body-scroll";
+import { BannerTriggerGroup, BannerTriggers } from "./banner-trigger";
 // @FIXME: add icons directly
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
+import { background } from "@trnsprncy/oss/dist/utils/styles";
+import React from "react";
+
+function useLockBodyScroll(enabled: boolean) {
+  // this hook was extended from the original at https://usehooks.com/uselockbodyscroll
+  React.useLayoutEffect(() => {
+    if (!enabled) return;
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [enabled]);
+}
 
 export type BannerProps = React.PropsWithChildren<{
   bannerClass?: string;
@@ -53,22 +65,25 @@ export default function Banner(props: BannerProps) {
       ) : null}
 
       <div
-        className={cn(
-          "py-9 absolute inset-0 flex flex-col items-center z-50",
-          className,
-          {
-            "justify-end": placement === "bottom",
-            "justify-center": placement === "centered",
-          }
-        )}
+        id="trnsprncy"
+        className={cn("flex flex-col items-center z-50", className, {
+          "absolute inset-0 justify-end py-9 ": placement === "bottom",
+          "absolute inset-0 justify-center py-9": placement === "centered",
+        })}
       >
-        <div className="max-w-3xl z-50 animate-in slide-in-from-bottom-60 animate-out slide-out-top-60 duration-1000 delay-200">
+        <div
+          className="max-w-3xl z-50 opacity-0 animate-in slide-in-from-bottom-60 animate-out slide-out-top-60 duration-1000 delay-200"
+          style={{
+            animationFillMode: "forwards",
+          }}
+        >
           <div
             className={cn(background, bannerClass, "border-2 border-muted/30")}
           >
             {leftElement ? (
               leftElement
             ) : (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src="https://cdn.jsdelivr.net/gh/trnsprncy/ui@dev/packages/site/public/trnsprncy.png"
                 alt="trnsprncy logo"
@@ -84,8 +99,4 @@ export default function Banner(props: BannerProps) {
       </div>
     </>
   );
-}
-
-function BannerShell(props: React.PropsWithChildren<{}>) {
-  return <div>{props.children}</div>;
 }

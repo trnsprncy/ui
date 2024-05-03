@@ -48,9 +48,6 @@ export default function DocsLayout({
         </aside>
         {children}
       </div>
-      <div className="border-t border-t-border">
-        <SiteFooter />
-      </div>
     </>
   );
 }

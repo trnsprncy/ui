@@ -30,10 +30,12 @@ export function BannerContent({
       <p>
         {description ??
           "We use cookies to improve your experience, manage your preferences, and provide better content."}{" "}
-        For details see our{"  "}
+        <span className="text-primary/60 dark:text-primary-400 ">
+          For details see our{"  "}
+        </span>
         <Link
           href={href ?? "/policies/cookies"}
-          className="text-primary/60 dark:text-primary-400 hover:underline text-gray-500"
+          className="text-indigo-900 dark:text-indigo-500 hover:underline"
         >
           {label ?? "cookie policy"}
         </Link>

@@ -1,20 +1,16 @@
 "use client";
 
-import { TrnsprncyButton } from "../trnsprncy-button";
-import { TriggerButton, _buttons } from "../utils/constants";
-import { BannerOptionsBase } from "./banner-opt-base";
+import { TriggerButton, _buttons } from "./utils/triggers";
 import { Button } from "@/components/ui/button";
 import { EssentialTagsTupleArrays } from "@trnsprncy/oss/dist/types";
 import { convertTagsToCookies } from "@trnsprncy/oss/dist/utils";
+import { Fragment } from "react";
 import { toast } from "sonner";
 
 export type BannerTriggersProps = React.PropsWithChildren<{
   buttons?: TriggerButton[];
   asChild?: boolean;
   tags?: EssentialTagsTupleArrays;
-  open?: boolean;
-  onClose?: () => void;
-  onAccept?: () => void;
 }>;
 
 /**
@@ -56,15 +52,7 @@ export function BareBannerTriggers(props: BannerTriggersProps) {
               );
             }
             return props.tags?.length ? (
-              <TrnsprncyButton key={i} {...btn} label={label}>
-                <BannerOptionsBase
-                  tags={props.tags!}
-                  consentCookie="app-cookie"
-                  key={i}
-                  open={props.open}
-                  onClose={props.onClose}
-                />
-              </TrnsprncyButton>
+              <Fragment key={i}>{props.children}</Fragment>
             ) : null;
           })
         : null}
