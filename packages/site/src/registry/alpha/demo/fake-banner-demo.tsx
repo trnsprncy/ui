@@ -2,7 +2,7 @@
 
 import { BannerOptionsBase } from "../library/banner/logic/banner-opt-base";
 import { TrnsprncyButton } from "../library/banner/trnsprncy-button";
-import { useMockBrowserCookies } from "@/hooks/demo/use-mock-browser-cookies";
+import { useMockBrowserCookies } from "@/registry/alpha/demo/hooks/use-mock-browser-cookies";
 import BannerShell from "@/registry/alpha/library/banner/banner-shell";
 import { BareBannerTriggers } from "@/registry/alpha/library/banner/bare-banner-trigger";
 import { _buttons } from "@/registry/alpha/library/banner/utils/triggers";
