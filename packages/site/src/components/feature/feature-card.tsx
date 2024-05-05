@@ -164,7 +164,7 @@ type FeatureCardProps = {
   title: string;
   description: string;
   body: string;
-  list: string[];
+  list?: string[];
   footer: string[];
   badge?: string;
   className?: string;
