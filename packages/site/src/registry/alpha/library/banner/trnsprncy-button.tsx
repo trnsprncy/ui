@@ -28,7 +28,7 @@ export function TrnsprncyButton({
 }: React.PropsWithChildren<ButtonProps & { label: string; open?: boolean }>) {
   return (
     <Popover open={open}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button {...props}>{label}</Button>
       </PopoverTrigger>
       <PopoverContent
