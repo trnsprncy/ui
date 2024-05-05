@@ -18,9 +18,9 @@ import { Balancer } from "react-wrap-balancer";
 export const SiteHeader = () => {
   const pathname = usePathname();
   return (
-    <header className="fixed w-full top-0 left-0 z-50">
+    <header className="fixed w-full top-0 left-0 z-50 bg-background/30 backdrop-blur-xl">
       {pathname === "/" && <></>}
-      <div className="flex items-center justify-between px-4 py-2 h-12 border-b border-border bg-background">
+      <div className="flex items-center justify-between px-4 py-2 h-12 border-b border-border">
         <nav className="mx-auto max-w-screen-2xl flex items-center justify-between w-full">
           <div className="flex items-center gap-4">
             <MobileMenu />

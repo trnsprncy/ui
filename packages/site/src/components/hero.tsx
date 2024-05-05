@@ -1,6 +1,7 @@
 import { WaitListForm } from "./forms/waitlist-form";
 import { Icons } from "./icons";
 import { Loading } from "./loading";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import {
@@ -70,8 +71,66 @@ export default function Hero() {
           animationFillMode: "forwards",
         }}
       >
-        <ul
-          className="flex gap-3 mb-6 motion-safe:animate-fade-up opacity-0"
+        <div className="w-full p-8 flex flex-col gap-y-4 border border-indigo-500 dark:border-indigo-300/40 rounded-md bg-background/40 backdrop-blur-md">
+          <strong className="max-w-4xl text-center text-muted-foreground">
+            <Balancer>For Early Access, Updates and Exclusives:</Balancer>
+          </strong>
+          {/* <WaitListForm /> */}
+          <div className="max-w-40 mx-auto w-full gradient-box rounded-md overflow-hidden active:scale-[0.85] transform-gpu ease-in-out-sine">
+            <Link
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "scale-[0.93] group cursor-pointer transition-colors py-5 hover:bg-black/60 hover:backdrop-blur-md hover:animate-pulse"
+              )}
+              style={{
+                animationDuration: "1.5s",
+              }}
+              href={followUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex items-center justify-between space-x-2">
+                <span className="peer text-lg">Follow us on</span>
+                {Icons["twitter"]({
+                  className:
+                    "peer w-6 h-6 fill-current group-hover:fill-current transition-colors",
+                })}
+              </div>
+            </Link>
+          </div>
+          <p className="text-center text-xs text-muted-foreground">
+            No Email Required
+          </p>
+          <div className="absolute bottom-5 right-4 scale-[0.7]">
+            <p className="text-center text-xs font-semibold text-muted-foreground mb-1">
+              made by:
+            </p>
+            <div className="flex -space-x-2 rtl:space-x-reverse">
+              <Link
+                href="https://x.com/dangling_hanma"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
+                  <AvatarImage src="https://pbs.twimg.com/profile_images/1780985267739934726/0Hy_0Bg__400x400.jpg" />
+                  <AvatarFallback>MR</AvatarFallback>
+                </Avatar>
+              </Link>
+              <Link
+                href="https://x.com/soham_asmi"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
+                  <AvatarImage src="https://pbs.twimg.com/profile_images/1758898035617083393/Dj9pSWia_400x400.jpg" />
+                  <AvatarFallback>GS</AvatarFallback>
+                </Avatar>
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* <ul
+          className="flex gap-3 my-6 motion-safe:animate-fade-up opacity-0"
           style={{
             animationDelay: "0.6s",
             animationFillMode: "forwards",
@@ -83,7 +142,7 @@ export default function Hero() {
             return (
               <li key={regulation}>
                 <Badge
-                  className="opacity-0 motion-safe:animate-fade-up flex gap-x-2 justify-between bg-background hover:bg-background/40 drop-shadow-glow"
+                  className="opacity-0 motion-safe:animate-fade-up flex gap-x-2 justify-between bg-background drop-shadow-glow select-none"
                   variant="auto"
                   style={{
                     animationDelay: `${delay}s`,
@@ -95,53 +154,7 @@ export default function Hero() {
               </li>
             );
           })}
-        </ul>
-        <div className="w-full p-8 flex flex-col gap-y-4 border  border-indigo-500 dark:border-indigo-300/40 rounded-md bg-background/40 backdrop-blur-md">
-          <strong className="max-w-4xl text-center">
-            <Balancer>For Early Access, Updates and Exclusives:</Balancer>
-          </strong>
-          {/* <WaitListForm /> */}
-          <div className="max-w-40 mx-auto w-full gradient-box rounded-md overflow-hidden">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    className={cn(
-                      buttonVariants({ variant: "outline", size: "sm" }),
-                      "scale-[0.93] group cursor-pointer transition-colors py-5 hover:bg-black/60 hover:backdrop-blur-md hover:animate-pulse"
-                    )}
-                    style={{
-                      animationDuration: "1.5s",
-                    }}
-                    href={followUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <div className="flex items-center justify-between space-x-2">
-                      <span className="peer text-lg">Follow us on</span>
-                      {Icons["twitter"]({
-                        className:
-                          "peer w-6 h-6 fill-current group-hover:fill-current transition-colors",
-                      })}
-                    </div>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent
-                  align="center"
-                  side="bottom"
-                  sideOffset={10}
-                  className="bg-background border shadow-euphonious"
-                >
-                  <p className="text-foreground">
-                    (
-                    <span className="font-semibold text-indigo-400">Note:</span>{" "}
-                    this action will automatically follow our twitter account.)
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-        </div>
+        </ul> */}
 
         {/* <Link @TODO: #JB4fsn/
               href={siteConfig.links.docs}
