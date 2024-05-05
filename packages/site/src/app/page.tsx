@@ -32,9 +32,9 @@ export default async function Home() {
             )}
           </Ticker>
         </section> */}
-        <section className="relative w-full mx-auto sheen pb-24 px-12 before:content=[' '] before:absolute before:inset-0 before:bg-dot-black/[0.1] before:dark:bg-dot-white/[0.1]">
+        {/* <section className="relative w-full mx-auto sheen pb-24 px-12 before:content=[' '] before:absolute before:inset-0 before:bg-dot-black/[0.1] before:dark:bg-dot-white/[0.1]">
           <Features />
-        </section>
+        </section> */}
       </main>
     </>
   );
