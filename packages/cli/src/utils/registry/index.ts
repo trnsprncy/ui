@@ -1,5 +1,4 @@
 import { registryIndexSchema, Registry } from "@/registry/schema";
-import { ui } from "@/registry/ui";
 import { decide, hasSrcPath } from "@/utils/get-json";
 import fs from "fs";
 import { HttpsProxyAgent } from "https-proxy-agent";
@@ -41,7 +40,7 @@ export async function fetchRegistry() {
  * @returns An array of component objects matching the provided component names.
  */
 export async function getComponentInfo(componentName: string[] | undefined) {
-  
+
   const componentRegistry = registryIndexSchema.parse(await fetchRegistry());
 
   const addedComponents = new Set<string>(componentName); // Set to store added component names
@@ -151,8 +150,11 @@ export function createFiles(fileNames: string[], contents: string[]): void {
 
   try {
     fileNames.forEach((fileName, index) => {
-      const filePath = path.join(basePath, fileName);
-      fs.writeFileSync(filePath, contents[index], "utf8");
+      const finalPath = path.join(basePath, fileName);
+      if (!fs.existsSync(finalPath)) {
+        const filePath = finalPath;
+        fs.writeFileSync(filePath, contents[index], "utf8");
+      }
     });
   } catch (err) {
     console.error("Error creating files:", err);
