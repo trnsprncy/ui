@@ -154,6 +154,14 @@
     initial-value: 0deg;
     inherits: false;
   }
+
+  .sheen {
+    background-size: 100% 100%;
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+    background-image: linear-gradient(45deg, #2f24985c 0%, #2f24985c 81%),
+      linear-gradient(139deg, #e8e8e896 0%, #303030ff 100%),
+      linear-gradient(195deg, #e8e8e8b5 0%, #303030ff 100%);
+  }
 }
 
 @media (max-width: 640px) {

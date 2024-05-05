@@ -66,7 +66,7 @@ export default function Banner(props: BannerProps) {
 
       <div
         id="trnsprncy"
-        className={cn("flex flex-col items-center z-50", className, {
+        className={cn("flex flex-col md:items-center z-50", className, {
           "absolute inset-0 justify-end py-9 ": placement === "bottom",
           "absolute inset-0 justify-center py-9": placement === "centered",
         })}
@@ -87,13 +87,15 @@ export default function Banner(props: BannerProps) {
               <img
                 src="https://cdn.jsdelivr.net/gh/trnsprncy/ui@dev/packages/site/public/trnsprncy.png"
                 alt="trnsprncy logo"
-                width="64px"
+                className="w-0 md:w-20"
               />
             )}
-            <ContentSlot {...content}>{children}</ContentSlot>
-            <BannerTriggerGroup>
-              <ButtonSlot>{buttonGroup}</ButtonSlot>
-            </BannerTriggerGroup>
+            <div className="flex flex-col md:flex-row">
+              <ContentSlot {...content}>{children}</ContentSlot>
+              <BannerTriggerGroup>
+                <ButtonSlot>{buttonGroup}</ButtonSlot>
+              </BannerTriggerGroup>
+            </div>
           </div>
         </div>
       </div>

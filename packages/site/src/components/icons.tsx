@@ -1,10 +1,9 @@
 import {
   AlertTriangle,
   Bell,
-  Clock,
+  Hexagon,
   Info,
   LucideProps,
-  Hexagon,
   TextCursorInput,
 } from "lucide-react";
 
