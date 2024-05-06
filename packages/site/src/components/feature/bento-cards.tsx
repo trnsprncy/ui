@@ -5,9 +5,9 @@ import { CARD_ICONS } from "./card-icons";
 
 export const bentoRowTop = [
   {
-    title: "User Data Protection",
+    title: "Privacy First",
     description: "",
-    body: "We apply sensible defaults to simplify compliance and protect user data",
+    body: "Proctect your user's privacy with our built-in sensible defaults. Eliminate 90% of compliance concerns by redacting all identifying data.",
     footer: ["gdpr", "eprivacy", "ccpa", "lcpd"],
 
     rightSlot: CARD_ICONS["data"]({ className: "w-12" }),
@@ -19,21 +19,21 @@ export const bentoRowTop = [
   },
   {
     cardIcon: "govt",
-    title: "Avoid Potentially Massive Fines",
+    title: "Avoid Massive Fines",
     description: "",
-    body: `It's not just the big companies that are impacted. Compliance must be at the forefront of your strategy.`,
+    body: `Don't get caught off guard - compliance violations can be expensive and damaging to your brand. With over 4 Billion Euros in fines issued since 2018.`,
     footer: [],
     component: Overview,
     leftSlot: CARD_ICONS["govt"]({ className: "w-14 h-12 text-right" }),
-    rightSlot: <GDPR className="w-10" />,
+    rightSlot: <GDPR className="w-10 opacity-70" />,
   },
 ];
 
 export const bentoRowBottom = [
   {
-    title: "Automatically Block Cookies",
+    title: "Simplified Compliance",
     description: "",
-    body: "Once enabled, consent is mandated before cookies are allowed.",
+    body: "Using our drop-in done-for-you UI kit, you can easily implement a compliant consent strategy in minutes.",
     footer: ["gdpr", "ccpa"],
     leftSlot: CARD_ICONS["block"]({
       className: "w-12",
@@ -43,12 +43,12 @@ export const bentoRowBottom = [
     title: "Quick Setup",
     description: "",
     body: `
-      Install the consent provider, and install the UI components. 
+      Combine the Consent Provider open-source package with our Shadcn-inspired UI Kit to get complaint easily.
     `,
 
     list: [
       "Wrap your app with the consent provider",
-      "Copy UI components or use our new (Shadcn inspired) CLI!",
+      "Copy UI components or use our new CLI to streamline your development!",
       "Simply drop in the banner component and your all set!",
     ],
     footer: [],
@@ -72,7 +72,7 @@ export const bentoRowBottom = [
     cardIcon: "google",
     title: "Optimized GTM",
     description: "",
-    body: `Optimized specifically for Next.js applications.`,
+    body: `Our GTM implementation is optimized specifically for Next.js application to avoid the performance pitfalls traditionally associated with Google Tag Manager.`,
     footer: ["gdpr"],
     leftSlot: CARD_ICONS["google"]({ className: "w-12" }),
   },
