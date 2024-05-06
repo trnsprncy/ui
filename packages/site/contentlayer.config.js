@@ -16,14 +16,12 @@ const computedFields = {
   slug: {
     type: "string",
     resolve: (doc) => {
-      console.log(doc._raw);
       return `/${doc._raw.flattenedPath}`;
     },
   },
   slugAsParams: {
     type: "string",
     resolve: (doc) => {
-      console.log("slugAsParams", doc._raw);
       return doc._raw.flattenedPath.split("/").slice(1).join("/");
     },
   },
@@ -88,7 +86,7 @@ export default makeSource({
   // This option defines the document types that the source can handle.
   // Presumably, `Doc` is a custom type or an imported type.
   documentTypes: [Doc],
-
+  disableImportAliasWarning: true,
   // This option configures how MDX files are processed.
   mdx: {
     // This option specifies remark plugins used for parsing Markdown.
