@@ -8,7 +8,7 @@ export const Index: Record<string, any> = {
     "banner-content": {
       name: "banner-content",
       type: "components:library",
-      registryDependencies: [],
+      registryDependencies: undefined,
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-content.tsx")),
       files: ["src/registry/alpha/library/banner/banner-content.tsx"],
     },
@@ -29,30 +29,30 @@ export const Index: Record<string, any> = {
     "banner-trigger": {
       name: "banner-trigger",
       type: "components:library",
-      registryDependencies: [],
+      registryDependencies: undefined,
       component: React.lazy(() => import("@/registry/alpha/library/banner/banner-trigger.tsx")),
-      files: ["src/registry/alpha/library/banner/banner-trigger.tsx"],
+      files: ["src/registry/alpha/library/banner/banner-trigger.tsx","src/registry/alpha/library/banner/utils/triggers.ts"],
     },
     "bare-banner-trigger": {
       name: "bare-banner-trigger",
       type: "components:library",
-      registryDependencies: [],
+      registryDependencies: undefined,
       component: React.lazy(() => import("@/registry/alpha/library/banner/bare-banner-trigger.tsx")),
-      files: ["src/registry/alpha/library/banner/bare-banner-trigger.tsx"],
+      files: ["src/registry/alpha/library/banner/bare-banner-trigger.tsx","src/registry/alpha/library/banner/utils/triggers.ts"],
     },
     "switch-w-thumb": {
       name: "switch-w-thumb",
       type: "components:library",
-      registryDependencies: [],
+      registryDependencies: undefined,
       component: React.lazy(() => import("@/registry/alpha/library/banner/switch-w-thumb.tsx")),
       files: ["src/registry/alpha/library/banner/switch-w-thumb.tsx"],
     },
     "trnsprncy-button": {
       name: "trnsprncy-button",
       type: "components:library",
-      registryDependencies: ["banner-options"],
+      registryDependencies: undefined,
       component: React.lazy(() => import("@/registry/alpha/library/banner/trnsprncy-button.tsx")),
-      files: ["src/registry/alpha/library/banner/trnsprncy-button.tsx"],
+      files: ["src/registry/alpha/library/banner/trnsprncy-button.tsx","src/registry/alpha/library/banner/logic/banner-options.tsx"],
     },
     "categorized-options": {
       name: "categorized-options",
@@ -61,12 +61,12 @@ export const Index: Record<string, any> = {
       component: React.lazy(() => import("@/registry/alpha/library/banner/categorized-options.tsx")),
       files: ["src/registry/alpha/library/banner/categorized-options.tsx"],
     },
-    "custom-banner": {
-      name: "custom-banner",
+    "fake-banner-demo": {
+      name: "fake-banner-demo",
       type: "components:demo",
-      registryDependencies: ["banner-shell","banner-opts-base","trnsprncy-button","banner-triggers"],
+      registryDependencies: ["banner-shell","trnsprncy-button","banner-trigger"],
       component: React.lazy(() => import("@/registry/alpha/demo/fake-banner-demo.tsx")),
-      files: ["src/registry/alpha/demo/fake-banner-demo.tsx"],
+      files: ["src/registry/alpha/demo/fake-banner-demo.tsx","src/registry/alpha/library/banner/logic/banner-opt-base.tsx","src/registry/alpha/demo/hooks/use-mock-browser-cookies"],
     },
   },
 }

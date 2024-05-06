@@ -1,9 +1,6 @@
 [
   {
     "name": "banner-content",
-    "dependencies": [],
-    "registryDependencies": [],
-    "uiDependencies": [],
     "files": [
       "library/banner/banner-content.tsx"
     ],
@@ -19,7 +16,6 @@
       "banner-content",
       "banner-trigger"
     ],
-    "uiDependencies": [],
     "files": [
       "library/banner/banner-shell.tsx"
     ],
@@ -27,11 +23,9 @@
   },
   {
     "name": "banner-switch",
-    "dependencies": [],
     "registryDependencies": [
       "switch-w-thumb"
     ],
-    "uiDependencies": [],
     "files": [
       "library/banner/banner-switch.tsx"
     ],
@@ -42,15 +36,15 @@
     "dependencies": [
       "@trnsprncy/oss"
     ],
-    "registryDependencies": [],
     "fileDependencies": [
-      "utils/triggers"
+      "utils"
     ],
     "uiDependencies": [
       "button"
     ],
     "files": [
-      "library/banner/banner-trigger.tsx"
+      "library/banner/banner-trigger.tsx",
+      "library/banner/utils/triggers.ts"
     ],
     "type": "components:library"
   },
@@ -59,16 +53,16 @@
     "dependencies": [
       "@trnsprncy/oss"
     ],
-    "registryDependencies": [],
     "fileDependencies": [
-      "utils/triggers"
+      "utils"
     ],
     "uiDependencies": [
       "toast",
       "button"
     ],
     "files": [
-      "library/banner/bare-banner-trigger.tsx"
+      "library/banner/bare-banner-trigger.tsx",
+      "library/banner/utils/triggers.ts"
     ],
     "type": "components:library"
   },
@@ -77,8 +71,6 @@
     "dependencies": [
       "@radix-ui/react-switch"
     ],
-    "registryDependencies": [],
-    "uiDependencies": [],
     "files": [
       "library/banner/switch-w-thumb.tsx"
     ],
@@ -86,16 +78,16 @@
   },
   {
     "name": "trnsprncy-button",
-    "dependencies": [],
-    "registryDependencies": [
-      "banner-options"
+    "fileDependencies": [
+      "logic"
     ],
     "uiDependencies": [
       "button",
       "popover"
     ],
     "files": [
-      "library/banner/trnsprncy-button.tsx"
+      "library/banner/trnsprncy-button.tsx",
+      "library/banner/logic/banner-options.tsx"
     ],
     "type": "components:library"
   },
@@ -116,21 +108,24 @@
     "type": "components:library"
   },
   {
-    "name": "custom-banner",
+    "name": "fake-banner-demo",
     "dependencies": [
       "@trnsprncy/oss"
     ],
     "registryDependencies": [
       "banner-shell",
-      "banner-opts-base",
       "trnsprncy-button",
-      "banner-triggers"
+      "banner-trigger"
     ],
-    "uiDependencies": [
-      ""
+    "fileDependencies": [
+      "logic",
+      "demo",
+      "demo/hooks"
     ],
     "files": [
-      "demo/fake-banner-demo.tsx"
+      "demo/fake-banner-demo.tsx",
+      "library/banner/logic/banner-opt-base.tsx",
+      "demo/hooks/use-mock-browser-cookies"
     ],
     "type": "components:demo"
   }
