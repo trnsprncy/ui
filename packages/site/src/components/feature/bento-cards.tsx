@@ -1,15 +1,9 @@
-"use client";
-
 import { Overview } from "../charts/overview";
 import { GDPR } from "../regulatory-icons/gdpr";
 import { Badge } from "../ui/badge";
 import { CARD_ICONS } from "./card-icons";
-import { FeatureCard } from "./feature-card";
-import { useMounted } from "@/hooks/use-mounted";
-import { cn } from "@/lib/utils";
-import { InView } from "react-intersection-observer";
 
-const cardRowTop = [
+export const bentoRowTop = [
   {
     title: "User Data Protection",
     description: "",
@@ -34,7 +28,8 @@ const cardRowTop = [
     rightSlot: <GDPR className="w-10" />,
   },
 ];
-const cardRowBottom = [
+
+export const bentoRowBottom = [
   {
     title: "Automatically Block Cookies",
     description: "",
@@ -82,35 +77,3 @@ const cardRowBottom = [
     leftSlot: CARD_ICONS["google"]({ className: "w-12" }),
   },
 ];
-
-export function Features() {
-  const mounted = useMounted();
-  return mounted ? (
-    <InView
-      as="div"
-      className="max-w-5xl mx-auto flex flex-col gap-2"
-      onChange={(inView, entry) => console.log(inView, entry)}
-      threshold={0.5}
-    >
-      <p className="text-4xl text-center font-semibold py-12"></p>
-      <div className="w-full flex flex-col md:flex-row gap-y-2 md:gap-x-2">
-        {cardRowTop.map((card, i) => {
-          const width = i === 1 ? "" : "md:w-[64%]";
-          return (
-            <FeatureCard
-              key={card.title}
-              {...card}
-              className={cn("w-full", width)}
-              {...Object.assign({}, i === 1 && { highlight: true })}
-            />
-          );
-        })}
-      </div>
-      <div className="w-full flex flex-col md:flex-row gap-y-2 md:gap-x-2">
-        <FeatureCard {...cardRowBottom[0]} className="md:w-[50%]" />
-        <FeatureCard {...cardRowBottom[1]} className="md:w-full" />
-        <FeatureCard {...cardRowBottom[2]} className="md:w-[50%]" />
-      </div>
-    </InView>
-  ) : null;
-}

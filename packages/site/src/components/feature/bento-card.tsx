@@ -40,7 +40,7 @@ type FeatureCardProps = {
   rightSlot?: React.ReactNode;
   component?: React.FC;
 };
-export function FeatureCard({
+export function BentoCard({
   title,
   description,
   body,
