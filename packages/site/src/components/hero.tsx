@@ -112,7 +112,7 @@ export default function Hero() {
                 rel="noreferrer noopener"
               >
                 <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
-                  <AvatarImage src="https://pbs.twimg.com/profile_images/1780985267739934726/0Hy_0Bg__400x400.jpg" />
+                  <AvatarImage src="https://pbs.twimg.com/profile_images/1787014305629519872/7-GAeKCm_400x400.jpg" />
                   <AvatarFallback>MR</AvatarFallback>
                 </Avatar>
               </Link>
