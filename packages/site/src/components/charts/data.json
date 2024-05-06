@@ -1,0 +1,485 @@
+[
+  {
+    "position": "1",
+    "name": "Jul",
+    "year": "2018",
+    "sum_euros": "400,000",
+    "num_fines": "1"
+  },
+  {
+    "position": "2",
+    "name": "Sep",
+    "year": "2018",
+    "sum_euros": "300",
+    "num_fines": "1"
+  },
+  {
+    "position": "3",
+    "name": "Oct",
+    "year": "2018",
+    "sum_euros": "388",
+    "num_fines": "1"
+  },
+  {
+    "position": "4",
+    "name": "Nov",
+    "year": "2018",
+    "sum_euros": "20,000",
+    "num_fines": "1"
+  },
+  {
+    "position": "5",
+    "name": "Dec",
+    "year": "2018",
+    "sum_euros": "15,700",
+    "num_fines": "5"
+  },
+  {
+    "position": "6",
+    "name": "Jan",
+    "year": "2019",
+    "sum_euros": "50,000,888",
+    "num_fines": "3"
+  },
+  {
+    "position": "7",
+    "name": "Feb",
+    "year": "2019",
+    "sum_euros": "65,108",
+    "num_fines": "12"
+  },
+  {
+    "position": "8",
+    "name": "Mar",
+    "year": "2019",
+    "sum_euros": "462,300",
+    "num_fines": "8"
+  },
+  {
+    "position": "9",
+    "name": "Apr",
+    "year": "2019",
+    "sum_euros": "309,135",
+    "num_fines": "8"
+  },
+  {
+    "position": "10",
+    "name": "May",
+    "year": "2019",
+    "sum_euros": "559,526",
+    "num_fines": "8"
+  },
+  {
+    "position": "11",
+    "name": "Jun",
+    "year": "2019",
+    "sum_euros": "773,700",
+    "num_fines": "8"
+  },
+  {
+    "position": "12",
+    "name": "Jul",
+    "year": "2019",
+    "sum_euros": "367,575",
+    "num_fines": "6"
+  },
+  {
+    "position": "13",
+    "name": "Aug",
+    "year": "2019",
+    "sum_euros": "3,227,835",
+    "num_fines": "9"
+  },
+  {
+    "position": "14",
+    "name": "Sep",
+    "year": "2019",
+    "sum_euros": "921,523",
+    "num_fines": "9"
+  },
+  {
+    "position": "15",
+    "name": "Oct",
+    "year": "2019",
+    "sum_euros": "1,877,374",
+    "num_fines": "28"
+  },
+  {
+    "position": "16",
+    "name": "Nov",
+    "year": "2019",
+    "sum_euros": "1,041,570",
+    "num_fines": "22"
+  },
+  {
+    "position": "17",
+    "name": "Dec",
+    "year": "2019",
+    "sum_euros": "12,207,530",
+    "num_fines": "22"
+  },
+  {
+    "position": "18",
+    "name": "Jan",
+    "year": "2020",
+    "sum_euros": "28,116,160",
+    "num_fines": "16"
+  },
+  {
+    "position": "19",
+    "name": "Feb",
+    "year": "2020",
+    "sum_euros": "775,690",
+    "num_fines": "29"
+  },
+  {
+    "position": "20",
+    "name": "Mar",
+    "year": "2020",
+    "sum_euros": "5,884,000",
+    "num_fines": "37"
+  },
+  {
+    "position": "21",
+    "name": "Apr",
+    "year": "2020",
+    "sum_euros": "804,200",
+    "num_fines": "8"
+  },
+  {
+    "position": "22",
+    "name": "May",
+    "year": "2020",
+    "sum_euros": "483,400",
+    "num_fines": "12"
+  },
+  {
+    "position": "23",
+    "name": "Jun",
+    "year": "2020",
+    "sum_euros": "2,027,808",
+    "num_fines": "32"
+  },
+  {
+    "position": "24",
+    "name": "Jul",
+    "year": "2020",
+    "sum_euros": "20,006,548",
+    "num_fines": "46"
+  },
+  {
+    "position": "25",
+    "name": "Aug",
+    "year": "2020",
+    "sum_euros": "628,004",
+    "num_fines": "24"
+  },
+  {
+    "position": "26",
+    "name": "Sep",
+    "year": "2020",
+    "sum_euros": "743,900",
+    "num_fines": "21"
+  },
+  {
+    "position": "27",
+    "name": "Oct",
+    "year": "2020",
+    "sum_euros": "78,121,358",
+    "num_fines": "30"
+  },
+  {
+    "position": "28",
+    "name": "Nov",
+    "year": "2020",
+    "sum_euros": "18,421,929",
+    "num_fines": "30"
+  },
+  {
+    "position": "29",
+    "name": "Dec",
+    "year": "2020",
+    "sum_euros": "15,569,545",
+    "num_fines": "57"
+  },
+  {
+    "position": "30",
+    "name": "Jan",
+    "year": "2021",
+    "sum_euros": "17,540,150",
+    "num_fines": "32"
+  },
+  {
+    "position": "31",
+    "name": "Feb",
+    "year": "2021",
+    "sum_euros": "1,764,550",
+    "num_fines": "35"
+  },
+  {
+    "position": "32",
+    "name": "Mar",
+    "year": "2021",
+    "sum_euros": "15,184,125",
+    "num_fines": "48"
+  },
+  {
+    "position": "33",
+    "name": "Apr",
+    "year": "2021",
+    "sum_euros": "2,492,020",
+    "num_fines": "34"
+  },
+  {
+    "position": "34",
+    "name": "May",
+    "year": "2021",
+    "sum_euros": "7,106,869",
+    "num_fines": "36"
+  },
+  {
+    "position": "35",
+    "name": "Jun",
+    "year": "2021",
+    "sum_euros": "6,551,600",
+    "num_fines": "34"
+  },
+  {
+    "position": "36",
+    "name": "Jul",
+    "year": "2021",
+    "sum_euros": "755,084,200",
+    "num_fines": "47"
+  },
+  {
+    "position": "37",
+    "name": "Aug",
+    "year": "2021",
+    "sum_euros": "2,464,800",
+    "num_fines": "24"
+  },
+  {
+    "position": "38",
+    "name": "Sep",
+    "year": "2021",
+    "sum_euros": "240,240,526",
+    "num_fines": "43"
+  },
+  {
+    "position": "39",
+    "name": "Oct",
+    "year": "2021",
+    "sum_euros": "3,995,280",
+    "num_fines": "33"
+  },
+  {
+    "position": "40",
+    "name": "Nov",
+    "year": "2021",
+    "sum_euros": "6,367,600",
+    "num_fines": "39"
+  },
+  {
+    "position": "41",
+    "name": "Dec",
+    "year": "2021",
+    "sum_euros": "219,597,193",
+    "num_fines": "57"
+  },
+  {
+    "position": "42",
+    "name": "Jan",
+    "year": "2022",
+    "sum_euros": "19,329,600",
+    "num_fines": "36"
+  },
+  {
+    "position": "43",
+    "name": "Feb",
+    "year": "2022",
+    "sum_euros": "29,717,200",
+    "num_fines": "40"
+  },
+  {
+    "position": "44",
+    "name": "Mar",
+    "year": "2022",
+    "sum_euros": "20,245,185",
+    "num_fines": "25"
+  },
+  {
+    "position": "45",
+    "name": "Apr",
+    "year": "2022",
+    "sum_euros": "8,328,000",
+    "num_fines": "51"
+  },
+  {
+    "position": "46",
+    "name": "May",
+    "year": "2022",
+    "sum_euros": "20,400,900",
+    "num_fines": "51"
+  },
+  {
+    "position": "47",
+    "name": "Jun",
+    "year": "2022",
+    "sum_euros": "1,448,440",
+    "num_fines": "37"
+  },
+  {
+    "position": "48",
+    "name": "Jul",
+    "year": "2022",
+    "sum_euros": "23,236,770",
+    "num_fines": "47"
+  },
+  {
+    "position": "49",
+    "name": "Aug",
+    "year": "2022",
+    "sum_euros": "1,148,045",
+    "num_fines": "41"
+  },
+  {
+    "position": "50",
+    "name": "Sep",
+    "year": "2022",
+    "sum_euros": "406,235,290",
+    "num_fines": "43"
+  },
+  {
+    "position": "51",
+    "name": "Oct",
+    "year": "2022",
+    "sum_euros": "31,169,720",
+    "num_fines": "49"
+  },
+  {
+    "position": "52",
+    "name": "Nov",
+    "year": "2022",
+    "sum_euros": "272,955,182",
+    "num_fines": "48"
+  },
+  {
+    "position": "53",
+    "name": "Dec",
+    "year": "2022",
+    "sum_euros": "7,333,003",
+    "num_fines": "68"
+  },
+  {
+    "position": "54",
+    "name": "Jan",
+    "year": "2023",
+    "sum_euros": "396,440,240",
+    "num_fines": "43"
+  },
+  {
+    "position": "55",
+    "name": "Feb",
+    "year": "2023",
+    "sum_euros": "2,645,251",
+    "num_fines": "36"
+  },
+  {
+    "position": "56",
+    "name": "Mar",
+    "year": "2023",
+    "sum_euros": "1,464,460",
+    "num_fines": "48"
+  },
+  {
+    "position": "57",
+    "name": "Apr",
+    "year": "2023",
+    "sum_euros": "24,607,831",
+    "num_fines": "41"
+  },
+  {
+    "position": "58",
+    "name": "May",
+    "year": "2023",
+    "sum_euros": "1,208,852,640",
+    "num_fines": "39"
+  },
+  {
+    "position": "59",
+    "name": "Jun",
+    "year": "2023",
+    "sum_euros": "50,419,060",
+    "num_fines": "61"
+  },
+  {
+    "position": "60",
+    "name": "Jul",
+    "year": "2023",
+    "sum_euros": "3,222,220",
+    "num_fines": "40"
+  },
+  {
+    "position": "61",
+    "name": "Aug",
+    "year": "2023",
+    "sum_euros": "3,498,480",
+    "num_fines": "34"
+  },
+  {
+    "position": "62",
+    "name": "Sep",
+    "year": "2023",
+    "sum_euros": "356,032,120",
+    "num_fines": "41"
+  },
+  {
+    "position": "63",
+    "name": "Oct",
+    "year": "2023",
+    "sum_euros": "18,357,120",
+    "num_fines": "40"
+  },
+  {
+    "position": "64",
+    "name": "Nov",
+    "year": "2023",
+    "sum_euros": "3,116,920",
+    "num_fines": "53"
+  },
+  {
+    "position": "65",
+    "name": "Dec",
+    "year": "2023",
+    "sum_euros": "10,655,200",
+    "num_fines": "32"
+  },
+  {
+    "position": "66",
+    "name": "Jan",
+    "year": "2024",
+    "sum_euros": "32,615,640",
+    "num_fines": "20"
+  },
+  {
+    "position": "67",
+    "name": "Feb",
+    "year": "2024",
+    "sum_euros": "8,111,040",
+    "num_fines": "21"
+  },
+  {
+    "position": "68",
+    "name": "Mar",
+    "year": "2024",
+    "sum_euros": "1,452,800",
+    "num_fines": "9"
+  },
+  {
+    "position": "69",
+    "name": "Apr",
+    "year": "2024",
+    "sum_euros": "15,427,800",
+    "num_fines": "10"
+  }
+]

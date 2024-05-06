@@ -1,10 +1,8 @@
-import Features from "@/components/feature/features";
+import { Features } from "@/components/feature/features";
 import Hero from "@/components/hero";
-import { Loading } from "@/components/loading";
+import { Icons } from "@/components/icons";
 import { Parallax } from "@/components/parallax";
 import { Ticker } from "@/components/ticker";
-import dynamic from "next/dynamic";
-import React, { Suspense } from "react";
 
 export default async function Home() {
   return (
@@ -32,9 +30,9 @@ export default async function Home() {
             )}
           </Ticker>
         </section> */}
-        {/* <section className="relative w-full mx-auto sheen pb-24 px-12 before:content=[' '] before:absolute before:inset-0 before:bg-dot-black/[0.1] before:dark:bg-dot-white/[0.1]">
+        <section className="relative w-full mx-auto sheen pb-24 px-12 before:content=[' '] before:absolute before:inset-0 before:bg-dot-black/[0.1] before:dark:bg-dot-white/[0.1]">
           <Features />
-        </section> */}
+        </section>
       </main>
     </>
   );

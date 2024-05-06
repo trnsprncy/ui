@@ -120,7 +120,7 @@
     background-image: radial-gradient(
       circle,
       transparent 0%,
-      hsl(var(--background, 0.45))
+      /* rgba(255, 255, 255, 0.5) 100%, */ hsl(var(--background, 0.45))
     );
     opacity: 1;
     z-index: 0;

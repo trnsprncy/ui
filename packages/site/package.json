@@ -67,6 +67,7 @@
     "react-hook-form": "^7.51.1",
     "react-intersection-observer": "^9.10.2",
     "react-wrap-balancer": "^1.1.0",
+    "recharts": "^2.12.6",
     "rehype-pretty-code": "^0.13.0",
     "rehype-slug": "^6.0.0",
     "remark": "^15.0.1",
