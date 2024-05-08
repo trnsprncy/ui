@@ -11,24 +11,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-
-const PREVIEW = true;
+import Balancer from "react-wrap-balancer";
 
 const INSTRUCTION_STEPS = [
   {
     title: "Install our package",
-    description: "Start by installing @trnsprncy/oss in your existing project.",
-    code: "$ npm i @trnsprncy/oss",
+    description:
+      "Start by installing trnsprncy into your existing project with your package manager.",
+    // code: "$ npm i @trnsprncy/oss",
   },
   {
     title: "Add the Next.js component",
     description:
-      "Import and use the `<ConsentProvder/>` React context component into your app's layout or your main file.",
-    code: "import { ConsentProvider } from '@trnsprncy/oss'",
+      "Import and use the `<ConsentProvder/>` context component into your app's top-level layout.",
+    // code: "import { ConsentProvider } from '@trnsprncy/oss'",
     link: {
       href: "#",
-      text: "For full examples and further reference, please refer to our documentation",
+      text: "Please refer to our documentation for further reference.",
     },
   },
   {
@@ -42,33 +43,12 @@ const INSTRUCTION_STEPS = [
 export function Instructions() {
   return (
     <div className="flex flex-col space-y-8 px-6 md:p-0">
-      <div className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-x-4">
+      <div className="flex flex-col md:flex-row md:justify-between items-stretch space-y-4 md:space-x-4">
         {INSTRUCTION_STEPS.map((step, index) => (
           <InstructionCard key={index} order={index + 1} {...step} />
         ))}
       </div>
     </div>
-  );
-}
-
-function ExternalLinkIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M15 3h6v6" />
-      <path d="M10 14 21 3" />
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    </svg>
   );
 }
 
@@ -101,20 +81,24 @@ function InstructionCard({
         </div>
       </CardHeader>
       <CardContent>
-        <CardDescription>{description}</CardDescription>
-        {!PREVIEW && code ? (
+        <CardDescription className="text-sm">
+          <Balancer>{description}</Balancer>
+        </CardDescription>
+        {code ? (
           <pre className="p-4 rounded-md mt-4 text-xs bg-muted/60 max-w-xs overflow-x-hidden">
             <code>{code}</code>
           </pre>
         ) : null}
         {link ? (
-          <Link
-            className="text-xs text-blue-600 hover:underline mt-4 block"
-            href={link?.href ?? ""}
-          >
-            {link?.text}
-            <ExternalLinkIcon className="inline-block ml-1" />
-          </Link>
+          <div className="flex items-center gap-x-4 text-blue-600 ">
+            <ExternalLink className="block w-8 text-current" />
+            <Link
+              className="text-xs hover:underline mt-4 block"
+              href={link?.href ?? ""}
+            >
+              {link?.text}
+            </Link>
+          </div>
         ) : null}
         {note ? (
           <p className="text-xs text-yellow-600 hover:underline mt-4 block">
