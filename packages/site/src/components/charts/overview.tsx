@@ -139,9 +139,8 @@ export function Overview() {
 
         <Bar
           dataKey="sum_euros"
-          fill="pink"
           radius={[4, 4, 0, 0]}
-          className="fill-primary"
+          className="fill-blue-400 dark:fill-white"
           minPointSize={20}
         />
         {/* <Bar

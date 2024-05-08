@@ -33,7 +33,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
     <div className="relative overflow-hidden">
       {backgroundImage && (
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+          className="absolute top-0 left-0 w-full h-full"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       )}
@@ -42,7 +42,7 @@ export const Parallax: React.FC<ParallaxProps> = ({
           {backgroundComponent}
         </div>
       )}
-      <div ref={contentRef} className="relative z-10 py-32 transform-gpu">
+      <div ref={contentRef} className="relative z-1 py-32 transform-gpu">
         {children}
       </div>
     </div>

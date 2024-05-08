@@ -1,40 +1,31 @@
-import { WaitListForm } from "./forms/waitlist-form";
 import { Icons } from "./icons";
 import { Loading } from "./loading";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Badge } from "./ui/badge";
-import { Button, buttonVariants } from "./ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { buttonVariants } from "./ui/button";
 import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
-import { CircleCheckBig, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Script from "next/script";
 import React, { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
 
-const REGULATIONS = ["GDPR", "CCPA", "ePrivacy", "UK GDPR"];
 const followUrl = `https://twitter.com/intent/follow?screen_name=${"_trnsprncy"}`;
 
 export default function Hero() {
   return (
     <>
       <h1
-        className="max-w-4xl px-4 text-center motion-safe:animate-fade-up text:4xl font-extrabold tracking-tight opacity-0 text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
+        className="max-w-6xl px-4 text-center motion-safe:animate-fade-up text:4xl font-extrabold tracking-tight opacity-0 text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-indigo-500 to-violet-300/80 bg-clip-text text-transparent"
         style={{
           animationDelay: "0.25s",
           animationFillMode: "forwards",
         }}
       >
         <Balancer>
-          Cookie Consent Compliance{" "}
-          <span className="text-foreground leading-relaxed">Simplified</span>
+          Simplify Consent, Safeguard Data,
+          <span className="inline-block text-foreground leading-relaxed">
+            and Gain Trust
+          </span>
           <span className="bg-gradient-to-r from-indigo-400 to-violet-300/80 bg-clip-text text-transparent">
             .
           </span>{" "}
@@ -71,12 +62,11 @@ export default function Hero() {
           animationFillMode: "forwards",
         }}
       >
-        <div className="w-full p-8 flex flex-col gap-y-4 border border-indigo-500 dark:border-indigo-300/40 rounded-md bg-background/40 backdrop-blur-md">
-          <strong className="max-w-4xl text-center text-muted-foreground">
-            <Balancer>For Early Access, Updates and Exclusives:</Balancer>
+        <div className="px-8 py-6 pb-12 flex flex-col gap-y-4 border border-indigo-500 dark:border-indigo-300/40 rounded-md bg-background/40 backdrop-blur-md">
+          <strong className="max-w-4xl text-center text-indigo-500">
+            <Balancer>For Early Access and Exclusives:</Balancer>
           </strong>
-          {/* <WaitListForm /> */}
-          <div className="max-w-40 mx-auto w-full gradient-box rounded-md overflow-hidden active:scale-[0.85] transform-gpu ease-in-out-sine">
+          <div className="max-w-60 mx-auto w-full mb-4 gradient-box rounded-md overflow-hidden active:scale-[0.85] transform-gpu ease-in-out-sine ">
             <Link
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
@@ -90,7 +80,7 @@ export default function Hero() {
               rel="noopener noreferrer"
             >
               <div className="flex items-center justify-between space-x-2">
-                <span className="peer text-lg">Follow us on</span>
+                <span className="peer text-lg">Follow our updates on</span>
                 {Icons["twitter"]({
                   className:
                     "peer w-6 h-6 fill-current group-hover:fill-current transition-colors",
@@ -98,68 +88,38 @@ export default function Hero() {
               </div>
             </Link>
           </div>
-          <p className="text-center text-xs text-muted-foreground">
-            No Email Required
+        </div>
+        <div className="absolute bottom-0 right-1 py-2 scale-[0.7] flex items-center gap-2">
+          <p className="text-center text-xs font-semibold text-muted-foreground mb-1">
+            made by:
           </p>
-          <div className="absolute bottom-5 right-4 scale-[0.7]">
-            <p className="text-center text-xs font-semibold text-muted-foreground mb-1">
-              made by:
-            </p>
-            <div className="flex -space-x-2 rtl:space-x-reverse">
-              <Link
-                href="https://x.com/dangling_hanma"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
-                  <AvatarImage src="https://pbs.twimg.com/profile_images/1787014305629519872/7-GAeKCm_400x400.jpg" />
-                  <AvatarFallback>MR</AvatarFallback>
-                </Avatar>
-              </Link>
-              <Link
-                href="https://x.com/soham_asmi"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
-                  <AvatarImage src="https://pbs.twimg.com/profile_images/1758898035617083393/Dj9pSWia_400x400.jpg" />
-                  <AvatarFallback>GS</AvatarFallback>
-                </Avatar>
-              </Link>
-            </div>
+          <div className="flex -space-x-2 rtl:space-x-reverse">
+            <Link
+              href="https://x.com/dangling_hanma"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
+                <AvatarImage src="https://pbs.twimg.com/profile_images/1787014305629519872/7-GAeKCm_400x400.jpg" />
+                <AvatarFallback>MR</AvatarFallback>
+              </Avatar>
+            </Link>
+            <Link
+              href="https://x.com/soham_asmi"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <Avatar className="hover:border-2 hover:border:white hover:scale-[1.2] hover:ease-in transition-gpu">
+                <AvatarImage src="https://pbs.twimg.com/profile_images/1758898035617083393/Dj9pSWia_400x400.jpg" />
+                <AvatarFallback>GS</AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </div>
-        {/* <ul
-          className="flex gap-3 my-6 motion-safe:animate-fade-up opacity-0"
-          style={{
-            animationDelay: "0.6s",
-            animationFillMode: "forwards",
-          }}
-        >
-          {REGULATIONS.map((regulation, i) => {
-            const _i = i * 0.2;
-            const delay = _i + 0.6;
-            return (
-              <li key={regulation}>
-                <Badge
-                  className="opacity-0 motion-safe:animate-fade-up flex gap-x-2 justify-between bg-background drop-shadow-glow select-none"
-                  variant="auto"
-                  style={{
-                    animationDelay: `${delay}s`,
-                    animationFillMode: "forwards",
-                  }}
-                >
-                  <CircleCheckBig className="w-5 h-5" /> {regulation}
-                </Badge>
-              </li>
-            );
-          })}
-        </ul> */}
-
         {/* <Link @TODO: #JB4fsn/
               href={siteConfig.links.docs}
               className={cn(buttonVariants({ variant: "gooeyLeft" }))}
-            >
+              >
               Get Started
             </Link> */}
       </div>

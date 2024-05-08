@@ -162,6 +162,76 @@
       linear-gradient(139deg, #e8e8e896 0%, #303030ff 100%),
       linear-gradient(195deg, #e8e8e8b5 0%, #303030ff 100%);
   }
+
+  .gradient-card {
+    background: linear-gradient(
+        309.15deg,
+        rgba(72, 75, 87, 0.2) 21.45%,
+        rgba(61, 61, 61, 0.044) 38.85%
+      ),
+      linear-gradient(
+        284.25deg,
+        rgba(0, 0, 0, 0) 44.37%,
+        rgba(0, 0, 0, 0.44) 70.31%
+      ),
+      linear-gradient(
+        123.84deg,
+        rgba(37, 43, 57, 0.7) 9.71%,
+        rgba(17, 22, 33, 0.7) 90.04%
+      ),
+      linear-gradient(
+        75.33deg,
+        rgba(36, 42, 55, 0.72) 18.88%,
+        rgba(37, 43, 58, 0.72) 46.47%,
+        rgba(70, 70, 70, 0.72) 92.44%
+      ),
+      #000000;
+  }
+
+  .gradient-card-dark {
+    background: linear-gradient(
+        309.15deg,
+        rgba(186, 188, 234, 0.6) 21.45%,
+        rgb(167, 165, 238) 38.85%
+      ),
+      /* linear-gradient(
+        284.25deg,
+        rgba(65, 72, 117, 0) 44.37%,
+        rgba(102, 102, 140, 0.63) 70.31%
+      ),
+      linear-gradient(
+        123.84deg,
+        rgba(67, 68, 131, 0.7) 9.71%,
+        rgba(46, 52, 104, 0.7) 90.04%
+      ),
+      linear-gradient(
+        75.33deg,
+        rgba(72, 83, 142, 0.72) 18.88%,
+        rgba(66, 70, 122, 0.72) 46.47%,
+        rgba(66, 64, 94, 0.72) 92.44%
+      ), */
+        #797db5;
+  }
+  .subtle-surface {
+    /* Rectangle 10 */
+
+    background: linear-gradient(
+      313.1deg,
+      rgba(82, 48, 153, 0.06) 30.31%,
+      rgba(127, 77, 233, 0.3) 126.81%
+    );
+    -webkit-box-shadow: 0px 0px 27px 6px rgba(147, 122, 245, 0.7);
+    -moz-box-shadow: 0px 0px 27px 6px rgba(147, 122, 245, 0.7);
+    box-shadow: 0px 0px 27px 6px rgba(147, 122, 245, 0.7);
+    background-blend-mode: lighten;
+    border-radius: 20px;
+  }
+
+  .shadow-dark {
+    -webkit-box-shadow: 0px 0px 66px 0px rgba(209, 209, 209, 0.37);
+    -moz-box-shadow: 0px 0px 66px 0px rgba(209, 209, 209, 0.37);
+    box-shadow: 0px 0px 10px 1px rgba(209, 209, 209, 0.37);
+  }
 }
 
 @media (max-width: 640px) {
