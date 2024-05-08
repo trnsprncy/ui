@@ -4,6 +4,7 @@ import { TailwindIndicator } from "./tailwind-indicator";
 import BannerShell from "@/registry/alpha/library/banner/banner-shell";
 import TrnsprncyProvider from "@trnsprncy/oss";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 
@@ -24,7 +25,7 @@ export const ClientProviders = ({
         </TrnsprncyProvider>
         <TailwindIndicator />
         <Toaster richColors position="bottom-center" />
-
+        <SpeedInsights />
         <Analytics />
       </ThemeProvider>
     </>
