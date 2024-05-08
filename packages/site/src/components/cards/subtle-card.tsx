@@ -8,7 +8,7 @@ export function SubtleCard({ title, body }: { title: string; body: string[] }) {
   return (
     <Card
       className={cn(
-        "w-full relative overflow-hidden rounded-lg shadow-xl dark:shadow-dark",
+        "w-full relative overflow-hidden rounded-lg shadow-xl",
         bgSubtle,
         "dark:text-muted-foreground/40 text-muted/40"
       )}

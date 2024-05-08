@@ -2,6 +2,7 @@ import { SubtleCard } from "@/components/cards/subtle-card";
 import { BentoSection } from "@/components/feature/bento-section";
 import Hero from "@/components/hero";
 import { Icons } from "@/components/icons";
+import { Instructions } from "@/components/instructions";
 import { Parallax } from "@/components/parallax";
 import { ParallaxItem } from "@/components/parallax-svg";
 import Balancer from "react-wrap-balancer";
@@ -26,13 +27,13 @@ export default async function Home() {
           </section>
           {/* </ParallaxItem> */}
         </Parallax>
-        <section className="relative my-12 w-full mx-auto">
+        <section className="relative my-12 w-full mx-auto px-6 md:p-0">
           <div className="relative flex flex-col items-center gap-y-4 my-24">
-            <h2 className="text-center text-5xl font-semibold text-muted-foreground pb-12">
+            <h2 className="leading-loose text-center text-5xl font-semibold  bg-gradient-to-r from-muted-foreground to-muted-foreground/50 bg-clip-text text-transparent">
               What is trnsprncy?
             </h2>
 
-            <div className="max-w-6xl flex flex-row items-stretch gap-x-12 overflow-hidden p-6">
+            <div className="max-w-6xl flex flex-col md:flex-row items-stretch gap-y-12 md:gap-x-12 overflow-hidden p-6">
               <SubtleCard
                 title="OSS"
                 body={[
@@ -58,7 +59,7 @@ export default async function Home() {
             </div>
             <div className="max-w-2xl flex flex-row items-center gap-x-8 justify-between overflow-hidden my-24">
               <div>
-                <h3 className="text-left text-5xl font-semibold text-muted-foreground">
+                <h3 className="pb-2 text-left text-5xl font-semibold bg-gradient-to-r from-muted-foreground to-muted-foreground/50 bg-clip-text text-transparent">
                   Why trnsprncy?
                 </h3>
                 <p className="text-muted-foreground/70 text-sm pt-3">
@@ -66,21 +67,24 @@ export default async function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-y-6">
-                <Balancer>
-                  <p className="text-left w-full mx-auto">
+                <p className="text-left w-full mx-auto">
+                  <Balancer>
                     We believe the web can be a safer place. trnsprncy empowers
                     users by giving them control over their data and protecting
                     their privacy.
-                  </p>
-                </Balancer>
-                <Balancer>
-                  <p className="text-left w-full mx-auto">
+                  </Balancer>
+                </p>
+                <p className="text-left w-full mx-auto">
+                  <Balancer>
                     As developers we built trnsprncy with the goal of
-                    simplifying consent removing the ambiguity of international
-                    compliance regulations.
-                  </p>
-                </Balancer>
+                    simplifying consent and removing the ambiguity of
+                    international compliance regulations.
+                  </Balancer>
+                </p>
               </div>
+            </div>
+            <div className="max-w-6xl">
+              <Instructions />
             </div>
           </div>
         </section>
