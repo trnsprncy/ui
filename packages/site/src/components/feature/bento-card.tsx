@@ -53,7 +53,7 @@ export function BentoCard({
   component,
 }: FeatureCardProps) {
   const bg = highlight
-    ? "bg-gradient-to-tr from-indigo-500 via-indigo-300 to-indigo-200 dark:from-indigo-100/[0.1] dark:via-indigo-300/[0.3] dark:to-indigo-400/[0.2]"
+    ? "bg-gradient-to-tr from-indigo-300 via-indigo-200 to-indigo-100 dark:from-indigo-100/[0.1] dark:via-indigo-300/[0.3] dark:to-indigo-400/[0.2]"
     : "bg-gradient-to-br from-slate-100/[0.1] via-slate-300/[0.3] to-slate-400/[0.2]";
 
   const Component = component;

@@ -2,7 +2,6 @@
 
 import React from "react";
 
-// Interface for scroller props
 interface TickerProps {
   speed?: "fast" | "slow";
   direction?: "left" | "right";
@@ -44,3 +43,18 @@ export const Ticker: React.FC<TickerProps & { children?: React.ReactNode }> = ({
     </div>
   );
 };
+
+/**
+ * @Usage
+ * <section className="relative w-full max-w-3xl mx-auto my-36 border-x-4 border-white border-l border-r text-white">
+      <p className="text-lg text-center pb-12">Our tools in crafting UI.</p>
+      <Ticker>
+        {[Icons["logo"], Icons["Ui"], Icons["Npmjs"], Icons["gitHub"]].map(
+          (icon, i) => (
+            <span key={i}>{icon({ width: "64px", height: "64px" })}</span>
+          )
+        )}
+      </Ticker>
+    </section> 
+ * 
+ */
