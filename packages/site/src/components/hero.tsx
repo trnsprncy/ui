@@ -2,6 +2,12 @@ import { Icons } from "./icons";
 import { Loading } from "./loading";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { buttonVariants } from "./ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 import { siteConfig } from "@/config/site-config";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
@@ -54,6 +60,36 @@ export default function Hero() {
             <BannerDemo />
           </Suspense>
         </div>
+      </div>
+      <div className="flex items-center mb-16">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Link // @TODO: #JB4fsn/
+                href={"#" ?? siteConfig.links.docs}
+                className={cn(
+                  buttonVariants({ variant: "disabled", size: "lg" })
+                )}
+              >
+                Get Started
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p className="leading-loose text-center text-sm max-w-sm p-1">
+                🤫 Psst! We&apos;re still in the alpha stages.
+                <br /> But we&apos;re glad you found us! <br />
+                Be sure to{" "}
+                <Link
+                  href="https://twitter.com/intent/follow?screen_name=_trnsprncy"
+                  className="text-indigo-400 font-semibold hover:underline"
+                >
+                  follow us on 𝕏
+                </Link>{" "}
+                for updates and early access.
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <div
         className="opacity-0 motion-safe:animate-fade-up flex flex-col items-center gap-y-4"
@@ -116,12 +152,6 @@ export default function Hero() {
             </Link>
           </div>
         </div>
-        {/* <Link @TODO: #JB4fsn/
-              href={siteConfig.links.docs}
-              className={cn(buttonVariants({ variant: "gooeyLeft" }))}
-              >
-              Get Started
-            </Link> */}
       </div>
     </>
   );

@@ -19,13 +19,9 @@ export default async function Home() {
             <div className="absolute inset-0 dark:bg-dot-white/[0.4] bg-dot-black/[0.4] dot-grid bg-fixed" />
           }
         >
-          {/* <ParallaxItem
-            svgContent={Icons["logo"]({ width: "10%", height: "10%" })}
-          > */}
           <section className="relative my-12 w-full mx-auto flex-1 flex flex-col items-center justify-center gap-y-4 z-10">
             <Hero />
           </section>
-          {/* </ParallaxItem> */}
         </Parallax>
         <section className="relative my-12 w-full mx-auto px-6 md:p-0">
           <div className="relative flex flex-col items-center gap-y-4 my-24">

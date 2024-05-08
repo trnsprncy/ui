@@ -125,10 +125,11 @@ export function Overview() {
           cursor={false}
           contentStyle={{
             backgroundColor: "hsla(var(--background)/0.6)",
-            color: "currentColor",
             borderRadius: "4px",
             backdropFilter: "blur(4px)",
           }}
+          labelStyle={{ color: "hsl(var(--foreground))" }}
+          itemStyle={{ color: "hsl(var(--foreground))" }}
           formatter={(value, name, props) => {
             if (name === "sum_euros") {
               return formatCurrency(value as string);

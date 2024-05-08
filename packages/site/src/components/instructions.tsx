@@ -19,18 +19,18 @@ const INSTRUCTION_STEPS = [
   {
     title: "Install our package",
     description:
-      "Start by installing trnsprncy into your existing project with your package manager.",
+      "Start by installing trnsprncy into your existing project using your favorite package manager.",
     // code: "$ npm i @trnsprncy/oss",
   },
   {
-    title: "Add the Next.js component",
+    title: "Add the Consent Provider",
     description:
       "Import and use the `<ConsentProvder/>` context component into your app's top-level layout.",
     // code: "import { ConsentProvider } from '@trnsprncy/oss'",
-    link: {
-      href: "#",
-      text: "Please refer to our documentation for further reference.",
-    },
+    // link: {
+    //   href: "#",
+    //   text: "Please refer to our documentation for further reference.",
+    // },
   },
   {
     title: "Create your UI",
@@ -43,7 +43,7 @@ const INSTRUCTION_STEPS = [
 export function Instructions() {
   return (
     <div className="flex flex-col space-y-8 px-6 md:p-0">
-      <div className="flex flex-col md:flex-row md:justify-between items-stretch space-y-4 md:space-x-4">
+      <div className="flex flex-col md:flex-row md:justify-between items-stretch md:space-x-4">
         {INSTRUCTION_STEPS.map((step, index) => (
           <InstructionCard key={index} order={index + 1} {...step} />
         ))}
@@ -73,7 +73,7 @@ function InstructionCard({
   note,
 }: InstructionCardProps) {
   return (
-    <Card className="flex-1 w-full">
+    <Card className="flex-1 w-full h-auto">
       <CardHeader>
         <div className="flex items-center space-x-2">
           <Badge variant="secondary">{order}</Badge>
