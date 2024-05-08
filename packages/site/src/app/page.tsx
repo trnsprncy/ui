@@ -57,7 +57,7 @@ export default async function Home() {
                 ]}
               />
             </div>
-            <div className="max-w-2xl flex flex-row items-center gap-x-8 justify-between overflow-hidden my-24">
+            <div className="max-w-2xl flex flex-col md:flex-row items-center gap-x-8 justify-between overflow-hidden my-24">
               <div>
                 <h3 className="pb-2 text-left text-5xl font-semibold bg-gradient-to-r from-muted-foreground to-muted-foreground/50 bg-clip-text text-transparent">
                   Why trnsprncy?
@@ -66,20 +66,16 @@ export default async function Home() {
                   Build Trust. Eliminate ambiguity. Increase transparency.{" "}
                 </p>
               </div>
-              <div className="flex flex-col gap-y-6">
-                <p className="text-left w-full mx-auto">
-                  <Balancer>
-                    We believe the web can be a safer place. trnsprncy empowers
-                    users by giving them control over their data and protecting
-                    their privacy.
-                  </Balancer>
+              <div className="w-full flex flex-col gap-y-6 text-center md:text-left mt-12 md:mt-0">
+                <p className="mx-auto">
+                  We believe the web can be a safer place. trnsprncy empowers
+                  users by giving them control over their data and protecting
+                  their privacy online.
                 </p>
-                <p className="text-left w-full mx-auto">
-                  <Balancer>
-                    As developers we built trnsprncy with the goal of
-                    simplifying consent and removing the ambiguity of
-                    international compliance regulations.
-                  </Balancer>
+                <p className="mx-auto">
+                  As developers we built trnsprncy with the goal of simplifying
+                  consent and removing the ambiguity of international compliance
+                  regulations.
                 </p>
               </div>
             </div>

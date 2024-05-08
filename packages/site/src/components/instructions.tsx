@@ -18,14 +18,15 @@ const PREVIEW = true;
 const INSTRUCTION_STEPS = [
   {
     title: "Install our package",
-    description: "Start by installing @trnsprncy/oss in your existing project.",
-    code: "$ npm i @trnsprncy/oss",
+    description:
+      "Start by installing trnsprncy into your existing project with your package manager.",
+    // code: "$ npm i @trnsprncy/oss",
   },
   {
     title: "Add the Next.js component",
     description:
       "Import and use the `<ConsentProvder/>` React context component into your app's layout or your main file.",
-    code: "import { ConsentProvider } from '@trnsprncy/oss'",
+    // code: "import { ConsentProvider } from '@trnsprncy/oss'",
     link: {
       href: "#",
       text: "For full examples and further reference, please refer to our documentation",
@@ -101,8 +102,8 @@ function InstructionCard({
         </div>
       </CardHeader>
       <CardContent>
-        <CardDescription>{description}</CardDescription>
-        {!PREVIEW && code ? (
+        <CardDescription className="text-sm">{description}</CardDescription>
+        {code ? (
           <pre className="p-4 rounded-md mt-4 text-xs bg-muted/60 max-w-xs overflow-x-hidden">
             <code>{code}</code>
           </pre>
