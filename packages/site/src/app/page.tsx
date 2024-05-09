@@ -53,7 +53,7 @@ export default async function Home() {
                 ]}
               />
             </div>
-            <div className="max-w-2xl flex flex-col md:flex-row items-center gap-x-8 justify-between overflow-hidden my-24">
+            <div className="max-w-2xl flex flex-col md:flex-row items-center gap-x-8 justify-between overflow-hidden mt-24">
               <div>
                 <h3 className="pb-2 text-left text-5xl font-semibold bg-gradient-to-r from-muted-foreground to-muted-foreground/50 bg-clip-text text-transparent">
                   Why trnsprncy?
@@ -75,9 +75,11 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <div className="max-w-6xl">
-              <Instructions />
-            </div>
+          </div>
+        </section>
+        <section className="bg-gradient-to-b from-black/20 via-indigo-400/80 to-indigo-200/40 dark:to-violet-400/40 py-24 backdrop-blur-xl">
+          <div className="max-w-4xl mx-auto">
+            <Instructions />
           </div>
         </section>
         <section className="relative w-full h-full min-h-[100dvh] mx-auto sheen pb-24 px-12 before:content=[' '] before:absolute before:inset-0 before:bg-dot-black/[0.1] before:dark:bg-dot-white/[0.1]">

@@ -8,6 +8,11 @@ export const env = createEnv({
     WAITLIST_API_KEY: z.string().optional(),
     WAITLIST_ID: z.string().optional(),
   },
-  client: {},
-  experimental__runtimeEnv: {},
+  client: {
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: z.string().optional(),
+  },
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID:
+      process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID,
+  },
 });

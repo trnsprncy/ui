@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
@@ -73,7 +74,7 @@ function InstructionCard({
   note,
 }: InstructionCardProps) {
   return (
-    <Card className="flex-1 w-full h-auto">
+    <Card className={cn("flex-1 w-full h-auto")}>
       <CardHeader>
         <div className="flex items-center space-x-2">
           <Badge variant="secondary">{order}</Badge>

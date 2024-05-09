@@ -64,7 +64,7 @@ export default function Hero() {
       <div className="flex items-center mb-16">
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Link // @TODO: #JB4fsn/
                 href={"#" ?? siteConfig.links.docs}
                 className={cn(
@@ -82,6 +82,7 @@ export default function Hero() {
                 <Link
                   href="https://twitter.com/intent/follow?screen_name=_trnsprncy"
                   className="text-indigo-400 font-semibold hover:underline"
+                  aria-disabled="true"
                 >
                   follow us on 𝕏
                 </Link>{" "}
