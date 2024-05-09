@@ -18,7 +18,7 @@ export function SubtleCard({ title, body }: { title: string; body: string[] }) {
           {title}
         </p>
       </CardHeader>
-      <CardContent className="relative w-full flex flex-col gap-y-4">
+      <CardContent className="relative w-full flex flex-col gap-y-4 bg-foreground/10 py-3 backdrop-blur-xl">
         {body?.length
           ? body.map((text, i) => (
               <p
